@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.productList {
+  padding: 10px;
+  align-content: center;
+  position: relative;
+  display: inline-block;
+}
+.input {
+  /* align-content: center; */
+  margin-left: 45px;
+  /* position: relative; */
+  /* display: inline-block; */
+}
+/* .product img {
+  max-height: 350px;
+  max-width: 350px;
+}
+.proList {
+  background-color: floralwhite;
+} */
+
+/* Nav Bar Design */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+header {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 15px 10%;
+  background-color: #24252a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbtn {
+  font-family: "Montserat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #edf0f1;
+  text-decoration: none;
+}
+
+.logo {
+  cursor: pointer;
+  height: 30px;
+}
+
+.nav_links {
+  list-style: none;
+}
+.nav_links li {
+  display: inline-block;
+  padding: 0px 20px;
+}
+.nav_links li .navbtn {
+  transition: all 0.3s ease 0s;
+}
+.nav_links li .navbtn:hover {
+  color: #06b2c2;
+}
+.homebtn {
+  padding: 8px 25px;
+  background-color: #04b4c4;
+  color: #edf0f1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 450;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+.homebtn:hover {
+  color: #24252a;
+  background-color: #edf0f1;
+}
+
+/* Footer design */
+.bottom-details {
+  max-width: 100%;
+  margin: auto;
+  padding: 20px 10%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #24252a;
+}
+.bottom-details span,
+.bottom-details a {
+  font-size: 14px;
+  font-weight: 300;
+  color: #fff;
+  opacity: 0.8;
+  text-decoration: none;
+  margin-right: 10px;
+}
+.bottom-details a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
