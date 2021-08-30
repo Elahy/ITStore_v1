@@ -11,6 +11,7 @@ import Success from "./Components/Success";
 import UpdateProduct from "./Components/UpdateProduct";
 import Home from "./Components/Home";
 import DeleteProduct from "./Components/DeleteProduct";
+import LoginPage from "./Pages/LoginPage";
 
 function App() {
   const history = useHistory();
@@ -46,13 +47,18 @@ function App() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" className="navbtn">
+                  <Link to="/products" className="navbtn">
                     New Collection
                   </Link>
                 </li>
                 <li>
                   <Link to="/contact" className="navbtn">
                     Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/add" className="navbtn">
+                    Add
                   </Link>
                 </li>
               </ul>
@@ -77,6 +83,9 @@ function App() {
               </Route>
               <Route exact path="/products/:id">
                 <ProductDetails />
+              </Route>
+              <Route exact path="/signin">
+                <LoginPage />
               </Route>
               <Route path="/add">
                 <AddProduct />

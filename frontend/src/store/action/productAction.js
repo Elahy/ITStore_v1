@@ -1,6 +1,7 @@
 import { ActionTypes } from "../ActionTypes";
 import axios from "axios";
 import { setLoaderValue } from "./loaderAction";
+import { useSelector } from "react-redux";
 
 export const setListofProduct = (productList) => ({
   type: ActionTypes.UPDATE_PRODUCT_LIST,
@@ -10,6 +11,11 @@ export const setListofProduct = (productList) => ({
 export const setCurrentProduct = (product) => ({
   type: ActionTypes.SET_CURRENT_PRODUCT,
   payload: product,
+});
+
+export const addProduct = (response) => ({
+  type: ActionTypes.ADD_PRODUCT,
+  payload: response,
 });
 
 export const editProduct = (response) => ({
@@ -23,7 +29,10 @@ export const deleteProduct = (response) => ({
 
 export const requestProductList = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:8080/products");
+    const response = await axios({
+      method: "GET",
+      url: "http://localhost:8080/products",
+    });
     dispatch(setListofProduct(response.data));
     dispatch(setLoaderValue(false));
   };
@@ -53,6 +62,7 @@ export const updateProduct = (product) => {
   return async (dispatch) => {
     const response = await axios.put(
       `https://fakestoreapi.com/products/${product.id}`,
+
       {
         title: product.title,
         price: product.price,
@@ -62,6 +72,31 @@ export const updateProduct = (product) => {
       }
     );
     dispatch(editProduct(response));
+    dispatch(setLoaderValue(false));
+    // console.log(response, "===response from update");
+  };
+};
+
+export const RequestAddProduct = (product) => {
+  const { token } = useSelector((store) => store.userInfoStore);
+  return async (dispatch) => {
+    const response = await axios({
+      method: "POST",
+      url: "http://localhost:8080/products",
+
+      headers: {
+        authorization: `bearer ${token}`,
+      },
+      data: JSON.stringify({
+        title: product.title,
+        price: product.price,
+        description: product.dexcription,
+        image: product.image,
+        stock: product.stock,
+        category: product.category,
+      }),
+    });
+    dispatch(addProduct(response));
     dispatch(setLoaderValue(false));
     // console.log(response, "===response from update");
   };
