@@ -58,8 +58,8 @@ function ProductList() {
           <Grid container spacing={3}>
             <Grid item xs={false} lg={1}></Grid>
             <Grid item xs={12} lg={10}>
-              {productList.map((product, index) => (
-                <div key={index} className="productList">
+              {productList.map((product) => (
+                <div key={product._id} className="productList">
                   <Card className={classes.root}>
                     <CardActionArea>
                       <CardMedia
@@ -76,10 +76,10 @@ function ProductList() {
                           color="textSecondary"
                           component="p"
                         >
-                          {product.category}
+                          {product.category.name}
                         </Typography>
                         <Typography gutterBottom variant="h5" component="h4">
-                          Price: ${product.price}
+                          Price: {product.price}Tk
                         </Typography>
                       </CardContent>
                     </CardActionArea>
@@ -92,7 +92,7 @@ function ProductList() {
                         Share
                       </Button>
                       <Button
-                        onClick={() => buttonHanlder(product.id)}
+                        onClick={() => buttonHanlder(product._id)}
                         className={classes.detailsButton}
                         variant="contained"
                         color="primary"

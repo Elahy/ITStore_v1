@@ -23,7 +23,7 @@ export const deleteProduct = (response) => ({
 
 export const requestProductList = () => {
   return async (dispatch) => {
-    const response = await axios.get("https://fakestoreapi.com/products");
+    const response = await axios.get("http://localhost:8080/products");
     dispatch(setListofProduct(response.data));
     dispatch(setLoaderValue(false));
   };
