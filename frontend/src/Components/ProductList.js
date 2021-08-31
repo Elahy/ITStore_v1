@@ -45,7 +45,7 @@ function ProductList() {
     dispatch(setLoaderValue(true));
     dispatch(requestProductList());
   }, [dispatch]);
-
+  console.log(productList);
   const buttonHanlder = (e) => {
     history.push(`/product/${e}`);
   };
@@ -64,9 +64,11 @@ function ProductList() {
                     <CardActionArea>
                       <CardMedia
                         className={classes.media}
-                        image={product.image}
+                        image={`http://localhost:8080${product.image}`}
                         title={product.title}
+                        alt={product.title}
                       />
+
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                           {product.title}

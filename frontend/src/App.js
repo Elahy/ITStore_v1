@@ -3,7 +3,6 @@ import { Switch, Route, Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "./Components/Loader";
 import ProductList from "./Components/ProductList";
-import AddProduct from "./Components/AddProduct";
 import Policy from "./Components/Policy";
 import NotFound from "./Components/NotFound";
 import ProductDetails from "./Components/ProductDetails";
@@ -90,9 +89,7 @@ function App() {
               <Route exact path="/signin">
                 <LoginPage />
               </Route>
-              <Route path="/add">
-                <AddProduct />
-              </Route>
+
               <Route path="/update/:id">
                 <UpdateProduct />
               </Route>
