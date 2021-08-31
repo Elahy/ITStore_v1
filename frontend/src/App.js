@@ -12,9 +12,12 @@ import UpdateProduct from "./Components/UpdateProduct";
 import Home from "./Components/Home";
 import DeleteProduct from "./Components/DeleteProduct";
 import LoginPage from "./Pages/LoginPage";
+import { useSelector } from "react-redux";
+import Dashboard from "./Dashboard";
 
 function App() {
   const history = useHistory();
+  const { role } = useSelector((store) => store.userInfoStore);
   const [loader, setLoader] = useState(true);
   useEffect(() => {
     setLoader(false);
@@ -57,8 +60,8 @@ function App() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/add" className="navbtn">
-                    Add
+                  <Link to="/dashboard" className="navbtn">
+                    DashBoard
                   </Link>
                 </li>
               </ul>
@@ -102,6 +105,12 @@ function App() {
               <Route path="/success">
                 <Success />
               </Route>
+
+              {role === "admin" && (
+                <Route path="/dashboard">
+                  <Dashboard />
+                </Route>
+              )}
               <Route path="/*">
                 <NotFound />
               </Route>

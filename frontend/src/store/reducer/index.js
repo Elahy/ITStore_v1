@@ -8,7 +8,7 @@ const mainReducer = combineReducers({
   productStore: productReducer,
   cartStore: cartReducer,
   loaderStore: loaderReducer,
-  UserInfoStore: signInReducer,
+  userInfoStore: signInReducer,
 });
 
 export default mainReducer;

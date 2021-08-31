@@ -7,10 +7,25 @@ export const signIn = (response) => ({
   payload: response,
 });
 
-export const requestSignIn = () => {
+export const requestSignIn = (credential) => {
+  console.log(JSON.stringify(credential), "Signin");
   return async (dispatch) => {
-    const response = await axios.post("http://localhost:8080/signin");
-    dispatch(signIn(response.data.userInfo));
-    dispatch(setLoaderValue(false));
+    try {
+      const response = await axios({
+        method: "POST",
+        url: "http://localhost:8080/signin",
+        data: {
+          email: credential.email,
+          password: credential.password,
+        },
+      });
+      dispatch(signIn(response.data.userInfo));
+      dispatch(setLoaderValue(false));
+      console.log("Signin Successfull");
+      console.log("Signin Successfull");
+    } catch (err) {
+      dispatch(setLoaderValue(false));
+      console.error(err, "===Error");
+    }
   };
 };
