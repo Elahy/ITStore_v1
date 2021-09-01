@@ -54,6 +54,7 @@ function ProductList() {
   const buttonHandler = () => {
     history.push("/products");
   };
+  console.log(loaderStore, "===loderStore");
 
   return (
     <>
@@ -64,8 +65,8 @@ function ProductList() {
           <CardActionArea>
             <CardMedia
               component="img"
-              alt={currentProduct && currentProduct.title}
-              image={currentProduct && currentProduct.image}
+              alt={currentProduct?.title}
+              image={`http://localhost:8080${currentProduct.image}`}
               title={currentProduct && currentProduct.title}
             />
             <CardContent>
@@ -81,7 +82,7 @@ function ProductList() {
                 {currentProduct && currentProduct.description}
               </Typography>
               <Typography variant="h6" color="textSecondary" component="p">
-                Type: {currentProduct && currentProduct.category}
+                Type: {currentProduct && currentProduct.category.name}
               </Typography>
               <Typography variant="h5" color="textPrimary" component="p">
                 Price: ${currentProduct && currentProduct.price}

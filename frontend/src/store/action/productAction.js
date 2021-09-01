@@ -43,6 +43,7 @@ export const requestProductDetails = (productId) => {
       method: "GET",
       url: `http://localhost:8080/products/${productId}`,
     });
+
     dispatch(setCurrentProduct(response.data));
     dispatch(setLoaderValue(false));
   };
@@ -82,32 +83,20 @@ export const requestAddProduct = (product) => {
     try {
       const { userInfoStore } = getState();
       const token = userInfoStore.token;
-      // console.log(token);
-      // console.log(
-      //   JSON.stringify({
-      //     title: product.title,
-      //     price: parseInt(product.price, 10),
-      //     description: product.description,
-      //     image: product.image,
-      //     stock: product.stock,
-      //     category: product.category,
-      //   })
-      // );
-      const response = await axios({
-        method: "POST",
-        url: "http://localhost:8080/products",
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        "http://localhost:8080/products",
+        {
           title: product.title,
           price: parseInt(product.price, 10),
           description: product.description,
           image: product.image,
           stock: product.stock,
           category: product.category,
-        }),
-      });
+        },
+        {
+          headers: { authorization: `bearer ${token}` },
+        }
+      );
       dispatch(addProduct(response));
       dispatch(setLoaderValue(false));
       console.log(response, "===response from request");
