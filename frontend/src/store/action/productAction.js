@@ -1,7 +1,6 @@
 import { ActionTypes } from "../ActionTypes";
 import axios from "axios";
 import { setLoaderValue } from "./loaderAction";
-import { useSelector } from "react-redux";
 
 export const setListofProduct = (productList) => ({
   type: ActionTypes.UPDATE_PRODUCT_LIST,
@@ -40,9 +39,10 @@ export const requestProductList = () => {
 
 export const requestProductDetails = (productId) => {
   return async (dispatch) => {
-    const response = await axios.get(
-      `https://fakestoreapi.com/products/${productId}`
-    );
+    const response = await axios({
+      method: "GET",
+      url: `http://localhost:8080/products/${productId}`,
+    });
     dispatch(setCurrentProduct(response.data));
     dispatch(setLoaderValue(false));
   };
@@ -77,27 +77,42 @@ export const updateProduct = (product) => {
   };
 };
 
-export const RequestAddProduct = (product) => {
-  const { token } = useSelector((store) => store.userInfoStore);
-  return async (dispatch) => {
-    const response = await axios({
-      method: "POST",
-      url: "http://localhost:8080/products",
-
-      headers: {
-        authorization: `bearer ${token}`,
-      },
-      data: JSON.stringify({
-        title: product.title,
-        price: product.price,
-        description: product.dexcription,
-        image: product.image,
-        stock: product.stock,
-        category: product.category,
-      }),
-    });
-    dispatch(addProduct(response));
-    dispatch(setLoaderValue(false));
-    // console.log(response, "===response from update");
+export const requestAddProduct = (product) => {
+  return async (dispatch, getState) => {
+    try {
+      const { userInfoStore } = getState();
+      const token = userInfoStore.token;
+      // console.log(token);
+      // console.log(
+      //   JSON.stringify({
+      //     title: product.title,
+      //     price: parseInt(product.price, 10),
+      //     description: product.description,
+      //     image: product.image,
+      //     stock: product.stock,
+      //     category: product.category,
+      //   })
+      // );
+      const response = await axios({
+        method: "POST",
+        url: "http://localhost:8080/products",
+        headers: {
+          authorization: `bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: product.title,
+          price: parseInt(product.price, 10),
+          description: product.description,
+          image: product.image,
+          stock: product.stock,
+          category: product.category,
+        }),
+      });
+      dispatch(addProduct(response));
+      dispatch(setLoaderValue(false));
+      console.log(response, "===response from request");
+    } catch (err) {
+      console.error(err, "===response from error");
+    }
   };
 };

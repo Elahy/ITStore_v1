@@ -54,12 +54,6 @@ function ProductList() {
   const buttonHandler = () => {
     history.push("/products");
   };
-  const updateHandler = () => {
-    history.push(`/update/${currentProduct.id}`);
-  };
-  const deleteHandler = () => {
-    history.push(`/delete/${currentProduct.id}`);
-  };
 
   return (
     <>
@@ -111,24 +105,6 @@ function ProductList() {
               color="primary"
             >
               Go Back
-            </Button>
-            <Button
-              onClick={updateHandler}
-              className={classes.buttton1}
-              size="medium"
-              variant="contained"
-              color="primary"
-            >
-              Edit
-            </Button>
-            <Button
-              onClick={deleteHandler}
-              className={classes.buttton1}
-              size="medium"
-              variant="contained"
-              color="primary"
-            >
-              Delete
             </Button>
           </CardActions>
         </Card>

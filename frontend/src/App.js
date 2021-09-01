@@ -58,11 +58,13 @@ function App() {
                     Contact
                   </Link>
                 </li>
-                <li>
-                  <Link to="/dashboard" className="navbtn">
-                    DashBoard
-                  </Link>
-                </li>
+                {role === "admin" && (
+                  <li>
+                    <Link to="/dashboard" className="navbtn">
+                      DashBoard
+                    </Link>
+                  </li>
+                )}
               </ul>
             </nav>
             <img
@@ -83,7 +85,7 @@ function App() {
               <Route exact path="/products">
                 <ProductList />
               </Route>
-              <Route exact path="/products/:id">
+              <Route path="/products/:id">
                 <ProductDetails />
               </Route>
               <Route exact path="/signin">

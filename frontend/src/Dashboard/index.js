@@ -1,29 +1,77 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import ProductBoard from "./ProductBoard";
+import { makeStyles } from "@material-ui/core/styles";
+import UserBoard from "./UserBoard";
+
+const useStyles = makeStyles({
+  root: {
+    minHeight: "90vh",
+  },
+  header: {
+    textAlign: "center",
+    margin: "10px",
+    padding: "10px",
+  },
+  menu: {
+    textAlign: "center",
+    fontSize: "25px",
+  },
+  menuItem: {
+    display: "flex",
+    textDecoration: "none",
+    margin: "5px 50px",
+    padding: "5px",
+    maxWidth: "100%",
+    border: "1px solid black",
+    borderRadius: "5px",
+    background: "#cdcdcd",
+    "&:hover": {
+      cursor: "pointer",
+      padding: "7px 5px",
+      background: "#d1bcbc",
+    },
+  },
+});
 
 function Dashboard() {
-  const [showProduct, setShowProduct] = useState(false);
-  const productMenu = () => {
-    setShowProduct(true);
-  };
+  const classes = useStyles();
+  const [show, setShow] = useState(null);
+
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className={classes.root}>
+      <h1 className={classes.header}>Dashboard</h1>
       <Grid container>
         <Grid item lg={1}></Grid>
         <Grid item lg={3}>
-          <p>Menu</p>
+          <p className={classes.menu}>Menu</p>
           <ul>
-            <li>User</li>
-            <li onClick={productMenu}>Product</li>
-            <li>Orders</li>
-            <li>Category</li>
+            <li onClick={() => setShow("user")} className={classes.menuItem}>
+              User
+            </li>
+            <li onClick={() => setShow("product")} className={classes.menuItem}>
+              Product
+            </li>
+            <li onClick={() => setShow("order")} className={classes.menuItem}>
+              Orders
+            </li>
+            <li
+              onClick={() => setShow("category")}
+              className={classes.menuItem}
+            >
+              Category
+            </li>
           </ul>
         </Grid>
         <Grid item lg={1}></Grid>
         <Grid item lg={5}>
-          {showProduct ? <ProductBoard /> : <p>Welcome!</p>}
+          {show === "product" ? (
+            <ProductBoard />
+          ) : show === "user" ? (
+            <UserBoard />
+          ) : (
+            <p>Welcome!</p>
+          )}
         </Grid>
         <Grid item lg={2}></Grid>
       </Grid>

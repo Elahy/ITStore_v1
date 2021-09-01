@@ -47,7 +47,7 @@ function ProductList() {
   }, [dispatch]);
   console.log(productList);
   const buttonHanlder = (e) => {
-    history.push(`/product/${e}`);
+    history.push(`/products/${e}`);
   };
   return (
     <>
@@ -91,7 +91,7 @@ function ProductList() {
                         color="primary"
                         className={classes.button}
                       >
-                        Share
+                        Add to Cart
                       </Button>
                       <Button
                         onClick={() => buttonHanlder(product._id)}

@@ -5,20 +5,22 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Loader from "../Components/Loader";
 import { useHistory } from "react-router";
+import { requestAddProduct } from "../store/action/productAction";
+import { useDispatch, useSelector } from "react-redux";
+import FileBase64 from "react-file-base64";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "44%",
+      width: "80%",
       textAlign: "center",
-      marginLeft: "28%",
-      marginRight: "28%",
+      marginLeft: "10%",
     },
   },
   input1: {
     margin: theme.spacing(1),
-    marginLeft: "45%",
+    marginLeft: "30%",
     backgroundColor: "#04b4c4",
   },
   input2: {
@@ -28,19 +30,37 @@ const useStyles = makeStyles((theme) => ({
   head: {
     margin: theme.spacing(1),
   },
+  upload: {
+    textAlign: "center",
+    border: "2px solid black",
+    padding: "8px 15px",
+    maxWidth: "50px",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+  imageWrap: {
+    display: "flex",
+  },
+  image: {
+    marginLeft: "10%",
+  },
 }));
 
 function AddProduct() {
-  const [loader, setLoader] = useState(false);
   const history = useHistory();
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { loader } = useSelector((store) => store.loaderStore);
+  const [image, setImage] = useState(null);
   const [product, setProduct] = useState({
     title: "",
-    price: "",
+    price: null,
     description: "",
     image: "",
-    category: "",
+    stock: "",
+    category: { _id: "612c69d0307e350fc0cb6c1f" },
   });
+
   const handleChange = (event) => {
     const value = event.target.value;
     setProduct({
@@ -49,33 +69,17 @@ function AddProduct() {
     });
   };
 
-  const handleSubmit = (e) => {
-    setLoader(true);
-    // axios
-    //   .post("https://fakestoreapi.com/products", {
-    //     title: product.title,
-    //     price: product.price,
-    //     description: product.dexcription,
-    //     image: product.image,
-    //     category: product.category,
-    //   })
-    //   .then(function (response) {
-    //     if (response.status === 200) {
-    //       console.log("Success");
-    //
-    //     } else {
-    //       console.log("Failed");
-    //     }
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-    history.push("/success");
-    console.log(product, "===product set done");
-    e.preventDefault();
+  const handleImage = (e) => {
+    setImage({ files: e });
+    setProduct({ ...product, image: e.base64 });
+    // console.log(e.base64, "Image Event");
+  };
 
-    // setTimeout(() => setLoader(false), 2500);
+  const handleSubmit = (e) => {
+    console.log(product, "Image Submitted");
+    dispatch(requestAddProduct(product));
+    history.push("/success");
+    e.preventDefault();
   };
   return (
     <>
@@ -91,12 +95,7 @@ function AddProduct() {
           >
             Add Product Details
           </Typography>
-          <form
-            onSubmit={handleSubmit}
-            className={classes.root}
-            noValidate
-            autoComplete="off"
-          >
+          <form className={classes.root} noValidate autoComplete="off">
             <div>
               <TextField
                 id="outlined-multiline-flexible"
@@ -133,17 +132,11 @@ function AddProduct() {
                   onChange={handleChange}
                 />
               </div>
-              <div>
-                <TextField
-                  id="outlined-multiline-static"
-                  label="Image"
-                  multiline
-                  maxRows={5}
-                  variant="outlined"
-                  type="text"
-                  name="image"
-                  onChange={handleChange}
-                />
+              <div className={classes.imageWrap}>
+                <FileBase64 onDone={handleImage} multiple={false} />
+                {image ? (
+                  <pre>{JSON.stringify(image.files, null, 2)}</pre>
+                ) : null}
               </div>
               <div>
                 <TextField
@@ -152,6 +145,16 @@ function AddProduct() {
                   variant="outlined"
                   type="text"
                   name="category"
+                  // onChange={handleChange}
+                />
+              </div>
+              <div>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Stock"
+                  variant="outlined"
+                  type="text"
+                  name="stock"
                   onChange={handleChange}
                 />
               </div>

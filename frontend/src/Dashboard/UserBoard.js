@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Products from "./Products";
-import AddProduct from "./AddProduct";
 
 const useStyles = makeStyles({
   list: {
@@ -23,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-function ProductBoard() {
+function UserBoard() {
   const classes = useStyles();
   const [view, setView] = useState("all");
 
@@ -31,21 +29,15 @@ function ProductBoard() {
     <div>
       <ul className={classes.list}>
         <li onClick={() => setView("all")} className={classes.select}>
-          Product List
+          User List
         </li>
         <li onClick={() => setView("add")} className={classes.select}>
-          Add product
+          Add User
         </li>
       </ul>
-      {view === "all" ? (
-        <Products />
-      ) : view === "add" ? (
-        <AddProduct />
-      ) : (
-        <p>Select</p>
-      )}
+      {view === "all" ? null : view === "add" ? null : <p>Select</p>}
     </div>
   );
 }
 
-export default ProductBoard;
+export default UserBoard;

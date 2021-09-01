@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { requestProductList } from "../store/action/productAction";
 import { setLoaderValue } from "../store/action/loaderAction";
 import Loader from "../Components/Loader";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   root: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
 });
 
 function Products() {
+  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { productStore, loaderStore } = useSelector((store) => store);
@@ -32,6 +34,12 @@ function Products() {
     dispatch(setLoaderValue(true));
     dispatch(requestProductList());
   }, [dispatch]);
+  const updateHandler = (e) => {
+    history.push(`/update/${e.data.id}`);
+  };
+  const deleteHandler = (e) => {
+    history.push(`/delete/${e.data.id}`);
+  };
 
   return (
     <>
@@ -55,8 +63,12 @@ function Products() {
               ) : (
                 <p className={classes.button}>Out of Stock</p>
               )}
-              <button className={classes.button}>Edit</button>
-              <button className={classes.button}>Delete</button>
+              <button className={classes.button} onClick={updateHandler}>
+                Edit
+              </button>
+              <button className={classes.button} onClick={deleteHandler}>
+                Delete
+              </button>
             </div>
           ))}
         </div>
