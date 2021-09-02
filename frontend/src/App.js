@@ -13,10 +13,13 @@ import DeleteProduct from "./Components/DeleteProduct";
 import LoginPage from "./Pages/LoginPage";
 import { useSelector } from "react-redux";
 import Dashboard from "./Dashboard";
+import Cart from "./Pages/Cart";
 
 function App() {
   const history = useHistory();
   const { role } = useSelector((store) => store.userInfoStore);
+  const { item } = useSelector((store) => store.cartStore);
+  console.log(item, "===cart Item");
   const [loader, setLoader] = useState(true);
   useEffect(() => {
     setLoader(false);
@@ -77,11 +80,11 @@ function App() {
                 />
               </li>
               <li>
-                <p className="cart">{0}</p>
+                <p className="cart">{item}</p>
               </li>
               <li>
                 <Link to="/signin" className="homebtn">
-                  Sign In
+                  {role ? <>Log Out</> : <>Sign In</>}
                 </Link>
               </li>
             </ul>
@@ -100,7 +103,9 @@ function App() {
               <Route exact path="/signin">
                 <LoginPage />
               </Route>
-
+              <Route exact path="/cart">
+                <Cart />
+              </Route>
               <Route path="/update/:id">
                 <UpdateProduct />
               </Route>

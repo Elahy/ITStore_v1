@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { requestProductList } from "../store/action/productAction";
 import { setLoaderValue } from "../store/action/loaderAction";
 import Loader from "./Loader";
+import AddToCart from "../ReComponent/AddToCart";
 
 const useStyles = makeStyles({
   root: {
@@ -22,12 +23,6 @@ const useStyles = makeStyles({
   },
   media: {
     height: 400,
-  },
-  button: {
-    marginLeft: "15%",
-    marginRight: "15%",
-    color: "#04b4c4",
-    borderColor: "#04b4c4",
   },
   detailsButton: {
     backgroundColor: "#04b4c4",
@@ -86,13 +81,7 @@ function ProductList() {
                       </CardContent>
                     </CardActionArea>
                     <CardActions>
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                        className={classes.button}
-                      >
-                        Add to Cart
-                      </Button>
+                      <AddToCart product={product} />
                       <Button
                         onClick={() => buttonHanlder(product._id)}
                         className={classes.detailsButton}

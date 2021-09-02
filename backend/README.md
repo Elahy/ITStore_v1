@@ -179,7 +179,7 @@ fetch("{BASE_URL}/cart")
     .then((json) => console.log(json));
 ```
 
-### Get Cart
+### Add to Cart
 
 Require User Authentication
 

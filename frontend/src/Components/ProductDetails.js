@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { requestProductDetails } from "../store/action/productAction";
 import { setLoaderValue } from "../store/action/loaderAction";
+import AddToCart from "../ReComponent/AddToCart";
 
 const useStyles = makeStyles({
   root: {
@@ -90,14 +91,7 @@ function ProductList() {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button
-              size="medium"
-              className={classes.buttton}
-              variant="outlined"
-              color="primary"
-            >
-              Add to cart
-            </Button>
+            <AddToCart product={currentProduct} />
             <Button
               onClick={buttonHandler}
               className={classes.buttton}

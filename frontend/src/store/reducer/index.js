@@ -11,13 +11,14 @@ const persistConfig = {
   storage: storage,
 };
 
-const persistedStore = persistReducer(persistConfig, signInReducer);
+const persistedUserInfo = persistReducer(persistConfig, signInReducer);
+const persistedCart = persistReducer(persistConfig, cartReducer);
 
 const mainReducer = combineReducers({
   productStore: productReducer,
-  cartStore: cartReducer,
+  cartStore: persistedCart,
   loaderStore: loaderReducer,
-  userInfoStore: persistedStore,
+  userInfoStore: persistedUserInfo,
 });
 
 export default mainReducer;
