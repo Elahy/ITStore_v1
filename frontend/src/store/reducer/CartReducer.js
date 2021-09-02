@@ -1,11 +1,13 @@
+import { ActionTypes } from "../ActionTypes";
+
 const initialState = {
   cart: null,
 };
 
 const cartReducer = (state = initialState, action) => {
-  if (action.type === "UPDATE_PRODUCT_LIST") {
+  if (action.type === ActionTypes.ADD_TO_CART) {
     return { ...state, productList: action.payload };
-  } else if (action.type === "SET_CURRENT_PRODUCT") {
+  } else if (action.type === ActionTypes.REMOVE_FROM_CART) {
     return { ...state, currentProduct: action.payload };
   } else {
     return state;

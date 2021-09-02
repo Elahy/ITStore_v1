@@ -67,15 +67,24 @@ function App() {
                 )}
               </ul>
             </nav>
-            <img
-              className="cartSign"
-              src="../images/cart.png"
-              onClick={cartClickHandler}
-              alt="cart"
-            />
-            <Link to="/signin" className="homebtn">
-              Sign In
-            </Link>
+            <ul className="nav_links">
+              <li>
+                <img
+                  className="cartSign"
+                  src="../images/cart.png"
+                  onClick={cartClickHandler}
+                  alt="cart"
+                />
+              </li>
+              <li>
+                <p className="cart">{0}</p>
+              </li>
+              <li>
+                <Link to="/signin" className="homebtn">
+                  Sign In
+                </Link>
+              </li>
+            </ul>
           </header>
           <main>
             <Switch>

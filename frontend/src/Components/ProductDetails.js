@@ -66,7 +66,7 @@ function ProductList() {
             <CardMedia
               component="img"
               alt={currentProduct?.title}
-              image={`http://localhost:8080${currentProduct.image}`}
+              image={`http://localhost:8080${currentProduct?.image}`}
               title={currentProduct && currentProduct.title}
             />
             <CardContent>
