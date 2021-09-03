@@ -8,4 +8,6 @@ export const ActionTypes = {
   SIGN_IN: "SIGN_IN",
   ADD_TO_CART: "ADD_TO_CART",
   REMOVE_FROM_CART: "REMOVE_FROM_CART",
+  SET_USER_LIST: "SET_USER_LIST",
+  ADD_USER: "ADD_USER",
 };

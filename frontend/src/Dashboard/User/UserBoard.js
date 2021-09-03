@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Users from "./Users";
+import AddUser from "./AddUser";
 
 const useStyles = makeStyles({
   list: {
@@ -35,7 +37,13 @@ function UserBoard() {
           Add User
         </li>
       </ul>
-      {view === "all" ? null : view === "add" ? null : <p>Select</p>}
+      {view === "all" ? (
+        <Users />
+      ) : view === "add" ? (
+        <AddUser />
+      ) : (
+        <p>Select</p>
+      )}
     </div>
   );
 }

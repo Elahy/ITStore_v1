@@ -4,6 +4,7 @@ import productReducer from "./productReducer";
 import cartReducer from "./cartReducer";
 import loaderReducer from "./loaderReducer";
 import signInReducer from "./signInReducer";
+import userReducer from "./userReducer";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
@@ -19,6 +20,7 @@ const mainReducer = combineReducers({
   cartStore: persistedCart,
   loaderStore: loaderReducer,
   userInfoStore: persistedUserInfo,
+  allUserStore: userReducer,
 });
 
 export default mainReducer;

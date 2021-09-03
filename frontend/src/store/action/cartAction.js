@@ -6,9 +6,9 @@ export const addToCart = (data) => ({
   payload: data.products,
 });
 
-fetch("{BASE_URL}/cart")
-  .then((res) => res.json())
-  .then((json) => console.log(json));
+// fetch("{BASE_URL}/cart")
+//   .then((res) => res.json())
+//   .then((json) => console.log(json));
 
 export const requestAddToCart = (product) => {
   const id = product.product._id;

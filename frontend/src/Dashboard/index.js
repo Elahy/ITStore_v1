@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import ProductBoard from "./ProductBoard";
+import ProductBoard from "./Product/ProductBoard";
 import { makeStyles } from "@material-ui/core/styles";
-import UserBoard from "./UserBoard";
+import UserBoard from "./User/UserBoard";
 
 const useStyles = makeStyles({
   root: {

@@ -3,11 +3,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Loader from "../Components/Loader";
+import Loader from "../../Components/Loader";
 import { useHistory } from "react-router";
-import { requestAddProduct } from "../store/action/productAction";
 import { useDispatch, useSelector } from "react-redux";
-import FileBase64 from "react-file-base64";
+import { requestAddUser } from "../../store/action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,38 +45,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddProduct() {
+function AddUser() {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { loader } = useSelector((store) => store.loaderStore);
-  const [image, setImage] = useState(null);
-  const [product, setProduct] = useState({
-    title: "",
-    price: null,
-    description: "",
-    image: "",
-    stock: "",
-    category: { _id: "612c69d0307e350fc0cb6c1f" },
+  const [user, setUser] = useState({
+    city: "",
+    streetNumber: "",
+    zipcode: "",
+    role: "",
+    email: "",
+    username: "",
+    phone: "",
+    password: "",
   });
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setProduct({
-      ...product,
+    setUser({
+      ...user,
       [event.target.name]: value,
     });
   };
 
-  const handleImage = (e) => {
-    setImage({ files: e });
-    setProduct({ ...product, image: e.base64 });
-    // console.log(e.base64, "Image Event");
-  };
-
   const handleSubmit = (e) => {
-    console.log(product, "Image Submitted");
-    dispatch(requestAddProduct(product));
+    dispatch(requestAddUser(user));
     history.push("/success");
     e.preventDefault();
   };
@@ -93,71 +86,105 @@ function AddProduct() {
             className={classes.head}
             gutterBottom
           >
-            Add Product Details
+            Add User Details
           </Typography>
           <form className={classes.root} noValidate autoComplete="off">
             <div>
               <TextField
                 id="outlined-multiline-flexible"
-                label="Title"
+                label="Username"
+                placeholder="Username"
                 multiline
                 maxRows={4}
                 variant="outlined"
                 type="text"
-                name="title"
+                name="username"
                 onChange={handleChange}
               />
             </div>
             <div>
               <TextField
                 id="outlined-textarea"
-                label="Price"
-                placeholder="Placeholder"
+                label="Email"
+                placeholder="Email"
+                multiline
+                variant="outlined"
+                type="email"
+                name="email"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                id="outlined-textarea"
+                label="Phone"
+                placeholder="Phone"
                 multiline
                 variant="outlined"
                 type="text"
-                name="price"
+                name="phone"
                 onChange={handleChange}
               />
-              <div />
-              <div>
-                <TextField
-                  id="outlined-multiline-static"
-                  label="Description"
-                  multiline
-                  rows={8}
-                  variant="outlined"
-                  type="text"
-                  name="description"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className={classes.imageWrap}>
-                <FileBase64 onDone={handleImage} multiple={false} />
-                {image ? (
-                  <pre>{JSON.stringify(image.files, null, 2)}</pre>
-                ) : null}
-              </div>
-              <div>
-                <TextField
-                  id="outlined-multiline-static"
-                  label="Category"
-                  variant="outlined"
-                  type="text"
-                  name="category"
-                  // onChange={handleChange}
-                />
-              </div>
-              <div>
-                <TextField
-                  id="outlined-multiline-static"
-                  label="Stock"
-                  variant="outlined"
-                  type="text"
-                  name="stock"
-                  onChange={handleChange}
-                />
-              </div>
+            </div>
+            <div>
+              <TextField
+                id="outlined-textarea"
+                label="Password"
+                placeholder="Password"
+                multiline
+                variant="outlined"
+                type="password"
+                name="password"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                id="outlined-textarea"
+                label="Role"
+                placeholder="Role"
+                multiline
+                variant="outlined"
+                type="text"
+                name="role"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                id="outlined-textarea"
+                label="City"
+                placeholder="City"
+                multiline
+                variant="outlined"
+                type="text"
+                name="city"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                id="outlined-textarea"
+                label="streetNumber"
+                placeholder="streetNumber"
+                multiline
+                variant="outlined"
+                type="text"
+                name="streetNumber"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                id="outlined-textarea"
+                label="Zipcode"
+                placeholder="Zipcode"
+                multiline
+                variant="outlined"
+                type="text"
+                name="zipcode"
+                onChange={handleChange}
+              />
             </div>
           </form>
           <div>
@@ -184,4 +211,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default AddUser;

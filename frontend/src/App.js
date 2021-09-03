@@ -14,6 +14,7 @@ import LoginPage from "./Pages/LoginPage";
 import { useSelector } from "react-redux";
 import Dashboard from "./Dashboard";
 import Cart from "./Pages/Cart";
+import ContactUs from "./ReComponent/ContactUs";
 
 function App() {
   const history = useHistory();
@@ -47,7 +48,7 @@ function App() {
             <nav>
               <ul className="nav_links">
                 <li>
-                  <Link to="/sale" className="navbtn">
+                  <Link to="/products" className="navbtn">
                     Sale!
                   </Link>
                 </li>
@@ -111,6 +112,9 @@ function App() {
               </Route>
               <Route path="/delete/:id">
                 <DeleteProduct />
+              </Route>
+              <Route path="/contact">
+                <ContactUs />
               </Route>
               <Route path="/PrivacyPolicy">
                 <Policy />
