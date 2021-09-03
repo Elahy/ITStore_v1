@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styles from "./Login.module.css";
 import Grid from "@material-ui/core/Grid";
 import { requestSignIn } from "../store/action/signInAction";
@@ -51,6 +51,9 @@ function LoginPage() {
                   autoComplete="on"
                 ></input>
                 <p>Forgot password?</p>
+                <p>
+                  Don't have a account? <Link to="/signup">Sign Up!</Link>
+                </p>
                 <button onClick={handleLogin} className={styles.body}>
                   Login
                 </button>

@@ -11,13 +11,16 @@ import UpdateProduct from "./Components/UpdateProduct";
 import Home from "./Components/Home";
 import DeleteProduct from "./Components/DeleteProduct";
 import LoginPage from "./Pages/LoginPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Dashboard from "./Dashboard";
 import Cart from "./Pages/Cart";
 import ContactUs from "./ReComponent/ContactUs";
+import { signIn } from "./store/action/signInAction";
+import SignupPage from "./Pages/SignupPage";
 
 function App() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const { role } = useSelector((store) => store.userInfoStore);
   const { item } = useSelector((store) => store.cartStore);
   console.log(item, "===cart Item");
@@ -25,6 +28,9 @@ function App() {
   useEffect(() => {
     setLoader(false);
   }, []);
+  const logOutHandler = () => {
+    dispatch(signIn(""));
+  };
   const logoClickHandler = () => {
     history.push("/");
   };
@@ -83,11 +89,19 @@ function App() {
               <li>
                 <p className="cart">{item}</p>
               </li>
-              <li>
-                <Link to="/signin" className="homebtn">
-                  {role ? <>Log Out</> : <>Sign In</>}
-                </Link>
-              </li>
+              {role ? (
+                <li>
+                  <button className="homebtn" onClick={logOutHandler}>
+                    Log Out
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <Link to="/signin" className="homebtn">
+                    Sign In
+                  </Link>
+                </li>
+              )}
             </ul>
           </header>
           <main>
@@ -103,6 +117,9 @@ function App() {
               </Route>
               <Route exact path="/signin">
                 <LoginPage />
+              </Route>
+              <Route exact path="/signup">
+                <SignupPage />
               </Route>
               <Route exact path="/cart">
                 <Cart />
