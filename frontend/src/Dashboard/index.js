@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import ProductBoard from "./Product/ProductBoard";
 import { makeStyles } from "@material-ui/core/styles";
 import UserBoard from "./User/UserBoard";
+import CategoryBoard from "./Category/CategoryBoard";
 
 const useStyles = makeStyles({
   root: {
@@ -69,6 +70,8 @@ function Dashboard() {
             <ProductBoard />
           ) : show === "user" ? (
             <UserBoard />
+          ) : show === "category" ? (
+            <CategoryBoard />
           ) : (
             <p>Welcome!</p>
           )}

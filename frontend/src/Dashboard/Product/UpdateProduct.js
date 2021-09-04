@@ -3,16 +3,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Loader from "./Loader";
+import Loader from "../../Components/Loader";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  editProduct,
+  requestEditProduct,
   requestProductDetails,
-  updateProduct,
-} from "../store/action/productAction";
-import { setLoaderValue } from "../store/action/loaderAction";
+} from "../../store/action/productAction";
+import { setLoaderValue } from "../../store/action/loaderAction";
+import FileBase64 from "react-file-base64";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,25 +41,68 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
     marginLeft: "45%",
   },
+  image: {
+    marginLeft: "35%",
+    maxWidth: "100px",
+    maxHeight: "100px",
+    padding: "0 1% ",
+  },
+  imageWrap: {
+    display: "flex",
+  },
 }));
 
 function UpdateProduct() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const pro = useParams();
-  // console.log(pro.id, "===pro.id");
-
-  useEffect(() => {
-    dispatch(setLoaderValue(true));
-    dispatch(requestProductDetails(pro.id));
-  }, [dispatch, pro.id]);
-
+  const param = useParams();
+  console.log(param.id, "===pro.id");
+  const [image, setImage] = useState(null);
   const { currentProduct, productEdited } = useSelector(
     (store) => store.productStore
   );
   const { loaderStore } = useSelector((store) => store);
-  const [product, setProduct] = useState(currentProduct);
+  // console.log(loaderStore.loader, "===loaderStore.loader");
+
+  const canvas = `http://localhost:8080${currentProduct?.image}`;
+  function encodeImageFileAsURL(file) {
+    // var file = element.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+      console.log("RESULT", reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
+  encodeImageFileAsURL(canvas);
+
+  // const base64image = reader.result;
+  // console.log(base64image, "base64Image");
+
+  const [product, setProduct] = useState({
+    _id: param.id,
+    title: currentProduct?.title,
+    price: currentProduct?.price,
+    description: currentProduct?.description,
+    // image: base64image,
+    stock: currentProduct?.stock,
+    category: { _id: "612c69d0307e350fc0cb6c1f" },
+  });
+
+  useEffect(() => {
+    // console.log("===Console in useEffect1");
+    dispatch(setLoaderValue(true));
+    dispatch(requestProductDetails(param.id));
+    // console.log("===Console in useEffect2");
+  }, [dispatch, param.id]);
+
+  const handleImage = (e) => {
+    setImage({ files: e });
+    setProduct({ ...product, image: e.base64 });
+    // console.log(e.base64, "Image Event");
+  };
+
+  // console.log(product, "===product");
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -71,10 +114,9 @@ function UpdateProduct() {
 
   const handleSubmit = (e) => {
     dispatch(setLoaderValue(true));
-    dispatch(updateProduct(product));
+    dispatch(requestEditProduct(product));
   };
   if (productEdited && productEdited.status === 200) {
-    dispatch(editProduct(null));
     history.push("/success");
   }
 
@@ -93,6 +135,21 @@ function UpdateProduct() {
             Edit Product info
           </Typography>
           <form className={classes.root} noValidate autoComplete="off">
+            <div className={classes.imageWrap}>
+              <img
+                src={`http://localhost:8080${currentProduct?.image}`}
+                alt={product?.title}
+                className={classes.image}
+              />
+              {console.log(product?.image, "===image")}
+              <> Upload new image to replace this one : </>
+              <FileBase64 onDone={handleImage} multiple={false} />
+              {image ? (
+                <pre>
+                  {/*{JSON.stringify(image.files, null, 2)}*/} Image Uploaded
+                </pre>
+              ) : null}
+            </div>
             <div>
               <TextField
                 id="outlined-multiline-flexible"
@@ -103,7 +160,7 @@ function UpdateProduct() {
                 variant="outlined"
                 type="text"
                 name="title"
-                defaultValue={product.title}
+                defaultValue={currentProduct?.title}
                 onChange={handleChange}
               />
             </div>
@@ -116,7 +173,7 @@ function UpdateProduct() {
                 variant="outlined"
                 type="text"
                 name="price"
-                defaultValue={product.price}
+                defaultValue={currentProduct?.price}
                 onChange={handleChange}
               />
               <div />
@@ -129,31 +186,34 @@ function UpdateProduct() {
                   variant="outlined"
                   type="text"
                   name="description"
-                  defaultValue={product.description}
+                  defaultValue={currentProduct?.description}
                   onChange={handleChange}
                 />
               </div>
+
               <div>
                 <TextField
-                  // id="outlined-multiline-static"
-                  label="Image"
+                  id="outlined-textarea"
+                  label="Stock"
+                  placeholder="Placeholder"
                   multiline
-                  maxRows={5}
                   variant="outlined"
                   type="text"
-                  name="image"
-                  defaultValue={product.image}
+                  name="stock"
+                  defaultValue={currentProduct?.stock}
                   onChange={handleChange}
                 />
               </div>
               <div>
                 <TextField
-                  // id="outlined-multiline-static"
-                  label="Category"
+                  id="outlined-textarea"
+                  label="Category ID"
+                  placeholder="Placeholder"
+                  multiline
                   variant="outlined"
                   type="text"
-                  name="category"
-                  defaultValue={product.category}
+                  name="Category"
+                  defaultValue={currentProduct?.category._id}
                   onChange={handleChange}
                 />
               </div>

@@ -59,25 +59,34 @@ export const requestDeleteProduct = (productId) => {
   };
 };
 
-export const updateProduct = (product) => {
-  return async (dispatch) => {
-    const response = await axios.put(
-      `https://fakestoreapi.com/products/${product.id}`,
-
-      {
-        title: product.title,
-        price: product.price,
-        description: product.dexcription,
-        image: product.image,
-        category: product.category,
-      }
-    );
-    dispatch(editProduct(response));
-    dispatch(setLoaderValue(false));
-    // console.log(response, "===response from update");
+export const requestEditProduct = (product) => {
+  return async (dispatch, getState) => {
+    try {
+      const { userInfoStore } = getState();
+      console.log("requestEditProduct Call");
+      const token = userInfoStore.token;
+      const response = await axios.patch(
+        `http://localhost:8080/products/${product._id}`,
+        {
+          title: product.title,
+          price: parseInt(product.price, 10),
+          description: product.description,
+          image: product.image,
+          stock: product.stock,
+          category: product.category,
+        },
+        {
+          headers: { authorization: `bearer ${token}` },
+        }
+      );
+      dispatch(editProduct(response));
+      dispatch(setLoaderValue(false));
+      console.log(response, "===response from Edit product Request");
+    } catch (err) {
+      console.error(err, "=== error from Edit product Request");
+    }
   };
 };
-
 export const requestAddProduct = (product) => {
   return async (dispatch, getState) => {
     try {

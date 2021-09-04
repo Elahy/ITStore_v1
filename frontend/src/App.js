@@ -7,7 +7,7 @@ import Policy from "./Components/Policy";
 import NotFound from "./Components/NotFound";
 import ProductDetails from "./Components/ProductDetails";
 import Success from "./Components/Success";
-import UpdateProduct from "./Components/UpdateProduct";
+import UpdateProduct from "./Dashboard/Product/UpdateProduct";
 import Home from "./Components/Home";
 import DeleteProduct from "./Components/DeleteProduct";
 import LoginPage from "./Pages/LoginPage";

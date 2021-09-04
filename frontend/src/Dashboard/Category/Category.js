@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Products() {
+function Category() {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -57,13 +57,6 @@ function Products() {
               />
               {console.log(product.image, "===image")}
               <p className={classes.button}>{product.title}</p>
-              {product.stock ? (
-                <p className={classes.button}>
-                  {product.stock} pieces available
-                </p>
-              ) : (
-                <p className={classes.button}>Out of Stock</p>
-              )}
               <button
                 className={classes.button}
                 onClick={() => updateHandler(product)}
@@ -81,4 +74,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Category;

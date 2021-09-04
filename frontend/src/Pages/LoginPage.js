@@ -11,7 +11,7 @@ function LoginPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { loader } = useSelector((store) => store.loaderStore);
-  const { token } = useSelector((store) => store.userInfoStore);
+  // const { token } = useSelector((store) => store.userInfoStore);
   console.log(loader, "===loader");
   const [cred, setCred] = useState([]);
   const handleLogin = (e) => {
@@ -19,10 +19,9 @@ function LoginPage() {
     dispatch(setLoaderValue(true));
     dispatch(requestSignIn(cred));
     console.log(cred, "===credential");
-  };
-  if (token) {
     history.push("/");
-  }
+  };
+
   return (
     <>
       {loader ? (
