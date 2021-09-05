@@ -11,16 +11,16 @@ import UpdateProduct from "./Dashboard/Product/UpdateProduct";
 import Home from "./Components/Home";
 import DeleteProduct from "./Components/DeleteProduct";
 import LoginPage from "./Pages/LoginPage";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Dashboard from "./Dashboard";
 import Cart from "./Pages/Cart";
 import ContactUs from "./ReComponent/ContactUs";
-import { signIn } from "./store/action/signInAction";
 import SignupPage from "./Pages/SignupPage";
+import UserProfile from "./Pages/User/UserProfile";
 
 function App() {
   const history = useHistory();
-  const dispatch = useDispatch();
+
   const { role } = useSelector((store) => store.userInfoStore);
   const { item } = useSelector((store) => store.cartStore);
   console.log(item, "===cart Item");
@@ -28,8 +28,8 @@ function App() {
   useEffect(() => {
     setLoader(false);
   }, []);
-  const logOutHandler = () => {
-    dispatch(signIn(""));
+  const profileHandler = () => {
+    history.push("/profile");
   };
   const logoClickHandler = () => {
     history.push("/");
@@ -91,8 +91,8 @@ function App() {
               </li>
               {role ? (
                 <li>
-                  <button className="homebtn" onClick={logOutHandler}>
-                    Log Out
+                  <button className="homebtn" onClick={profileHandler}>
+                    Profile
                   </button>
                 </li>
               ) : (
@@ -123,6 +123,9 @@ function App() {
               </Route>
               <Route exact path="/cart">
                 <Cart />
+              </Route>
+              <Route exact path="/profile">
+                <UserProfile />
               </Route>
               <Route path="/update/:id">
                 <UpdateProduct />

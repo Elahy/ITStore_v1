@@ -12,4 +12,6 @@ export const ActionTypes = {
   ADD_USER: "ADD_USER",
   SIGN_UP: "SIGN_UP",
   PLACE_ORDER: "PLACE_ORDER",
+  GET_MY_INFO: "GET_MY_INFO",
+  GET_MY_ORDER: "GET_MY_ORDER",
 };
