@@ -4,7 +4,7 @@ import ProductBoard from "./Product/ProductBoard";
 import { makeStyles } from "@material-ui/core/styles";
 import UserBoard from "./User/UserBoard";
 import CategoryBoard from "./Category/CategoryBoard";
-import OrderBoard from "./Order/OrderBoard";
+import Order from "./Order";
 
 const useStyles = makeStyles({
   root: {
@@ -72,7 +72,7 @@ function Dashboard() {
           ) : show === "user" ? (
             <UserBoard />
           ) : show === "order" ? (
-            <OrderBoard />
+            <Order />
           ) : show === "category" ? (
             <CategoryBoard />
           ) : (

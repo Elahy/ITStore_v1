@@ -5,7 +5,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
 import { useHistory } from "react-router";
-import { requestUserList } from "../../store/action/userAction";
+import {
+  requestDeleteUser,
+  requestUserDetails,
+  requestUserList,
+  setCurrentUserId,
+  setView,
+} from "../../store/action/userAction";
 
 const useStyles = makeStyles({
   root: {
@@ -35,10 +41,14 @@ function Users() {
     dispatch(requestUserList());
   }, [dispatch]);
   const updateHandler = (e) => {
-    history.push(`/update/${e.data.id}`);
+    console.log(e._id, "===event of edit");
+    dispatch(requestUserDetails(e._id));
+    dispatch(setCurrentUserId(e._id));
+    dispatch(setView("edit"));
   };
   const deleteHandler = (e) => {
-    history.push(`/delete/${e.data.id}`);
+    dispatch(requestDeleteUser(e._id));
+    history.push("/success");
   };
 
   return (
@@ -53,12 +63,18 @@ function Users() {
               <p className={classes.button}>{user.username}</p>
               <p className={classes.button}>{user.email}</p>
               <p className={classes.button}>{user.phone}</p>
-              <p className={classes.button}>{user.address.city}</p>
+              <p className={classes.button}>{user.address?.city}</p>
 
-              <button className={classes.button} onClick={updateHandler}>
+              <button
+                className={classes.button}
+                onClick={() => updateHandler(user)}
+              >
                 Edit
               </button>
-              <button className={classes.button} onClick={deleteHandler}>
+              <button
+                className={classes.button}
+                onClick={() => deleteHandler(user)}
+              >
                 Delete
               </button>
             </div>

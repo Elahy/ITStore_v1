@@ -35,6 +35,9 @@ const useStyles = makeStyles({
       background: "#d1bcbc",
     },
   },
+  logoutButton: {
+    margin: "30px",
+  },
 });
 
 function UserProfile() {
@@ -59,13 +62,18 @@ function UserProfile() {
             <li onClick={() => setShow("info")} className={classes.menuItem}>
               Info
             </li>
-            <li onClick={() => setShow("product")} className={classes.menuItem}>
-              Product
-            </li>
             <li onClick={() => setShow("order")} className={classes.menuItem}>
               Orders
             </li>
           </ul>
+          <Button
+            onClick={logOutHandler}
+            className={classes.logoutButton}
+            variant="contained"
+            color="primary"
+          >
+            LogOut
+          </Button>
         </Grid>
         <Grid item lg={1}></Grid>
         <Grid item lg={5}>
@@ -73,12 +81,9 @@ function UserProfile() {
             <Info />
           ) : show === "order" ? (
             <Orders />
-          ) : show === "category" ? null : (
+          ) : (
             <p>Welcome!</p>
           )}
-          <Button onClick={logOutHandler} variant="contained" color="primary">
-            LogOut
-          </Button>
         </Grid>
         <Grid item lg={2}></Grid>
       </Grid>

@@ -7,24 +7,35 @@ export const setListofUser = (userList) => ({
   payload: userList,
 });
 
-// export const setCurrentProduct = (user) => ({
-//   type: ActionTypes.SET_CURRENT_USER,
-//   payload: user,
-// });
+export const setCurrentUser = (user) => ({
+  type: ActionTypes.SET_CURRENT_USER,
+  payload: user,
+});
 
 export const addUser = (response) => ({
   type: ActionTypes.ADD_USER,
   payload: response,
 });
 
-// export const editProduct = (response) => ({
-//   type: ActionTypes.UPDATE_A_PRODUCT,
-//   payload: response,
-// });
-// export const deleteProduct = (response) => ({
-//   type: ActionTypes.DELETE_A_PRODUCT,
-//   payload: response,
-// });
+export const editUser = (response) => ({
+  type: ActionTypes.EDIT_USER,
+  payload: response,
+});
+
+export const setCurrentUserId = (response) => ({
+  type: ActionTypes.SET_CURRENT_USER_ID,
+  payload: response,
+});
+
+export const setView = (response) => ({
+  type: ActionTypes.SET_VIEW,
+  payload: response,
+});
+
+export const deleteUser = (response) => ({
+  type: ActionTypes.DELETE_A_USER,
+  payload: response,
+});
 
 export const requestUserList = () => {
   return async (dispatch, getState) => {
@@ -40,46 +51,66 @@ export const requestUserList = () => {
   };
 };
 
-// export const requestProductDetails = (productId) => {
-//   return async (dispatch) => {
-//     const response = await axios({
-//       method: "GET",
-//       url: `http://localhost:8080/products/${productId}`,
-//     });
+export const requestUserDetails = (userId) => {
+  return async (dispatch, getState) => {
+    const { userInfoStore } = getState();
+    const token = userInfoStore.token;
+    const response = await axios({
+      method: "GET",
+      url: `http://localhost:8080/user/${userId}`,
+      headers: { authorization: `bearer ${token}` },
+    });
+    dispatch(setCurrentUser(response.data));
+    dispatch(setLoaderValue(false));
+  };
+};
 
-//     dispatch(setCurrentProduct(response.data));
-//     dispatch(setLoaderValue(false));
-//   };
-// };
+export const requestDeleteUser = (userId) => {
+  return async (dispatch, getState) => {
+    const { userInfoStore } = getState();
+    const token = userInfoStore.token;
+    const response = await axios({
+      method: "DELETE",
+      url: `http://localhost:8080/user/${userId}`,
+      headers: { authorization: `bearer ${token}` },
+    });
+    dispatch(deleteUser(response));
+    dispatch(setLoaderValue(false));
+  };
+};
 
-// export const requestDeleteProduct = (productId) => {
-//   return async (dispatch) => {
-//     const response = await axios.delete(
-//       `https://fakestoreapi.com/products/${productId}`
-//     );
-//     dispatch(deleteProduct(response));
-//     dispatch(setLoaderValue(false));
-//   };
-// };
-
-// export const updateProduct = (product) => {
-//   return async (dispatch) => {
-//     const response = await axios.put(
-//       `https://fakestoreapi.com/products/${product.id}`,
-
-//       {
-//         title: product.title,
-//         price: product.price,
-//         description: product.dexcription,
-//         image: product.image,
-//         category: product.category,
-//       }
-//     );
-//     dispatch(editProduct(response));
-//     dispatch(setLoaderValue(false));
-//     // console.log(response, "===response from update");
-//   };
-// };
+export const requestEditUser = (user) => {
+  return async (dispatch, getState) => {
+    const { userInfoStore } = getState();
+    const token = userInfoStore.token;
+    const response = await axios.patch(
+      `http://localhost:8080/user/${user._id}`,
+      {
+        address: {
+          geolocation: {
+            lat: user.lat,
+            long: user.long,
+          },
+          city: user.city,
+          street: user.street,
+          number: user.streetNumber,
+          zipcode: user.zipcode,
+        },
+        role: user.role,
+        email: user.email,
+        username: user.userName,
+        phone: user.phone,
+        password: user.password,
+      },
+      {
+        headers: { authorization: `bearer ${token}` },
+      }
+    );
+    dispatch(editUser(response));
+    dispatch(setLoaderValue(false));
+    // console.log(response, "===response from update");
+  };
+};
 
 export const requestAddUser = (user) => {
   return async (dispatch, getState) => {

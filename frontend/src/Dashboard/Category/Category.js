@@ -4,8 +4,14 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
-import { useHistory } from "react-router";
-import { requestCategoryList } from "../../store/action/categoryAction";
+// import { useHistory } from "react-router";
+import {
+  requestCategoryDetails,
+  requestCategoryList,
+  requestDeleteCategory,
+  setCurrentCategoryId,
+} from "../../store/action/categoryAction";
+import { setView } from "../../store/action/userAction";
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +31,7 @@ const useStyles = makeStyles({
 });
 
 function Category() {
-  const history = useHistory();
+  // const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { categoryStore, loaderStore } = useSelector((store) => store);
@@ -36,11 +42,13 @@ function Category() {
     dispatch(requestCategoryList());
   }, [dispatch]);
   const updateHandler = (e) => {
-    console.log(e, "==update Event");
-    history.push(`/update/${e._id}`);
+    console.log(e, "===event update");
+    dispatch(requestCategoryDetails(e._id));
+    dispatch(setCurrentCategoryId(e._id));
+    dispatch(setView("edit"));
   };
   const deleteHandler = (e) => {
-    history.push(`/delete/${e._id}`);
+    dispatch(requestDeleteCategory(e._id));
   };
 
   return (
@@ -66,7 +74,10 @@ function Category() {
               >
                 Edit
               </button>
-              <button className={classes.button} onClick={deleteHandler}>
+              <button
+                className={classes.button}
+                onClick={() => deleteHandler(product)}
+              >
                 Delete
               </button>
             </div>

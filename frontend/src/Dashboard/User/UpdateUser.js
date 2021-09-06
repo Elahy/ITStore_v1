@@ -1,0 +1,189 @@
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Loader from "../../Components/Loader";
+import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoaderValue } from "../../store/action/loaderAction";
+import { requestEditUser } from "../../store/action/userAction";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "44%",
+      textAlign: "center",
+      marginLeft: "28%",
+      marginRight: "28%",
+    },
+  },
+  input: {
+    margin: theme.spacing(1),
+    marginLeft: "40%",
+    backgroundColor: "#04b4c4",
+  },
+  input2: {
+    margin: theme.spacing(1),
+    marginLeft: 15,
+  },
+  head: {
+    margin: theme.spacing(1),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    marginLeft: "45%",
+  },
+}));
+
+function UpdateUser(userId) {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { currentUser, currentUserId } = useSelector(
+    (store) => store.allUserStore
+  );
+  console.log(currentUser, "===currentUser");
+  const { loaderStore } = useSelector((store) => store);
+  // console.log(loaderStore.loader, "===loaderStore.loader");
+
+  const [user, setUser] = useState({
+    _id: currentUserId,
+    address: {
+      geolocation: {
+        lat: currentUser?.lat,
+        long: currentUser?.long,
+      },
+      city: currentUser?.city,
+      street: currentUser?.street,
+      number: currentUser?.streetNumber,
+      zipcode: currentUser?.zipcode,
+    },
+    role: currentUser?.role,
+    email: currentUser?.email,
+    username: currentUser?.userName,
+    phone: currentUser?.phone,
+    password: currentUser?.password,
+  });
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setUser({
+      ...user,
+      [event.target.name]: value,
+    });
+  };
+  const handleCancel = () => {
+    history.push("/");
+  };
+
+  const handleSubmit = (e) => {
+    dispatch(setLoaderValue(true));
+    dispatch(requestEditUser(user));
+  };
+  return (
+    <>
+      {loaderStore.loader ? (
+        <Loader />
+      ) : (
+        <div>
+          <Typography
+            variant="h3"
+            align="center"
+            className={classes.head}
+            gutterBottom
+          >
+            Edit User info
+          </Typography>
+          <form className={classes.root} noValidate autoComplete="off">
+            <div>
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Username"
+                multiline
+                maxRows={4}
+                variant="outlined"
+                type="text"
+                name="username"
+                defaultValue={currentUser?.username}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <TextField
+                id="outlined-textarea"
+                label="Email"
+                multiline
+                variant="outlined"
+                type="email"
+                name="email"
+                defaultValue={currentUser?.email}
+                onChange={handleChange}
+              />
+              <div />
+              <div>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Phone"
+                  multiline
+                  variant="outlined"
+                  type="text"
+                  name="phone"
+                  defaultValue={currentUser?.phone}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div>
+                <TextField
+                  id="outlined-textarea"
+                  label="Password"
+                  placeholder="Placeholder"
+                  multiline
+                  variant="outlined"
+                  type="password"
+                  name="password"
+                  defaultValue={currentUser?.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <TextField
+                  id="outlined-textarea"
+                  label="City"
+                  multiline
+                  variant="outlined"
+                  type="text"
+                  name="city"
+                  defaultValue={currentUser?.address?.city}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </form>
+          <Button
+            onClick={handleSubmit}
+            className={classes.input}
+            variant="contained"
+            color="primary"
+          >
+            Update
+          </Button>
+          <Button
+            onClick={handleCancel}
+            className={classes.input2}
+            variant="contained"
+            color="secondary"
+          >
+            Cancel
+          </Button>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default UpdateUser;

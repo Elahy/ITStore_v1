@@ -7,9 +7,14 @@ export const setListofCategory = (categoryList) => ({
   payload: categoryList,
 });
 
-export const setCurrentProduct = (product) => ({
-  type: ActionTypes.SET_CURRENT_PRODUCT,
-  payload: product,
+export const setCurrentCategory = (category) => ({
+  type: ActionTypes.SET_CURRENT_CATEGORY,
+  payload: category,
+});
+
+export const setCurrentCategoryId = (categoryId) => ({
+  type: ActionTypes.SET_CURRENT_CATEGORY_ID,
+  payload: categoryId,
 });
 
 export const addCategory = (response) => ({
@@ -17,12 +22,13 @@ export const addCategory = (response) => ({
   payload: response,
 });
 
-export const editProduct = (response) => ({
-  type: ActionTypes.UPDATE_A_PRODUCT,
+export const editCategory = (response) => ({
+  type: ActionTypes.UPDATE_A_CATEGORY,
   payload: response,
 });
-export const deleteProduct = (response) => ({
-  type: ActionTypes.DELETE_A_PRODUCT,
+
+export const deleteCategory = (response) => ({
+  type: ActionTypes.DELETE_A_CATEGORY,
   payload: response,
 });
 
@@ -38,56 +44,57 @@ export const requestCategoryList = () => {
   };
 };
 
-// export const requestProductDetails = (productId) => {
-//   return async (dispatch) => {
-//     const response = await axios({
-//       method: "GET",
-//       url: `http://localhost:8080/products/${productId}`,
-//     });
+export const requestCategoryDetails = (categoryId) => {
+  return async (dispatch) => {
+    const response = await axios({
+      method: "GET",
+      url: `http://localhost:8080/category/${categoryId}`,
+    });
 
-//     dispatch(setCurrentProduct(response.data));
-//     dispatch(setLoaderValue(false));
-//   };
-// };
+    dispatch(setCurrentCategory(response.data));
+    dispatch(setLoaderValue(false));
+  };
+};
 
-// export const requestDeleteProduct = (productId) => {
-//   return async (dispatch) => {
-//     const response = await axios.delete(
-//       `https://fakestoreapi.com/products/${productId}`
-//     );
-//     dispatch(deleteProduct(response));
-//     dispatch(setLoaderValue(false));
-//   };
-// };
+export const requestDeleteCategory = (categoryId) => {
+  return async (dispatch, getState) => {
+    const { userInfoStore } = getState();
+    const token = userInfoStore.token;
+    const response = await axios({
+      method: "DELETE",
+      url: `http://localhost:8080/category/${categoryId}`,
+      headers: { authorization: `bearer ${token}` },
+    });
+    dispatch(deleteCategory(response));
+    dispatch(setLoaderValue(false));
+  };
+};
 
-// export const requestEditProduct = (product) => {
-//   return async (dispatch, getState) => {
-//     try {
-//       const { userInfoStore } = getState();
-//       console.log("requestEditProduct Call");
-//       const token = userInfoStore.token;
-//       const response = await axios.patch(
-//         `http://localhost:8080/products/${product._id}`,
-//         {
-//           title: product.title,
-//           price: parseInt(product.price, 10),
-//           description: product.description,
-//           image: product.image,
-//           stock: product.stock,
-//           category: product.category,
-//         },
-//         {
-//           headers: { authorization: `bearer ${token}` },
-//         }
-//       );
-//       dispatch(editProduct(response));
-//       dispatch(setLoaderValue(false));
-//       console.log(response, "===response from Edit product Request");
-//     } catch (err) {
-//       console.error(err, "=== error from Edit product Request");
-//     }
-//   };
-// };
+export const requestEditCategory = (category) => {
+  return async (dispatch, getState) => {
+    console.log(category, "===requestEditCategory");
+    try {
+      const { userInfoStore } = getState();
+      console.log("requestEditProduct Call");
+      const token = userInfoStore.token;
+      const response = await axios.patch(
+        `http://localhost:8080/category/${category._id}`,
+        {
+          name: category.name,
+          description: category.description,
+        },
+        {
+          headers: { authorization: `bearer ${token}` },
+        }
+      );
+      dispatch(editCategory(response));
+      dispatch(setLoaderValue(false));
+      console.log(response, "===response from Edit product Request");
+    } catch (err) {
+      console.error(err, "=== error from Edit product Request");
+    }
+  };
+};
 
 export const requestAddCategory = (category) => {
   return async (dispatch, getState) => {

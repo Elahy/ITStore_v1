@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Users from "./Users";
 import AddUser from "./AddUser";
+import UpdateUser from "./UpdateUser";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoaderValue } from "../../store/action/loaderAction";
+import { setView } from "../../store/action/userAction";
 
 const useStyles = makeStyles({
   list: {
@@ -25,22 +29,30 @@ const useStyles = makeStyles({
 
 function UserBoard() {
   const classes = useStyles();
-  const [view, setView] = useState("all");
+  const dispatch = useDispatch();
+  const { view } = useSelector((store) => store.allUserStore);
+
+  useEffect(() => {
+    dispatch(setLoaderValue(false));
+    dispatch(setView("all"));
+  }, [dispatch]);
 
   return (
     <div>
       <ul className={classes.list}>
-        <li onClick={() => setView("all")} className={classes.select}>
+        <li onClick={() => dispatch(setView("all"))} className={classes.select}>
           User List
         </li>
-        <li onClick={() => setView("add")} className={classes.select}>
+        <li onClick={() => dispatch(setView("add"))} className={classes.select}>
           Add User
         </li>
       </ul>
       {view === "all" ? (
-        <Users />
+        <Users setView />
       ) : view === "add" ? (
         <AddUser />
+      ) : view === "edit" ? (
+        <UpdateUser />
       ) : (
         <p>Select</p>
       )}
