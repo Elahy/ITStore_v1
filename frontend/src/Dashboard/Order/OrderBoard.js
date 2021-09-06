@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Category from "./Category";
-import AddCategory from "./AddCategory";
+import Order from "./Order";
 
 const useStyles = makeStyles({
   list: {
@@ -23,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-function CategoryBoard() {
+function OrderBoard() {
   const classes = useStyles();
   const [view, setView] = useState("all");
 
@@ -31,21 +30,15 @@ function CategoryBoard() {
     <div>
       <ul className={classes.list}>
         <li onClick={() => setView("all")} className={classes.select}>
-          Category List
+          Product List
         </li>
         <li onClick={() => setView("add")} className={classes.select}>
-          Add Category
+          Add product
         </li>
       </ul>
-      {view === "all" ? (
-        <Category />
-      ) : view === "add" ? (
-        <AddCategory />
-      ) : (
-        <p>Select</p>
-      )}
+      {view === "all" ? <Order /> : view === "add" ? null : <p>Select</p>}
     </div>
   );
 }
 
-export default CategoryBoard;
+export default OrderBoard;

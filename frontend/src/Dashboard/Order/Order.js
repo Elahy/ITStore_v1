@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
 import { useHistory } from "react-router";
-import { requestCategoryList } from "../../store/action/categoryAction";
+import { requestOrderList } from "../../store/action/orderAction";
 
 const useStyles = makeStyles({
   root: {
@@ -24,16 +24,15 @@ const useStyles = makeStyles({
   },
 });
 
-function Category() {
+function Order() {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { categoryStore, loaderStore } = useSelector((store) => store);
-  console.log(categoryStore, "===Category Store");
-  const productList = categoryStore.categoryList;
+  const { orderStore, loaderStore } = useSelector((store) => store);
+  const productList = orderStore.orderList;
   useEffect(() => {
     dispatch(setLoaderValue(true));
-    dispatch(requestCategoryList());
+    dispatch(requestOrderList());
   }, [dispatch]);
   const updateHandler = (e) => {
     console.log(e, "==update Event");
@@ -51,15 +50,11 @@ function Category() {
         <div>
           {productList.map((product) => (
             <div key={product._id} className={classes.root}>
-              {/* <img
-                src={`http://localhost:8080${product.image}`}
-                alt={product.title}
-                className={classes.image}
-              /> */}
-              {console.log(product.image, "===image")}
+              {console.log(product, "===image")}
+              <p className={classes.button}>{product.status}</p>
               <p className={classes.button}>{product._id}</p>
-              <p className={classes.button}>{product.name}</p>
-              <p className={classes.button}>{product.description}</p>
+              <p className={classes.button}>{product.date}</p>
+              <p className={classes.button}>{product.userId.username}</p>
               <button
                 className={classes.button}
                 onClick={() => updateHandler(product)}
@@ -77,4 +72,4 @@ function Category() {
   );
 }
 
-export default Category;
+export default Order;

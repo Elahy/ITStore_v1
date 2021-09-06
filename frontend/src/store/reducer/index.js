@@ -7,6 +7,8 @@ import signInReducer from "./signInReducer";
 import userReducer from "./userReducer";
 import storage from "redux-persist/lib/storage";
 import myInfoReducer from "./myInfoReducer";
+import categoryReducer from "./categoryReducer";
+import orderReducer from "./orderReducer";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +25,8 @@ const mainReducer = combineReducers({
   userInfoStore: persistedUserInfo,
   allUserStore: userReducer,
   myInfoStore: myInfoReducer,
+  categoryStore: categoryReducer,
+  orderStore: orderReducer,
 });
 
 export default mainReducer;
