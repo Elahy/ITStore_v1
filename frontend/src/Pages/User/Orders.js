@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { requestProductList } from "../../store/action/productAction";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
 import { useHistory } from "react-router";
