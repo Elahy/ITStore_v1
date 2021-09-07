@@ -4,7 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Loader from "../../Components/Loader";
-import { useParams } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,7 +11,8 @@ import {
   requestProductDetails,
 } from "../../store/action/productAction";
 import { setLoaderValue } from "../../store/action/loaderAction";
-import FileBase64 from "react-file-base64";
+import { MenuItem } from "@material-ui/core";
+import { requestCategoryList } from "../../store/action/categoryAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,66 +41,36 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
     marginLeft: "45%",
   },
-  image: {
-    marginLeft: "35%",
-    maxWidth: "100px",
-    maxHeight: "100px",
-    padding: "0 1% ",
-  },
-  imageWrap: {
-    display: "flex",
-  },
 }));
 
 function UpdateProduct() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const param = useParams();
-  console.log(param.id, "===pro.id");
-  const [image, setImage] = useState(null);
-  const { currentProduct, productEdited } = useSelector(
-    (store) => store.productStore
-  );
+
+  const { currentProduct } = useSelector((store) => store.productStore);
+  console.log(currentProduct, "====currentProduct");
+  const { categoryList } = useSelector((store) => store.categoryStore);
   const { loaderStore } = useSelector((store) => store);
-  // console.log(loaderStore.loader, "===loaderStore.loader");
 
-  // const canvas = `http://localhost:8080${currentProduct?.image}`;
-  // function encodeImageFileAsURL(file) {
-  //   // var file = element.files[0];
-  //   var reader = new FileReader();
-  //   reader.onloadend = function () {
-  //     console.log("RESULT", reader.result);
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
-  // encodeImageFileAsURL(canvas);
-
-  // const base64image = reader.result;
-  // console.log(base64image, "base64Image");
-
-  const [product, setProduct] = useState({
-    _id: param.id,
-    title: currentProduct?.title,
-    price: currentProduct?.price,
-    description: currentProduct?.description,
-    // image: base64image,
-    stock: currentProduct?.stock,
-    category: { _id: "612c69d0307e350fc0cb6c1f" },
-  });
+  const [product, setProduct] = useState();
 
   useEffect(() => {
-    // console.log("===Console in useEffect1");
-    dispatch(setLoaderValue(true));
-    dispatch(requestProductDetails(param.id));
-    // console.log("===Console in useEffect2");
-  }, [dispatch, param.id]);
+    setProduct({
+      _id: currentProduct?._id,
+      title: currentProduct?.title,
+      price: currentProduct?.price,
+      description: currentProduct?.description,
+      stock: currentProduct?.stock,
+      category: currentProduct?.category._id,
+    });
+  }, [currentProduct]);
 
-  const handleImage = (e) => {
-    setImage({ files: e });
-    setProduct({ ...product, image: e.base64 });
-    // console.log(e.base64, "Image Event");
-  };
+  useEffect(() => {
+    dispatch(setLoaderValue(true));
+    dispatch(requestProductDetails());
+    dispatch(requestCategoryList());
+  }, [dispatch]);
 
   // console.log(product, "===product");
 
@@ -115,10 +85,8 @@ function UpdateProduct() {
   const handleSubmit = (e) => {
     dispatch(setLoaderValue(true));
     dispatch(requestEditProduct(product));
+    history.push("/");
   };
-  if (productEdited && productEdited.status === 200) {
-    history.push("/success");
-  }
 
   return (
     <>
@@ -135,21 +103,6 @@ function UpdateProduct() {
             Edit Product info
           </Typography>
           <form className={classes.root} noValidate autoComplete="off">
-            <div className={classes.imageWrap}>
-              <img
-                src={`http://localhost:8080${currentProduct?.image}`}
-                alt={product?.title}
-                className={classes.image}
-              />
-              {console.log(product?.image, "===image")}
-              <> Upload new image to replace this one : </>
-              <FileBase64 onDone={handleImage} multiple={false} />
-              {image ? (
-                <pre>
-                  {/*{JSON.stringify(image.files, null, 2)}*/} Image Uploaded
-                </pre>
-              ) : null}
-            </div>
             <div>
               <TextField
                 id="outlined-multiline-flexible"
@@ -204,19 +157,30 @@ function UpdateProduct() {
                   onChange={handleChange}
                 />
               </div>
-              <div>
-                <TextField
-                  id="outlined-textarea"
-                  label="Category ID"
-                  placeholder="Placeholder"
-                  multiline
-                  variant="outlined"
-                  type="text"
-                  name="Category"
-                  defaultValue={currentProduct?.category._id}
-                  onChange={handleChange}
-                />
-              </div>
+              <TextField
+                id="filled-select-categoty"
+                select
+                label="Category"
+                defaultValue={currentProduct?.category?.name}
+                name="category"
+                onChange={handleChange}
+                helperText="Please select a category"
+                variant="outlined"
+              >
+                {console.log(
+                  currentProduct?.category?.name,
+                  "currentProduct?.category?.name"
+                )}
+                {categoryList.map((category) => (
+                  <MenuItem
+                    key={category._id}
+                    value={category.name}
+                    // defaultValue={currentProduct?.category.name}
+                  >
+                    {category.name}
+                  </MenuItem>
+                ))}
+              </TextField>
             </div>
           </form>
           <Button

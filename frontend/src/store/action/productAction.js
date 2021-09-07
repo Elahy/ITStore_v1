@@ -80,7 +80,7 @@ export const requestEditProduct = (product) => {
   return async (dispatch, getState) => {
     try {
       const { userInfoStore } = getState();
-      console.log("requestEditProduct Call");
+      console.log(product, "requestEditProduct Call");
       const token = userInfoStore.token;
       const response = await axios.patch(
         `http://localhost:8080/products/${product._id}`,
@@ -88,9 +88,8 @@ export const requestEditProduct = (product) => {
           title: product.title,
           price: parseInt(product.price, 10),
           description: product.description,
-          image: product.image,
           stock: product.stock,
-          category: product.category,
+          category: { _id: product.category },
         },
         {
           headers: { authorization: `bearer ${token}` },

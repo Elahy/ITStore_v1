@@ -18,7 +18,7 @@ export const placeorder = (data) => ({
 
 export const requestAddToCart = (item) => {
   const id = item.product._id;
-  console.log(item, "===Id from Cart");
+  console.log(item, "===item from Cart");
   return async (dispatch, getState) => {
     try {
       const { userInfoStore } = getState();

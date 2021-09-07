@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -32,31 +32,41 @@ function Order() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { orderStore, loaderStore } = useSelector((store) => store);
-  const productList = orderStore.orderList;
+  const [orderList, setOrderList] = useState();
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestOrderList());
   }, [dispatch]);
+
+  useEffect(() => {
+    setOrderList(orderStore.orderList);
+  }, [orderStore]);
+
   const confirmHandler = (e) => {
     console.log(e, "==update Event");
     const order = {
       _id: e._id,
       status: "1",
     };
+    dispatch(setLoaderValue(true));
     dispatch(requestUpdateOrder(order));
   };
+
   const cancelHandler = (e) => {
     const order = {
       _id: e._id,
       status: "2",
     };
+    dispatch(setLoaderValue(true));
     dispatch(requestUpdateOrder(order));
   };
+
   const pendingHandler = (e) => {
     const order = {
       _id: e._id,
       status: "0",
     };
+    dispatch(setLoaderValue(true));
     dispatch(requestUpdateOrder(order));
   };
 
@@ -66,7 +76,7 @@ function Order() {
         <Loader />
       ) : (
         <div>
-          {productList.map((product) => (
+          {orderList?.map((product) => (
             <div key={product._id} className={classes.root}>
               {console.log(product, "===image")}
 

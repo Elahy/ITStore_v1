@@ -47,7 +47,8 @@ function Cart() {
   const productList = cart;
 
   const deleteHandler = (e) => {
-    history.push(`/delete/${e.data.id}`);
+    const item = { product: { _id: e }, quantity: 0 };
+    dispatch(requestAddToCart(item));
   };
 
   const minusCart = (e) => {
@@ -64,6 +65,7 @@ function Cart() {
     dispatch(setLoaderValue(true));
     dispatch(requestCheckout());
     dispatch(addToCart(""));
+    history.push("/");
   };
 
   return (
@@ -73,7 +75,7 @@ function Cart() {
       ) : cart ? (
         <div className={classes.root}>
           {productList?.map((product) => (
-            <div key={product.productId?._id} className={classes.main}>
+            <div key={product?.productId?._id} className={classes.main}>
               <img
                 src={`http://localhost:8080${product.productId?.image}`}
                 alt={product.productId?.title}
@@ -97,7 +99,10 @@ function Cart() {
                 </button>
               </p>
 
-              <button className={classes.button} onClick={deleteHandler}>
+              <button
+                className={classes.button}
+                onClick={() => deleteHandler(product._id)}
+              >
                 Delete
               </button>
             </div>

@@ -153,17 +153,6 @@ function AddProduct() {
                 {image ? <pre>Image Uploaded</pre> : null}
               </div>
               <div>
-                {/* <TextField
-                  id="outlined-multiline-static"
-                  select
-                  label="Category"
-                  // variant="outlined"
-                  type="text"
-                  defaultValue=""
-                  value={categories}
-                  name="category"
-                  // onChange={handleChange}
-                /> */}
                 <TextField
                   id="filled-select-categoty"
                   select

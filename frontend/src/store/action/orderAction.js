@@ -42,10 +42,11 @@ export const requestUpdateOrder = (order) => {
       url: `http://localhost:8080/order/${order._id}`,
       headers: { authorization: `bearer ${token}` },
       data: {
-        status: order.status,
+        status: parseInt(order.status, 10),
       },
     });
     dispatch(updateOrder(response));
+    dispatch(requestOrderList());
     dispatch(setLoaderValue(false));
   };
 };
