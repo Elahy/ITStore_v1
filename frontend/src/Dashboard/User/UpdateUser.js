@@ -105,6 +105,7 @@ function UpdateUser(userId) {
                 label="Username"
                 multiline
                 maxRows={4}
+                placeholder=""
                 variant="outlined"
                 type="text"
                 name="username"
@@ -117,6 +118,7 @@ function UpdateUser(userId) {
                 id="outlined-textarea"
                 label="Email"
                 multiline
+                placeholder=""
                 variant="outlined"
                 type="email"
                 name="email"
@@ -129,6 +131,7 @@ function UpdateUser(userId) {
                   id="outlined-multiline-static"
                   label="Phone"
                   multiline
+                  placeholder=""
                   variant="outlined"
                   type="text"
                   name="phone"
@@ -155,6 +158,7 @@ function UpdateUser(userId) {
                   id="outlined-textarea"
                   label="City"
                   multiline
+                  placeholder="Placeholder"
                   variant="outlined"
                   type="text"
                   name="city"

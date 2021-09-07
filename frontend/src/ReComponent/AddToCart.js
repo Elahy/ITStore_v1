@@ -16,7 +16,8 @@ function AddToCart(product) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const handleCartAdd = () => {
-    dispatch(requestAddToCart(product));
+    const item = { ...product, quantity: 1 };
+    dispatch(requestAddToCart(item));
     console.log(product, "===Add to cart called");
   };
 

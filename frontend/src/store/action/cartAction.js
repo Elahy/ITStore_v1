@@ -16,9 +16,9 @@ export const placeorder = (data) => ({
 //   .then((res) => res.json())
 //   .then((json) => console.log(json));
 
-export const requestAddToCart = (product) => {
-  const id = product.product._id;
-  console.log(id, "===Id from Cart");
+export const requestAddToCart = (item) => {
+  const id = item.product._id;
+  console.log(item, "===Id from Cart");
   return async (dispatch, getState) => {
     try {
       const { userInfoStore } = getState();
@@ -28,7 +28,7 @@ export const requestAddToCart = (product) => {
         {
           product: {
             id: id,
-            quantity: 1,
+            quantity: item.quantity,
           },
         },
         {

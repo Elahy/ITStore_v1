@@ -37,6 +37,17 @@ export const requestProductList = () => {
   };
 };
 
+export const requestProductByCategory = (categoryId) => {
+  return async (dispatch) => {
+    const response = await axios({
+      method: "GET",
+      url: `http://localhost:8080/products/category/${categoryId}`,
+    });
+    dispatch(setListofProduct(response.data));
+    dispatch(setLoaderValue(false));
+  };
+};
+
 export const requestProductDetails = (productId) => {
   return async (dispatch) => {
     const response = await axios({

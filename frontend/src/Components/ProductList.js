@@ -11,7 +11,11 @@ import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { requestProductList } from "../store/action/productAction";
+import {
+  requestProductByCategory,
+  requestProductList,
+} from "../store/action/productAction";
+import { requestCategoryList } from "../store/action/categoryAction";
 import { setLoaderValue } from "../store/action/loaderAction";
 import Loader from "./Loader";
 import AddToCart from "../ReComponent/AddToCart";
@@ -27,19 +31,33 @@ const useStyles = makeStyles({
   detailsButton: {
     backgroundColor: "#04b4c4",
   },
+  selectButton: {
+    display: "inline-flex",
+    margin: "20px",
+  },
 });
 
 function ProductList() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
-  const { productStore, loaderStore } = useSelector((store) => store);
+  const { productStore, loaderStore, categoryStore } = useSelector(
+    (store) => store
+  );
   const productList = productStore.productList;
+  const categoryList = categoryStore.categoryList;
 
   useEffect(() => {
     dispatch(setLoaderValue(true));
+    dispatch(requestCategoryList());
     dispatch(requestProductList());
   }, [dispatch]);
+
+  const handleSelect = (e) => {
+    dispatch(setLoaderValue(true));
+    dispatch(requestProductByCategory(e));
+  };
+
   console.log(productList);
   const buttonHanlder = (e) => {
     history.push(`/products/${e}`);
@@ -50,6 +68,16 @@ function ProductList() {
         <Loader />
       ) : (
         <div>
+          {categoryList.map((category) => (
+            <Button
+              className={classes.selectButton}
+              variant="contained"
+              color="secondary"
+              onClick={() => handleSelect(category._id)}
+            >
+              {category.name}
+            </Button>
+          ))}
           <Grid container spacing={3}>
             <Grid item xs={false} lg={1}></Grid>
             <Grid item xs={12} lg={10}>
