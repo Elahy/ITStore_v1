@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -8,6 +8,9 @@ import { useHistory } from "react-router";
 import { requestAddProduct } from "../../store/action/productAction";
 import { useDispatch, useSelector } from "react-redux";
 import FileBase64 from "react-file-base64";
+import { setLoaderValue } from "../../store/action/loaderAction";
+import { requestCategoryList } from "../../store/action/categoryAction";
+import { MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,15 +54,28 @@ function AddProduct() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { loader } = useSelector((store) => store.loaderStore);
+  const { categoryList } = useSelector((store) => store.categoryStore);
+  console.log(categoryList, "categoryList after Store Call");
   const [image, setImage] = useState(null);
+  // const [categories, setCategories] = useState(null);
+  // const [category, setCategory] = useState("SSD");
   const [product, setProduct] = useState({
     title: "",
     price: null,
     description: "",
     image: "",
     stock: "",
-    category: { _id: "612c69d0307e350fc0cb6c1f" },
+    category: "",
   });
+
+  useEffect(() => {
+    dispatch(setLoaderValue(true));
+    dispatch(requestCategoryList());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   setCategories(categoryList.map((category) => category.name));
+  // }, [categoryList]);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -134,19 +150,36 @@ function AddProduct() {
               </div>
               <div className={classes.imageWrap}>
                 <FileBase64 onDone={handleImage} multiple={false} />
-                {image ? (
-                  <pre>{JSON.stringify(image.files, null, 2)}</pre>
-                ) : null}
+                {image ? <pre>Image Uploaded</pre> : null}
               </div>
               <div>
-                <TextField
+                {/* <TextField
                   id="outlined-multiline-static"
+                  select
                   label="Category"
-                  variant="outlined"
+                  // variant="outlined"
                   type="text"
+                  defaultValue=""
+                  value={categories}
                   name="category"
                   // onChange={handleChange}
-                />
+                /> */}
+                <TextField
+                  id="filled-select-categoty"
+                  select
+                  label="Category"
+                  // value={category}
+                  name="category"
+                  onChange={handleChange}
+                  helperText="Please select a category"
+                  variant="outlined"
+                >
+                  {categoryList.map((category) => (
+                    <MenuItem key={category._id} value={category._id}>
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </div>
               <div>
                 <TextField

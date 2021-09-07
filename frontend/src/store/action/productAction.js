@@ -106,7 +106,7 @@ export const requestAddProduct = (product) => {
           description: product.description,
           image: product.image,
           stock: product.stock,
-          category: product.category,
+          category: { _id: product.category },
         },
         {
           headers: { authorization: `bearer ${token}` },
