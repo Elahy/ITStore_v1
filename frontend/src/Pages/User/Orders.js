@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
 import { useHistory } from "react-router";
-import { requestMyOrder } from "../../store/action/signInAction";
+import { requestMyOrder } from "../../store/action/orderAction";
 
 const useStyles = makeStyles({
   root: {
@@ -30,6 +30,7 @@ function Orders() {
   const dispatch = useDispatch();
   const { myInfoStore, loaderStore } = useSelector((store) => store);
   const productList = myInfoStore.myOrder;
+  console.log(productList, "===orderlist");
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestMyOrder());
@@ -50,22 +51,21 @@ function Orders() {
         <div>
           {productList.map((product) => (
             <div key={product._id} className={classes.root}>
-              <p className={classes.button}>{product.title}</p>
-              {product.stock ? (
-                <p className={classes.button}>
-                  {product.stock} pieces available
-                </p>
-              ) : (
-                <p className={classes.button}>Out of Stock</p>
-              )}
+              <p className={classes.button}>{product._id}</p>
+              <p className={classes.button}>{product.date}</p>
+              <p className={classes.button}>{product.products.length}</p>
+              <p className={classes.button}>
+                {product.status === 0 ? <>Pending</> : <>Delivered</>}
+              </p>
+
               <button
                 className={classes.button}
                 onClick={() => updateHandler(product)}
               >
-                Edit
+                Received
               </button>
               <button className={classes.button} onClick={deleteHandler}>
-                Delete
+                Cancel
               </button>
             </div>
           ))}

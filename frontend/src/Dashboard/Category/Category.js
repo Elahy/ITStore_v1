@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
-// import { useHistory } from "react-router";
+import { useHistory } from "react-router";
 import {
   requestCategoryDetails,
   requestCategoryList,
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 });
 
 function Category() {
-  // const history = useHistory();
+  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { categoryStore, loaderStore } = useSelector((store) => store);
@@ -49,6 +49,7 @@ function Category() {
   };
   const deleteHandler = (e) => {
     dispatch(requestDeleteCategory(e._id));
+    history.push("/success");
   };
 
   return (

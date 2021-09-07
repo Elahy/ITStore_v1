@@ -2,10 +2,15 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { requestProductList } from "../../store/action/productAction";
+import {
+  requestDeleteProduct,
+  requestProductDetails,
+  requestProductList,
+} from "../../store/action/productAction";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
 import { useHistory } from "react-router";
+import { setView } from "../../store/action/userAction";
 
 const useStyles = makeStyles({
   root: {
@@ -30,16 +35,21 @@ function Products() {
   const dispatch = useDispatch();
   const { productStore, loaderStore } = useSelector((store) => store);
   const productList = productStore.productList;
+
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestProductList());
   }, [dispatch]);
+
   const updateHandler = (e) => {
     console.log(e, "==update Event");
-    history.push(`/update/${e._id}`);
+    dispatch(requestProductDetails(e._id));
+    dispatch(setView("edit"));
   };
+
   const deleteHandler = (e) => {
-    history.push(`/delete/${e._id}`);
+    dispatch(requestDeleteProduct(e._id));
+    history.push("/success");
   };
 
   return (
@@ -70,7 +80,10 @@ function Products() {
               >
                 Edit
               </button>
-              <button className={classes.button} onClick={deleteHandler}>
+              <button
+                className={classes.button}
+                onClick={() => deleteHandler(product)}
+              >
                 Delete
               </button>
             </div>

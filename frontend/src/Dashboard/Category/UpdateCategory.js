@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -48,11 +48,14 @@ function UpdateCategory(userId) {
   const { loaderStore } = useSelector((store) => store);
   // console.log(loaderStore.loader, "===loaderStore.loader");
 
-  const [category, setCategory] = useState({
-    _id: currentCategory?._id,
-    name: currentCategory?.name,
-    description: currentCategory?.description,
-  });
+  const [category, setCategory] = useState();
+  useEffect(() => {
+    setCategory({
+      _id: currentCategory?._id,
+      name: currentCategory?.name,
+      description: currentCategory?.description,
+    });
+  }, [currentCategory]);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -67,6 +70,7 @@ function UpdateCategory(userId) {
 
   const handleSubmit = (e) => {
     dispatch(setLoaderValue(true));
+    console.log(category, "===category");
     dispatch(requestEditCategory(category));
   };
 

@@ -65,16 +65,16 @@ function UpdateProduct() {
   const { loaderStore } = useSelector((store) => store);
   // console.log(loaderStore.loader, "===loaderStore.loader");
 
-  const canvas = `http://localhost:8080${currentProduct?.image}`;
-  function encodeImageFileAsURL(file) {
-    // var file = element.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function () {
-      console.log("RESULT", reader.result);
-    };
-    reader.readAsDataURL(file);
-  }
-  encodeImageFileAsURL(canvas);
+  // const canvas = `http://localhost:8080${currentProduct?.image}`;
+  // function encodeImageFileAsURL(file) {
+  //   // var file = element.files[0];
+  //   var reader = new FileReader();
+  //   reader.onloadend = function () {
+  //     console.log("RESULT", reader.result);
+  //   };
+  //   reader.readAsDataURL(file);
+  // }
+  // encodeImageFileAsURL(canvas);
 
   // const base64image = reader.result;
   // console.log(base64image, "base64Image");

@@ -50,9 +50,15 @@ export const requestProductDetails = (productId) => {
 };
 
 export const requestDeleteProduct = (productId) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const { userInfoStore } = getState();
+    console.log("requestDeleteProduct Call");
+    const token = userInfoStore.token;
     const response = await axios.delete(
-      `https://fakestoreapi.com/products/${productId}`
+      `http://localhost:8080/products/${productId}`,
+      {
+        headers: { authorization: `bearer ${token}` },
+      }
     );
     dispatch(deleteProduct(response));
     dispatch(setLoaderValue(false));

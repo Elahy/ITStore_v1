@@ -1,9 +1,14 @@
-import { makeStyles } from "@material-ui/core";
-import React, { useEffect } from "react";
+import { Button, makeStyles } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/Loader";
+import UpdateUser from "../../Dashboard/User/UpdateUser";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import { requestMyInfo } from "../../store/action/signInAction";
+import {
+  requestUserDetails,
+  setCurrentUserId,
+} from "../../store/action/userAction";
 
 const useStyles = makeStyles({
   root: {
@@ -22,10 +27,20 @@ function Info() {
     dispatch(requestMyInfo());
   }, [dispatch]);
 
+  const [view, setView] = useState("");
+
+  const handleEditUserInfo = (e) => {
+    dispatch(requestUserDetails(e._id));
+    dispatch(setCurrentUserId(e._id));
+    setView("edit");
+  };
+
   return (
     <>
       {loaderStore.loader ? (
         <Loader />
+      ) : view === "edit" ? (
+        <UpdateUser />
       ) : (
         <div className={classes.root}>
           <p>First Name: {myInfoStore.userInfo.firstname}</p>
@@ -36,6 +51,13 @@ function Info() {
           <p>City: {myInfoStore.userInfo.address?.city}</p>
           <p>Road Number: {myInfoStore.userInfo.address?.number}</p>
           <p>Zipcode: {myInfoStore.userInfo.address?.zipcode}</p>
+          <Button
+            onClick={() => handleEditUserInfo(myInfoStore?.userInfo)}
+            variant="contained"
+            color="primary"
+          >
+            Edit Info
+          </Button>
         </div>
       )}
     </>

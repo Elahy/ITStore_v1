@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Products from "./Products";
 import AddProduct from "./AddProduct";
+import { useDispatch, useSelector } from "react-redux";
+import { setView } from "../../store/action/userAction";
+import UpdateProduct from "./UpdateProduct";
 
 const useStyles = makeStyles({
   list: {
@@ -25,15 +28,16 @@ const useStyles = makeStyles({
 
 function ProductBoard() {
   const classes = useStyles();
-  const [view, setView] = useState("all");
+  const dispatch = useDispatch();
+  const { view } = useSelector((store) => store.allUserStore);
 
   return (
     <div>
       <ul className={classes.list}>
-        <li onClick={() => setView("all")} className={classes.select}>
+        <li onClick={() => dispatch(setView("all"))} className={classes.select}>
           Product List
         </li>
-        <li onClick={() => setView("add")} className={classes.select}>
+        <li onClick={() => dispatch(setView("add"))} className={classes.select}>
           Add product
         </li>
       </ul>
@@ -41,6 +45,8 @@ function ProductBoard() {
         <Products />
       ) : view === "add" ? (
         <AddProduct />
+      ) : view === "edit" ? (
+        <UpdateProduct />
       ) : (
         <p>Select</p>
       )}

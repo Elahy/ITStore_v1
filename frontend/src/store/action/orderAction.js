@@ -12,6 +12,11 @@ export const updateOrder = (response) => ({
   payload: response,
 });
 
+export const myOrder = (response) => ({
+  type: ActionTypes.GET_MY_ORDER,
+  payload: response,
+});
+
 export const requestOrderList = () => {
   return async (dispatch, getState) => {
     const { userInfoStore } = getState();
@@ -42,5 +47,25 @@ export const requestUpdateOrder = (order) => {
     });
     dispatch(updateOrder(response));
     dispatch(setLoaderValue(false));
+  };
+};
+
+export const requestMyOrder = () => {
+  return async (dispatch, getState) => {
+    const { userInfoStore } = getState();
+    console.log("requestMyOrder Successfull");
+    const token = userInfoStore.token;
+    try {
+      const response = await axios({
+        method: "GET",
+        url: "http://localhost:8080/order/my-order",
+        headers: { authorization: `bearer ${token}` },
+      });
+      dispatch(myOrder(response.data));
+      dispatch(setLoaderValue(false));
+    } catch (err) {
+      dispatch(setLoaderValue(false));
+      console.error(err, "===Error");
+    }
   };
 };

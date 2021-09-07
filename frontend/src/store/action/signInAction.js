@@ -12,11 +12,6 @@ export const myInfo = (response) => ({
   payload: response,
 });
 
-export const myOrder = (response) => ({
-  type: ActionTypes.GET_MY_ORDER,
-  payload: response,
-});
-
 export const requestSignIn = (credential) => {
   console.log(JSON.stringify(credential), "Signin");
   return async (dispatch) => {
@@ -49,26 +44,6 @@ export const requestMyInfo = () => {
       const response = await axios({
         method: "GET",
         url: "http://localhost:8080/my-detail",
-        headers: { authorization: `bearer ${token}` },
-      });
-      dispatch(myInfo(response.data));
-      dispatch(setLoaderValue(false));
-    } catch (err) {
-      dispatch(setLoaderValue(false));
-      console.error(err, "===Error");
-    }
-  };
-};
-
-export const requestMyOrder = () => {
-  return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
-    console.log("requestMyOrder Successfull");
-    const token = userInfoStore.token;
-    try {
-      const response = await axios({
-        method: "GET",
-        url: "http://localhost:8080/my-order",
         headers: { authorization: `bearer ${token}` },
       });
       dispatch(myInfo(response.data));
