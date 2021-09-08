@@ -12,6 +12,11 @@ export const placeorder = (data) => ({
   payload: data.products,
 });
 
+export const setCheckoutItems = (data) => ({
+  type: ActionTypes.SET_CHECKOUT_ITEMS,
+  payload: data,
+});
+
 // fetch("{BASE_URL}/cart")
 //   .then((res) => res.json())
 //   .then((json) => console.log(json));

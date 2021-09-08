@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
 import {
   Button,
+  Checkbox,
   Grid,
   Table,
   TableBody,
@@ -41,8 +42,13 @@ const useStyles = makeStyles({
     margin: "10px",
   },
   cartButton: {
-    padding: "8px",
+    padding: "5px 7px",
     margin: "5px",
+  },
+  deleteButton: {
+    padding: "2px",
+    margin: "2px",
+    display: "block",
   },
   heading: {
     textAlign: "start",
@@ -59,6 +65,12 @@ function Cart() {
   const { loader } = useSelector((store) => store.loaderStore);
   console.log(cart, "===cart");
   const [productList, setProductList] = useState();
+
+  const [checked, setChecked] = React.useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
 
   const deleteHandler = (e) => {
     const item = { product: { _id: e }, quantity: 0 };
@@ -86,10 +98,7 @@ function Cart() {
   }, [cart]);
 
   const handleCheckout = () => {
-    dispatch(setLoaderValue(true));
-    dispatch(requestCheckout());
-    dispatch(addToCart(""));
-    history.push("/");
+    history.push("/checkout");
   };
 
   return (
@@ -109,6 +118,9 @@ function Cart() {
                   <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                       <TableRow>
+                        <TableCell>
+                          <Checkbox />
+                        </TableCell>
                         <TableCell>{""}</TableCell>
                         <TableCell>Product</TableCell>
                         <TableCell>Unit Price</TableCell>
@@ -119,12 +131,14 @@ function Cart() {
                     </TableHead>
                     <TableBody>
                       {productList?.map((product) => (
-                        <TableRow
-                          hover
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={product._id}
-                        >
+                        <TableRow hover tabIndex={-1} key={product._id}>
+                          <TableCell>
+                            <Checkbox
+                              checked={checked}
+                              onChange={handleChange}
+                              inputProps={{ "aria-label": "primary checkbox" }}
+                            />
+                          </TableCell>
                           <TableCell key={product.productId?.image}>
                             <img
                               src={`http://localhost:8080${product.productId?.image}`}
@@ -153,13 +167,13 @@ function Cart() {
                               +
                             </button>
                           </TableCell>
-                          <TableCell key={product._id}>
+                          <TableCell>
                             {product.productId?.price *
                               parseInt(product?.quantity, 10)}{" "}
                             tk
                           </TableCell>
-                          <TableCell key={product._id}>
-                            <DeleteIcon />
+                          <TableCell onClick={deleteHandler}>
+                            <DeleteIcon className={classes.deleteButton} />
                             {console.log("Delete Icon Called")}
                           </TableCell>
                         </TableRow>
@@ -173,7 +187,7 @@ function Cart() {
                 color="primary"
                 onClick={handleCheckout}
               >
-                Place Order
+                Check Out
               </Button>
             </Grid>
             <Grid xs={false} lg={2} item={true}></Grid>

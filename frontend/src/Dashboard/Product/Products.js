@@ -7,10 +7,23 @@ import {
   requestProductDetails,
   requestProductList,
 } from "../../store/action/productAction";
+import {
+  Button,
+  Checkbox,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
 import { useHistory } from "react-router";
 import { setView } from "../../store/action/userAction";
+
+// import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles({
   root: {
@@ -58,36 +71,62 @@ function Products() {
         <Loader />
       ) : (
         <div>
-          {productList.map((product) => (
-            <div key={product._id} className={classes.root}>
-              <img
-                src={`http://localhost:8080${product.image}`}
-                alt={product.title}
-                className={classes.image}
-              />
-              {console.log(product.image, "===image")}
-              <p className={classes.button}>{product.title}</p>
-              {product.stock ? (
-                <p className={classes.button}>
-                  {product.stock} pieces available
-                </p>
-              ) : (
-                <p className={classes.button}>Out of Stock</p>
-              )}
-              <button
-                className={classes.button}
-                onClick={() => updateHandler(product)}
-              >
-                Edit
-              </button>
-              <button
-                className={classes.button}
-                onClick={() => deleteHandler(product)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
+          <div>
+            <TableContainer className={classes.container}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>{""}</TableCell>
+                    <TableCell>Product</TableCell>
+                    <TableCell>Stock</TableCell>
+                    <TableCell>Action</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {productList?.map((product) => (
+                    <TableRow hover tabIndex={-1} key={product._id}>
+                      <TableCell key={product?.image}>
+                        <img
+                          src={`http://localhost:8080${product?.image}`}
+                          alt={product?.title}
+                          className={classes.image}
+                        />
+                      </TableCell>
+                      <TableCell key={product?.title}>
+                        {product?.title}
+                      </TableCell>
+
+                      <TableCell key={product.quantity}>
+                        {product.stock ? (
+                          <p className={classes.button}>
+                            {product.stock} pieces available
+                          </p>
+                        ) : (
+                          <p className={classes.button}>Out of Stock</p>
+                        )}
+                      </TableCell>
+
+                      <TableCell>
+                        <button
+                          className={classes.button}
+                          onClick={() => updateHandler(product)}
+                        >
+                          Edit
+                        </button>
+                        {/* <DeleteIcon className={classes.deleteButton} /> */}
+                        <button
+                          className={classes.button}
+                          onClick={() => deleteHandler(product)}
+                        >
+                          Delete
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
         </div>
       )}
     </>

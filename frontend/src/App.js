@@ -7,9 +7,7 @@ import Policy from "./Components/Policy";
 import NotFound from "./Components/NotFound";
 import ProductDetails from "./Components/ProductDetails";
 import Success from "./Components/Success";
-import UpdateProduct from "./Dashboard/Product/UpdateProduct";
 import Home from "./Components/Home";
-import DeleteProduct from "./Components/DeleteProduct";
 import LoginPage from "./Pages/LoginPage";
 import { useSelector } from "react-redux";
 import Dashboard from "./Dashboard";
@@ -17,6 +15,7 @@ import Cart from "./Pages/Cart";
 import ContactUs from "./ReComponent/ContactUs";
 import SignupPage from "./Pages/SignupPage";
 import UserProfile from "./Pages/User/UserProfile";
+import CheckOutPage from "./Pages/CheckOutPage";
 
 function App() {
   const history = useHistory();
@@ -127,12 +126,6 @@ function App() {
               <Route exact path="/profile">
                 <UserProfile />
               </Route>
-              <Route path="/update/:id">
-                <UpdateProduct />
-              </Route>
-              <Route path="/delete/:id">
-                <DeleteProduct />
-              </Route>
               <Route path="/contact">
                 <ContactUs />
               </Route>
@@ -142,10 +135,14 @@ function App() {
               <Route path="/success">
                 <Success />
               </Route>
-
               {role === "admin" && (
                 <Route path="/dashboard">
                   <Dashboard />
+                </Route>
+              )}
+              {role === "admin" && (
+                <Route path="/checkout">
+                  <CheckOutPage />
                 </Route>
               )}
               <Route path="/*">
