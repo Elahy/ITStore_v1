@@ -28,7 +28,7 @@ export const requestAddToCart = (item) => {
         {
           product: {
             id: id,
-            quantity: item.quantity,
+            quantity: parseInt(item.quantity, 10),
           },
         },
         {
@@ -56,6 +56,23 @@ export const requestCheckout = () => {
       console.log(response.data, "===response from request");
     } catch (err) {
       console.error(err, "===response from error");
+    }
+  };
+};
+
+export const requestCart = () => {
+  return async (dispatch, getState) => {
+    try {
+      const { userInfoStore } = getState();
+      const token = userInfoStore.token;
+      const response = await axios.get("http://localhost:8080/cart", {
+        headers: { authorization: `bearer ${token}` },
+      });
+      dispatch(addToCart(response.data));
+      dispatch(setLoaderValue(false));
+      console.log(response.data, "===response from requestCART");
+    } catch (err) {
+      console.error(err, "===response from requestCART error");
     }
   };
 };

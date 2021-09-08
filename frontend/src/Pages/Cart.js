@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
-import { Button } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 import Loader from "../Components/Loader";
 import { setLoaderValue } from "../store/action/loaderAction";
 import {
   addToCart,
   requestAddToCart,
+  requestCart,
   requestCheckout,
 } from "../store/action/cartAction";
 
 const useStyles = makeStyles({
   root: {
-    marginTop: "5%",
-    marginLeft: "25%",
+    margin: "5%",
     minHeight: "90vh",
   },
   main: {
@@ -23,7 +33,7 @@ const useStyles = makeStyles({
   image: {
     maxWidth: "60px",
     maxHeight: "60px",
-    padding: "0 1% ",
+    padding: "10px",
   },
   button: {
     maxHeight: "35px",
@@ -33,6 +43,10 @@ const useStyles = makeStyles({
   cartButton: {
     padding: "8px",
     margin: "5px",
+  },
+  heading: {
+    textAlign: "start",
+    padding: "10px",
   },
 });
 
@@ -44,7 +58,7 @@ function Cart() {
   const { cart } = useSelector((store) => store.cartStore);
   const { loader } = useSelector((store) => store.loaderStore);
   console.log(cart, "===cart");
-  const productList = cart;
+  const [productList, setProductList] = useState();
 
   const deleteHandler = (e) => {
     const item = { product: { _id: e }, quantity: 0 };
@@ -52,14 +66,24 @@ function Cart() {
   };
 
   const minusCart = (e) => {
-    const item = { product: { _id: e }, quantity: -1 };
+    const num = e.quantity;
+    const item = { product: { _id: e._id }, quantity: num - 1 };
     console.log(item, "===item");
     dispatch(requestAddToCart(item));
   };
   const plusCart = (e) => {
-    const item = { product: { _id: e }, quantity: 1 };
+    const num = e.quantity;
+    console.log(num + 1, "===num+1");
+    const item = { product: { _id: e._id }, quantity: num + 1 };
     dispatch(requestAddToCart(item));
   };
+
+  useEffect(() => {
+    dispatch(requestCart());
+  }, [dispatch]);
+  useEffect(() => {
+    setProductList(cart);
+  }, [cart]);
 
   const handleCheckout = () => {
     dispatch(setLoaderValue(true));
@@ -74,42 +98,86 @@ function Cart() {
         <Loader />
       ) : cart ? (
         <div className={classes.root}>
-          {productList?.map((product) => (
-            <div key={product?.productId?._id} className={classes.main}>
-              <img
-                src={`http://localhost:8080${product.productId?.image}`}
-                alt={product.productId?.title}
-                className={classes.image}
-              />
-              {console.log(product.productId, "===product from image")}
-              <p className={classes.button}>{product.productId?.title}</p>
-              <p className={classes.button}>
-                <button
-                  className={classes.cartButton}
-                  onClick={() => minusCart(product._id)}
-                >
-                  -
-                </button>
-                {product.quantity}
-                <button
-                  className={classes.cartButton}
-                  onClick={() => plusCart(product._id)}
-                >
-                  +
-                </button>
-              </p>
+          <Grid container>
+            <Grid xs={false} lg={2} item={true}></Grid>
+            <Grid xs={12} lg={8} item={true}>
+              <h1 className={classes.heading}>Shopping Cart</h1>
+              <h4 className={classes.heading}>Your Order</h4>
 
-              <button
-                className={classes.button}
-                onClick={() => deleteHandler(product._id)}
+              <div>
+                <TableContainer className={classes.container}>
+                  <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>{""}</TableCell>
+                        <TableCell>Product</TableCell>
+                        <TableCell>Unit Price</TableCell>
+                        <TableCell>Quantity</TableCell>
+                        <TableCell>Total Price</TableCell>
+                        <TableCell>Action</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {productList?.map((product) => (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={product._id}
+                        >
+                          <TableCell key={product.productId?.image}>
+                            <img
+                              src={`http://localhost:8080${product.productId?.image}`}
+                              alt={product.productId?.title}
+                              className={classes.image}
+                            />
+                          </TableCell>
+                          <TableCell key={product.productId?.title}>
+                            {product.productId?.title}
+                          </TableCell>
+                          <TableCell key={product.productId?.price}>
+                            {product.productId?.price}tk
+                          </TableCell>
+                          <TableCell key={product.quantity}>
+                            <button
+                              className={classes.cartButton}
+                              onClick={() => minusCart(product)}
+                            >
+                              -
+                            </button>
+                            {product.quantity}
+                            <button
+                              className={classes.cartButton}
+                              onClick={() => plusCart(product)}
+                            >
+                              +
+                            </button>
+                          </TableCell>
+                          <TableCell key={product._id}>
+                            {product.productId?.price *
+                              parseInt(product?.quantity, 10)}{" "}
+                            tk
+                          </TableCell>
+                          <TableCell key={product._id}>
+                            <DeleteIcon />
+                            {console.log("Delete Icon Called")}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleCheckout}
               >
-                Delete
-              </button>
-            </div>
-          ))}
-          <Button variant="contained" color="primary" onClick={handleCheckout}>
-            Place Order
-          </Button>
+                Place Order
+              </Button>
+            </Grid>
+            <Grid xs={false} lg={2} item={true}></Grid>
+          </Grid>
         </div>
       ) : (
         <p className={classes.root}>Cart is Empty!</p>
