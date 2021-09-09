@@ -13,7 +13,6 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Loader from "../Components/Loader";
 import { requestAddToCart, requestCart } from "../store/action/cartAction";
 
@@ -59,6 +58,15 @@ function Cart() {
   const { loader } = useSelector((store) => store.loaderStore);
   console.log(cart, "===cart");
   const [productList, setProductList] = useState();
+  // const [totalPrice, setTotalPrice] = useState(0);
+
+  // const calculateTotalPrice = (productList) => {
+  //   productList?.map((product) =>
+  //     setTotalPrice(totalPrice + product.productId?.price)
+  //   );
+  // };
+
+  // console.log(totalPrice, "===totalPrice");
 
   const [checked, setChecked] = React.useState(true);
 
@@ -89,6 +97,7 @@ function Cart() {
   }, [dispatch]);
   useEffect(() => {
     setProductList(cart);
+    // calculateTotalPrice(productList);
   }, [cart]);
 
   const handleCheckout = () => {
@@ -167,7 +176,10 @@ function Cart() {
                             tk
                           </TableCell>
                           <TableCell onClick={deleteHandler}>
-                            <DeleteIcon className={classes.deleteButton} />
+                            <img
+                              src="../images/CrossDelete.svg"
+                              alt="Delete icon"
+                            />
                             {console.log("Delete Icon Called")}
                           </TableCell>
                         </TableRow>

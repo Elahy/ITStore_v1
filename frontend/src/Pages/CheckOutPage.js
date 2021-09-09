@@ -100,6 +100,15 @@ function CheckOutPage() {
                 <br />
                 <p1>Cash On Deliery</p1>
               </div>
+              {/* <h5>{totalPrice} Tk</h5> */}
+              {/* {console.log(totalPrice, "totalPrice")} */}
+              <Button
+                onClick={handleCheckout}
+                variant="contained"
+                color="primary"
+              >
+                Place Order
+              </Button>
             </Grid>
             <Grid xs={12} lg={5} item={true}>
               {productList?.map((product) => (
@@ -132,9 +141,6 @@ function CheckOutPage() {
             </Grid>
             <Grid xs={false} lg={1} item={true}></Grid>
           </Grid>
-          <Button onClick={handleCheckout} variant="contained" color="primary">
-            Place Order
-          </Button>
         </div>
       )}
     </>

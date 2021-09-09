@@ -8,6 +8,14 @@ import {
   requestMyOrder,
   requestUpdateOrder,
 } from "../../store/action/orderAction";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -70,68 +78,93 @@ function Orders() {
         <Loader />
       ) : (
         <div>
-          {productList.map((product) => (
-            <div key={product._id} className={classes.root}>
-              <p className={classes.button}>{product._id}</p>
-              <p className={classes.button}>{product.date}</p>
-              <p className={classes.button}>{product.products.length}</p>
-              <p className={classes.button}>
-                {product.status === 0 ? (
-                  <>Pending</>
-                ) : product.status === 1 ? (
-                  <>Deliverd</>
-                ) : (
-                  <>Canceled</>
-                )}
-              </p>
-              {product.status === 0 ? (
-                <>
-                  <button
-                    className={classes.button}
-                    onClick={() => confirmHandler(product)}
-                  >
-                    Confirm
-                  </button>
-                  <button
-                    className={classes.button}
-                    onClick={() => cancelHandler(product)}
-                  >
-                    Cancel
-                  </button>
-                </>
-              ) : product.status === 1 ? (
-                <>
-                  <button
-                    className={classes.button}
-                    onClick={() => pendingHandler(product)}
-                  >
-                    Pending
-                  </button>
-                  <button
-                    className={classes.button}
-                    onClick={() => cancelHandler(product)}
-                  >
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className={classes.button}
-                    onClick={() => pendingHandler(product)}
-                  >
-                    Pending
-                  </button>
-                  <button
-                    className={classes.button}
-                    onClick={() => cancelHandler(product)}
-                  >
-                    Confirm
-                  </button>
-                </>
-              )}
-            </div>
-          ))}
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Order ID</TableCell>
+                  <TableCell>Order Date</TableCell>
+                  <TableCell>Item</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {productList?.map((product) => (
+                  <TableRow hover tabIndex={-1} key={product._id}>
+                    <TableCell key={product.productId?.image}>
+                      {product._id}
+                    </TableCell>
+                    <TableCell key={product.productId?.title}>
+                      {product.date}
+                    </TableCell>
+                    <TableCell key={product.productId?.price}>
+                      {product.products.length}
+                    </TableCell>
+                    <TableCell key={product.quantity}>
+                      <p className={classes.button}>
+                        {product.status === 0 ? (
+                          <>Pending</>
+                        ) : product.status === 1 ? (
+                          <>Deliverd</>
+                        ) : (
+                          <>Canceled</>
+                        )}
+                      </p>
+                    </TableCell>
+                    <TableCell>
+                      {product.status === 0 ? (
+                        <>
+                          <button
+                            className={classes.button}
+                            onClick={() => confirmHandler(product)}
+                          >
+                            Confirm
+                          </button>
+                          <button
+                            className={classes.button}
+                            onClick={() => cancelHandler(product)}
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : product.status === 1 ? (
+                        <>
+                          <button
+                            className={classes.button}
+                            onClick={() => pendingHandler(product)}
+                          >
+                            Pending
+                          </button>
+                          <button
+                            className={classes.button}
+                            onClick={() => cancelHandler(product)}
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            className={classes.button}
+                            onClick={() => pendingHandler(product)}
+                          >
+                            Pending
+                          </button>
+                          <button
+                            className={classes.button}
+                            onClick={() => cancelHandler(product)}
+                          >
+                            Confirm
+                          </button>
+                        </>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       )}
     </>
