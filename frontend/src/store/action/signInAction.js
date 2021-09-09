@@ -7,10 +7,10 @@ export const signIn = (response) => ({
   payload: response,
 });
 
-export const myInfo = (response) => ({
-  type: ActionTypes.GET_MY_INFO,
-  payload: response,
-});
+// export const myInfo = (response) => ({
+//   type: ActionTypes.GET_MY_INFO,
+//   payload: response,
+// });
 
 export const requestSignIn = (credential) => {
   console.log(JSON.stringify(credential), "Signin");
@@ -35,22 +35,22 @@ export const requestSignIn = (credential) => {
   };
 };
 
-export const requestMyInfo = () => {
-  return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
-    console.log("requestMyInfo Successfull");
-    const token = userInfoStore.token;
-    try {
-      const response = await axios({
-        method: "GET",
-        url: "http://localhost:8080/my-detail",
-        headers: { authorization: `bearer ${token}` },
-      });
-      dispatch(myInfo(response.data));
-      dispatch(setLoaderValue(false));
-    } catch (err) {
-      dispatch(setLoaderValue(false));
-      console.error(err, "===Error");
-    }
-  };
-};
+// export const requestMyInfo = () => {
+//   return async (dispatch, getState) => {
+//     const { userInfoStore } = getState();
+//     console.log("requestMyInfo Successfull");
+//     const token = userInfoStore.token;
+//     try {
+//       const response = await axios({
+//         method: "GET",
+//         url: "http://localhost:8080/my-detail",
+//         headers: { authorization: `bearer ${token}` },
+//       });
+//       dispatch(myInfo(response.data));
+//       dispatch(setLoaderValue(false));
+//     } catch (err) {
+//       dispatch(setLoaderValue(false));
+//       console.error(err, "===Error");
+//     }
+//   };
+// };

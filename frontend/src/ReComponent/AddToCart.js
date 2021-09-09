@@ -1,6 +1,7 @@
 import { Button, makeStyles } from "@material-ui/core";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { requestAddToCart } from "../store/action/cartAction";
 
 const useStyles = makeStyles({
@@ -14,11 +15,12 @@ const useStyles = makeStyles({
 
 function AddToCart(product) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const classes = useStyles();
+  const { role } = useSelector((store) => store.userInfoStore);
   const handleCartAdd = () => {
     const item = { ...product, quantity: 1 };
-    dispatch(requestAddToCart(item));
-    console.log(product, "===Add to cart called");
+    role ? dispatch(requestAddToCart(item)) : history.push("/signin");
   };
 
   return (

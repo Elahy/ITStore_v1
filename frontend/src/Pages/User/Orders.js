@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
-import { useHistory } from "react-router";
-import { requestMyOrder } from "../../store/action/orderAction";
+import {
+  requestMyOrder,
+  requestUpdateOrder,
+} from "../../store/action/orderAction";
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +27,6 @@ const useStyles = makeStyles({
 });
 
 function Orders() {
-  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { myInfoStore, loaderStore } = useSelector((store) => store);
@@ -35,12 +36,32 @@ function Orders() {
     dispatch(setLoaderValue(true));
     dispatch(requestMyOrder());
   }, [dispatch]);
-  const updateHandler = (e) => {
+  const confirmHandler = (e) => {
     console.log(e, "==update Event");
-    history.push(`/update/${e._id}`);
+    const order = {
+      _id: e._id,
+      status: "1",
+    };
+    dispatch(setLoaderValue(true));
+    dispatch(requestUpdateOrder(order));
   };
-  const deleteHandler = (e) => {
-    history.push(`/delete/${e._id}`);
+
+  const cancelHandler = (e) => {
+    const order = {
+      _id: e._id,
+      status: "2",
+    };
+    dispatch(setLoaderValue(true));
+    dispatch(requestUpdateOrder(order));
+  };
+
+  const pendingHandler = (e) => {
+    const order = {
+      _id: e._id,
+      status: "0",
+    };
+    dispatch(setLoaderValue(true));
+    dispatch(requestUpdateOrder(order));
   };
 
   return (
@@ -55,18 +76,60 @@ function Orders() {
               <p className={classes.button}>{product.date}</p>
               <p className={classes.button}>{product.products.length}</p>
               <p className={classes.button}>
-                {product.status === 0 ? <>Pending</> : <>Delivered</>}
+                {product.status === 0 ? (
+                  <>Pending</>
+                ) : product.status === 1 ? (
+                  <>Deliverd</>
+                ) : (
+                  <>Canceled</>
+                )}
               </p>
-
-              <button
-                className={classes.button}
-                onClick={() => updateHandler(product)}
-              >
-                Received
-              </button>
-              <button className={classes.button} onClick={deleteHandler}>
-                Cancel
-              </button>
+              {product.status === 0 ? (
+                <>
+                  <button
+                    className={classes.button}
+                    onClick={() => confirmHandler(product)}
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    className={classes.button}
+                    onClick={() => cancelHandler(product)}
+                  >
+                    Cancel
+                  </button>
+                </>
+              ) : product.status === 1 ? (
+                <>
+                  <button
+                    className={classes.button}
+                    onClick={() => pendingHandler(product)}
+                  >
+                    Pending
+                  </button>
+                  <button
+                    className={classes.button}
+                    onClick={() => cancelHandler(product)}
+                  >
+                    Cancel
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className={classes.button}
+                    onClick={() => pendingHandler(product)}
+                  >
+                    Pending
+                  </button>
+                  <button
+                    className={classes.button}
+                    onClick={() => cancelHandler(product)}
+                  >
+                    Confirm
+                  </button>
+                </>
+              )}
             </div>
           ))}
         </div>

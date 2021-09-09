@@ -37,6 +37,11 @@ export const deleteUser = (response) => ({
   payload: response,
 });
 
+export const setMyInfo = (response) => ({
+  type: ActionTypes.GET_MY_INFO,
+  payload: response,
+});
+
 export const requestUserList = () => {
   return async (dispatch, getState) => {
     const { userInfoStore } = getState();
@@ -146,5 +151,19 @@ export const requestAddUser = (user) => {
     } catch (err) {
       console.error(err, "===response from error");
     }
+  };
+};
+
+export const requestMyInfo = () => {
+  return async (dispatch, getState) => {
+    const { userInfoStore } = getState();
+    const token = userInfoStore.token;
+    const response = await axios({
+      method: "GET",
+      url: `http://localhost:8080/my-detail`,
+      headers: { authorization: `bearer ${token}` },
+    });
+    dispatch(setMyInfo(response.data));
+    dispatch(setLoaderValue(false));
   };
 };

@@ -15,13 +15,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Loader from "../Components/Loader";
-import { setLoaderValue } from "../store/action/loaderAction";
-import {
-  addToCart,
-  requestAddToCart,
-  requestCart,
-  requestCheckout,
-} from "../store/action/cartAction";
+import { requestAddToCart, requestCart } from "../store/action/cartAction";
 
 const useStyles = makeStyles({
   root: {
@@ -79,14 +73,14 @@ function Cart() {
 
   const minusCart = (e) => {
     const num = e.quantity;
-    const item = { product: { _id: e._id }, quantity: num - 1 };
+    const item = { product: { _id: e.productId?._id }, quantity: num - 1 };
     console.log(item, "===item");
     dispatch(requestAddToCart(item));
   };
   const plusCart = (e) => {
     const num = e.quantity;
     console.log(num + 1, "===num+1");
-    const item = { product: { _id: e._id }, quantity: num + 1 };
+    const item = { product: { _id: e.productId?._id }, quantity: num + 1 };
     dispatch(requestAddToCart(item));
   };
 
