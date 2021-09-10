@@ -9,12 +9,24 @@ import Orders from "./Orders";
 
 const useStyles = makeStyles({
   root: {
+    margin: "0",
     minHeight: "90vh",
+    background: "#e8f4f8",
+  },
+  menuGrid: {
+    background: "#ADD8E6",
+    borderRadius: "20px 0 0  20px",
+    minHeight: "70vh",
+  },
+  itemGrid: {
+    background: "#ADD8E6",
+    borderRadius: "0 20px 20px 0",
+    minHeight: "70vh",
   },
   header: {
     textAlign: "center",
-    margin: "10px",
-    padding: "10px",
+    margin: "0",
+    padding: "20px",
   },
   menu: {
     textAlign: "center",
@@ -55,28 +67,42 @@ function UserProfile() {
     <div className={classes.root}>
       <h1 className={classes.header}>Profile</h1>
       <Grid container>
-        <Grid item lg={1}></Grid>
-        <Grid item lg={3}>
+        <Grid item lg={2}></Grid>
+        <Grid item lg={3} className={classes.menuGrid}>
           <p className={classes.menu}>Menu</p>
           <ul>
             <li onClick={() => setShow("info")} className={classes.menuItem}>
-              Info
+              Profile
             </li>
             <li onClick={() => setShow("order")} className={classes.menuItem}>
-              Orders
+              Active Orders
+            </li>
+            <li onClick={() => setShow("order")} className={classes.menuItem}>
+              Past Orders
+            </li>
+            <li onClick={() => setShow("order")} className={classes.menuItem}>
+              Reviews
+            </li>
+            <li onClick={() => setShow("order")} className={classes.menuItem}>
+              Track Orders
+            </li>
+            <li onClick={() => setShow("order")} className={classes.menuItem}>
+              Customer Service
+            </li>
+            <li onClick={() => setShow("order")} className={classes.menuItem}>
+              <Button
+                onClick={logOutHandler}
+                className={classes.logoutButton}
+                variant="contained"
+                color="primary"
+              >
+                LogOut
+              </Button>
             </li>
           </ul>
-          <Button
-            onClick={logOutHandler}
-            className={classes.logoutButton}
-            variant="contained"
-            color="primary"
-          >
-            LogOut
-          </Button>
         </Grid>
-        <Grid item lg={1}></Grid>
-        <Grid item lg={5}>
+        {/* <Grid item lg={1} className={classes.menuGrid}></Grid> */}
+        <Grid item lg={5} className={classes.itemGrid}>
           {show === "info" ? (
             <Info />
           ) : show === "order" ? (

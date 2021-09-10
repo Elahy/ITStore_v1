@@ -22,11 +22,11 @@ import AddToCart from "../ReComponent/AddToCart";
 
 const useStyles = makeStyles({
   root: {
-    width: 300,
-    margin: "1%",
+    width: 320,
+    margin: "10px 25px",
   },
   media: {
-    height: 400,
+    height: "320px",
   },
   detailsButton: {
     backgroundColor: "#04b4c4",
@@ -34,6 +34,9 @@ const useStyles = makeStyles({
   selectButton: {
     display: "inline-flex",
     margin: "20px",
+  },
+  options: {
+    marginLeft: "190px",
   },
 });
 
@@ -68,16 +71,18 @@ function ProductList() {
         <Loader />
       ) : (
         <div>
-          {categoryList.map((category) => (
-            <Button
-              className={classes.selectButton}
-              variant="contained"
-              color="secondary"
-              onClick={() => handleSelect(category._id)}
-            >
-              {category.name}
-            </Button>
-          ))}
+          <div className={classes.options}>
+            {categoryList.map((category) => (
+              <Button
+                className={classes.selectButton}
+                variant="contained"
+                color="secondary"
+                onClick={() => handleSelect(category._id)}
+              >
+                {category.name}
+              </Button>
+            ))}
+          </div>
           <Grid container spacing={3}>
             <Grid item xs={false} lg={1}></Grid>
             <Grid item xs={12} lg={10}>

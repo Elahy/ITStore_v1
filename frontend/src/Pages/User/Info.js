@@ -12,9 +12,19 @@ import {
 
 const useStyles = makeStyles({
   root: {
-    width: 300,
-    marginLeft: "40%",
-    textAlign: "center",
+    textAlign: "left",
+    padding: "10%",
+    // border: "1px solid #ADD8E6",
+    // borderRadius: " 0 20px 20px 0",
+  },
+  header: {
+    display: "flex",
+  },
+  userImage: {
+    width: "50px",
+    border: "2px solid black",
+    borderRadius: "50%",
+    margin: "0 5%",
   },
 });
 
@@ -43,6 +53,17 @@ function Info() {
         <UpdateUser />
       ) : (
         <div className={classes.root}>
+          <div className={classes.header}>
+            <img
+              src="../images/user.png"
+              alt="user"
+              className={classes.userImage}
+            />
+            <h1>
+              {myInfoStore.userInfo.firstname} {myInfoStore.userInfo.lastname}
+            </h1>
+          </div>
+          <h3> Personal Info </h3>
           <p>First Name: {myInfoStore.userInfo.firstname}</p>
           <p>Last Name: {myInfoStore.userInfo.lastname}</p>
           <p>Email: {myInfoStore.userInfo.email}</p>
