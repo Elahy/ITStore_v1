@@ -17,6 +17,11 @@ export const setCheckoutItems = (data) => ({
   payload: data,
 });
 
+export const setCartQuantity = (data) => ({
+  type: ActionTypes.SET_CHECKOUT_ITEMS,
+  payload: data,
+});
+
 // fetch("{BASE_URL}/cart")
 //   .then((res) => res.json())
 //   .then((json) => console.log(json));

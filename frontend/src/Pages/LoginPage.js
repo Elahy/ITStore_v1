@@ -48,51 +48,51 @@ function LoginPage() {
                 alt="Login display"
               />
             </Grid>
-            <Grid item xs={12} lg={4} className={styles.body}>
-              <div className={styles.formContainer}>
-                <form action="#">
-                  <h1>Sign in</h1>
-                  <div className={styles.socialContainer}>
-                    <Link to="www.facebook.com" className={styles.social}>
-                      <FontAwesomeIcon icon={["fab", "facebook-f"]} />
-                      <FontAwesomeIcon icon={["far", "coffee"]} />
-                    </Link>
-                    <Link to="www.facebook.com" className={styles.social}>
-                      <FontAwesomeIcon icon={["fab", "facebook-f"]} />
-                    </Link>
-                    <Link to="www.facebook.com" className={styles.social}>
-                      <FontAwesomeIcon icon={["fab", "facebook-f"]} />
-                    </Link>
-                  </div>
-                  <span>
-                    or use your account{" "}
+            <Grid item xs={12} lg={4}>
+              <form className={styles.formContainer}>
+                <h1 className={styles.header}>Sign in</h1>
+                <div className={styles.socialContainer}>
+                  <Link to="www.facebook.com" className={styles.social}>
+                    <FontAwesomeIcon icon={["fab", "facebook-f"]} />
                     <FontAwesomeIcon icon={["far", "coffee"]} />
-                  </span>
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    defaultValue={cred.email}
-                    onChange={(e) =>
-                      setCred({ ...cred, email: e.target.value })
-                    }
-                    autoComplete="on"
-                  />
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    defaultValue={cred.password}
-                    onChange={(e) =>
-                      setCred({ ...cred, password: e.target.value })
-                    }
-                    autoComplete="on"
-                  />
-                  <Link href="#">Forgot your password?</Link>
-                  <p>
-                    Don't have a account? <Link to="/signup">Sign Up!</Link>
-                  </p>
-                  <button onClick={handleLogin}>Sign In</button>
-                </form>
-              </div>
+                  </Link>
+                  <Link to="www.facebook.com" className={styles.social}>
+                    <FontAwesomeIcon icon={["fab", "facebook-f"]} />
+                  </Link>
+                  <Link to="www.facebook.com" className={styles.social}>
+                    <FontAwesomeIcon icon={["fab", "facebook-f"]} />
+                  </Link>
+                </div>
+                <span>
+                  or use your account{" "}
+                  <FontAwesomeIcon icon={["far", "coffee"]} />
+                </span>
+                <input
+                  className={styles.input}
+                  type="email"
+                  placeholder="Email"
+                  defaultValue={cred.email}
+                  onChange={(e) => setCred({ ...cred, email: e.target.value })}
+                  autoComplete="on"
+                />
+                <input
+                  className={styles.input}
+                  type="password"
+                  placeholder="Password"
+                  defaultValue={cred.password}
+                  onChange={(e) =>
+                    setCred({ ...cred, password: e.target.value })
+                  }
+                  autoComplete="on"
+                />
+                <Link href="#">Forgot your password?</Link>
+                <p className={styles.para}>
+                  Don't have a account? <Link to="/signup">Sign Up!</Link>
+                </p>
+                <button className={styles.button} onClick={handleLogin}>
+                  Sign In
+                </button>
+              </form>
             </Grid>
             <Grid item xs={false} lg={2}></Grid>
           </Grid>

@@ -1,5 +1,5 @@
 import "./App.css";
-import { Switch, Route, Link, useHistory } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "./Components/Loader";
 import ProductList from "./Components/ProductList";
@@ -16,26 +16,15 @@ import ContactUs from "./ReComponent/ContactUs";
 import SignupPage from "./Pages/SignupPage";
 import UserProfile from "./Pages/User/UserProfile";
 import CheckOutPage from "./Pages/CheckOutPage";
+import Header from "./Components/Header";
 
 function App() {
-  const history = useHistory();
-
   const { role } = useSelector((store) => store.userInfoStore);
-  const { item } = useSelector((store) => store.cartStore);
-  console.log(item, "===cart Item");
   const [loader, setLoader] = useState(true);
+
   useEffect(() => {
     setLoader(false);
   }, []);
-  const profileHandler = () => {
-    history.push("/profile");
-  };
-  const logoClickHandler = () => {
-    history.push("/");
-  };
-  const cartClickHandler = () => {
-    history.push("/cart");
-  };
 
   return (
     <>
@@ -43,66 +32,7 @@ function App() {
         <Loader />
       ) : (
         <>
-          <header>
-            <img
-              className="logo"
-              src="../images/logo.png"
-              onClick={logoClickHandler}
-              alt="logo"
-            />
-            <nav>
-              <ul className="nav_links">
-                <li>
-                  <Link to="/products" className="navbtn">
-                    Sale!
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/products" className="navbtn">
-                    New Collection
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/contact" className="navbtn">
-                    Contact
-                  </Link>
-                </li>
-                {role === "admin" && (
-                  <li>
-                    <Link to="/dashboard" className="navbtn">
-                      DashBoard
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </nav>
-            <ul className="nav_links">
-              <li>
-                <img
-                  className="cartSign"
-                  src="../images/cart.png"
-                  onClick={cartClickHandler}
-                  alt="cart"
-                />
-              </li>
-              <li>
-                <p className="cart">{item}</p>
-              </li>
-              {role ? (
-                <li>
-                  <button className="homebtn" onClick={profileHandler}>
-                    Profile
-                  </button>
-                </li>
-              ) : (
-                <li>
-                  <Link to="/signin" className="homebtn">
-                    Sign In
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </header>
+          <Header />
           <main>
             <Switch>
               <Route exact path="/">
