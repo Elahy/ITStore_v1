@@ -6,9 +6,9 @@ function ContactUs() {
     <section className={styles.contact} id="contact">
       <div className={styles.container}>
         <h4>cantact us</h4>
-        <p>41/A High Street, Dhanmondi, Dhaka</p>
+        <p>41/A Free School Street, Dhanmondi, Dhaka</p>
         <p>+ (880) 193 452 8562</p>
-        <p>info.ecommerce@gmail.com</p>
+        <p>itstore@gmail.com</p>
         <p className={styles.email}>
           email us
           <span>

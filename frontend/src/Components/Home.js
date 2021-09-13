@@ -37,30 +37,30 @@ function Home() {
           <div className={styles.product}>
             <figure>
               <img src="../images/collection1.jpg" alt="product" />
-              <figcaption>women fashion</figcaption>
-              <figcaption>$ 84.00</figcaption>
+              <figcaption>MAC Pro</figcaption>
+              <figcaption>2,50,000 BDT</figcaption>
             </figure>
           </div>
           <div className={styles.product}>
             <figure>
               <img src="../images/collection2.jpg" alt="product" />
-              <figcaption>cold fashion</figcaption>
-              <figcaption>$ 56.00</figcaption>
+              <figcaption>EVGA RTX 3090</figcaption>
+              <figcaption>1,50,000 BDT</figcaption>
             </figure>
           </div>
           <div className={styles.product}>
             <figure>
               <img src="../images/collection3.jpg" alt="product" />
-              <figcaption>men fashion</figcaption>
-              <figcaption>$ 89.00</figcaption>
+              <figcaption>HP EliteDesk</figcaption>
+              <figcaption>57,000 BDT</figcaption>
             </figure>
           </div>
 
           <div className={styles.product}>
             <figure>
               <img src="../images/collection4.jpg" alt="product" />
-              <figcaption>women fashion</figcaption>
-              <figcaption>$ 48.00</figcaption>
+              <figcaption>LG Monitor</figcaption>
+              <figcaption>48,000 BDT</figcaption>
             </figure>
           </div>
         </div>
@@ -81,8 +81,8 @@ function Home() {
                 <img src="../images/p1.jpg" alt="blog" />
               </div>
               <div className={styles.blog1content}>
-                <h4>Lorem Ipsum</h4>
-                <h3>Lorem ipsum dolor sit amet.</h3>
+                <h4>HP Probook</h4>
+                <h3>Best Laptop in Mid Range Budget!</h3>
                 <p className={styles.description}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -96,8 +96,8 @@ function Home() {
                 <img src="../images/p4.jpg" alt="blog" />
               </div>
               <div className={styles.blog2content}>
-                <h4>Lorem Ipsum</h4>
-                <h3>Lorem ipsum dolor sit amet.</h3>
+                <h4>Ryzen 5600</h4>
+                <h3>Processor Of the Year 2021</h3>
                 <p className={styles.description}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
