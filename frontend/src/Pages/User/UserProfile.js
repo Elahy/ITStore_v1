@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { signIn } from "../../store/action/signInAction";
 import Info from "./Info";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Orders from "./Orders";
 
@@ -56,6 +56,10 @@ function UserProfile() {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  useEffect(() => {
+    setShow("info");
+  }, []);
 
   const logOutHandler = () => {
     history.push("/");

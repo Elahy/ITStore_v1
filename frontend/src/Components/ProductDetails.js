@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
@@ -17,21 +15,25 @@ import AddToCart from "../ReComponent/AddToCart";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: "45%",
-    minWidth: "40%",
+    width: "67%",
     alignContent: "center",
-    margin: "2% 27%",
+    margin: "2% 16%",
+    display: "flex",
+    minHeight: "80vh",
   },
   buttton: {
     color: "#04b4c4",
     borderColor: "#04b4c4",
-    margin: "2% 4%",
+    // margin: "2% 4%",
     display: "block",
   },
-  buttton1: {
-    backgroundColor: "#04b4c4",
-    margin: "2% 4%",
-    display: "block",
+  image: {
+    maxWidth: "500px",
+    maxHeight: "500px",
+    margin: "5%",
+  },
+  cardBody: {
+    margin: "5%",
   },
 });
 
@@ -63,34 +65,31 @@ function ProductList() {
         <Loader />
       ) : (
         <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt={currentProduct?.title}
-              image={`http://localhost:8080${currentProduct?.image}`}
-              title={currentProduct && currentProduct.title}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {currentProduct && currentProduct.title}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="body1"
-                color="textSecondary"
-                component="p"
-              >
-                {currentProduct && currentProduct.description}
-              </Typography>
-              <Typography variant="h6" color="textSecondary" component="p">
-                Type: {currentProduct && currentProduct.category.name}
-              </Typography>
-              <Typography variant="h5" color="textPrimary" component="p">
-                Price: ${currentProduct && currentProduct.price}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
+          <CardMedia
+            className={classes.image}
+            component="img"
+            alt={currentProduct?.title}
+            image={`http://localhost:8080${currentProduct?.image}`}
+            title={currentProduct?.title}
+          />
+          <CardContent className={classes.cardBody}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {currentProduct?.title}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="body1"
+              color="textSecondary"
+              component="p"
+            >
+              {currentProduct && currentProduct.description}
+            </Typography>
+            <Typography variant="h6" color="textSecondary" component="p">
+              Type: {currentProduct && currentProduct.category.name}
+            </Typography>
+            <Typography variant="h5" color="textPrimary" component="p">
+              Price: ${currentProduct && currentProduct.price}
+            </Typography>
             <AddToCart product={currentProduct} />
             <Button
               onClick={buttonHandler}
@@ -101,7 +100,7 @@ function ProductList() {
             >
               Go Back
             </Button>
-          </CardActions>
+          </CardContent>
         </Card>
       )}
     </>

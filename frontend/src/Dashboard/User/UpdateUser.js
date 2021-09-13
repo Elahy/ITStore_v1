@@ -105,7 +105,7 @@ function UpdateUser(userId) {
                 label="Username"
                 multiline
                 maxRows={4}
-                placeholder=""
+                // placeholder={currentUser?.username}
                 variant="outlined"
                 type="text"
                 name="username"
@@ -118,7 +118,7 @@ function UpdateUser(userId) {
                 id="outlined-textarea"
                 label="Email"
                 multiline
-                placeholder=""
+                // placeholder=""
                 variant="outlined"
                 type="email"
                 name="email"
@@ -131,7 +131,7 @@ function UpdateUser(userId) {
                   id="outlined-multiline-static"
                   label="Phone"
                   multiline
-                  placeholder=""
+                  // placeholder=""
                   variant="outlined"
                   type="text"
                   name="phone"
@@ -144,7 +144,7 @@ function UpdateUser(userId) {
                 <TextField
                   id="outlined-textarea"
                   label="Password"
-                  placeholder="Placeholder"
+                  // placeholder="Placeholder"
                   multiline
                   variant="outlined"
                   type="password"
@@ -158,7 +158,7 @@ function UpdateUser(userId) {
                   id="outlined-textarea"
                   label="City"
                   multiline
-                  placeholder="Placeholder"
+                  // placeholder="Placeholder"
                   variant="outlined"
                   type="text"
                   name="city"

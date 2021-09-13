@@ -15,12 +15,15 @@ const Header = () => {
 
   return (
     <header>
-      <img
+      {/* <img
         className="logo"
         src="../images/logo.png"
         onClick={logoClickHandler}
         alt="logo"
-      />
+      /> */}
+      <h1 onClick={logoClickHandler} className="logo">
+        ITStore
+      </h1>
       <nav>
         <ul className="nav_links">
           <li>

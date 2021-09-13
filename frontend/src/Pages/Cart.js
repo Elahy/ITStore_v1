@@ -60,12 +60,6 @@ function Cart() {
   const [productList, setProductList] = useState();
   // const [totalPrice, setTotalPrice] = useState(0);
 
-  // const calculateTotalPrice = (productList) => {
-  //   productList?.map((product) =>
-  //     setTotalPrice(totalPrice + product.productId?.price)
-  //   );
-  // };
-
   // console.log(totalPrice, "===totalPrice");
 
   const [checked, setChecked] = React.useState(true);
@@ -74,8 +68,9 @@ function Cart() {
     setChecked(event.target.checked);
   };
 
-  const deleteHandler = (e) => {
-    const item = { product: { _id: e }, quantity: 0 };
+  const deleteHandler = (productId) => {
+    console.log("delete handler called");
+    const item = { product: { _id: productId }, quantity: 0 };
     dispatch(requestAddToCart(item));
   };
 
@@ -95,10 +90,20 @@ function Cart() {
   useEffect(() => {
     dispatch(requestCart());
   }, [dispatch]);
+
   useEffect(() => {
     setProductList(cart);
-    // calculateTotalPrice(productList);
   }, [cart]);
+
+  // useEffect(() => {
+  //   // const calculateTotalPrice = () => {
+  //   //   console.log("calculateTotalPrice called");
+  // //   productList?.map((product) =>
+  // //     setTotalPrice(
+  // //       totalPrice + product.productId?.price * parseInt(product?.quantity, 10)
+  // //     )
+  // //   );
+  // // }, [productList]);
 
   const handleCheckout = () => {
     history.push("/checkout");
@@ -135,7 +140,7 @@ function Cart() {
                     <TableBody>
                       {productList?.map((product) => (
                         <TableRow hover tabIndex={-1} key={product._id}>
-                          <TableCell>
+                          <TableCell key={product._id}>
                             <Checkbox
                               checked={checked}
                               onChange={handleChange}
@@ -155,7 +160,7 @@ function Cart() {
                           <TableCell key={product.productId?.price}>
                             {product.productId?.price}tk
                           </TableCell>
-                          <TableCell key={product.quantity}>
+                          <TableCell key={product.productId?.stock}>
                             <button
                               className={classes.cartButton}
                               onClick={() => minusCart(product)}
@@ -170,20 +175,40 @@ function Cart() {
                               +
                             </button>
                           </TableCell>
-                          <TableCell>
+                          <TableCell key={product.quantity}>
                             {product.productId?.price *
-                              parseInt(product?.quantity, 10)}{" "}
+                              parseInt(product?.quantity, 10)}
                             tk
                           </TableCell>
-                          <TableCell onClick={deleteHandler}>
-                            <img
-                              src="../images/CrossDelete.svg"
-                              alt="Delete icon"
-                            />
-                            {console.log("Delete Icon Called")}
+                          <TableCell key={product.productId._id}>
+                            <button
+                              onClick={() =>
+                                deleteHandler(product.productId._id)
+                              }
+                            >
+                              <img
+                                src="../images/CrossDelete.svg"
+                                alt="Delete icon"
+                              />
+                            </button>
                           </TableCell>
                         </TableRow>
                       ))}
+                      <TableCell>
+                        <p>
+                          {`Total Products: ${productList?.reduce(
+                            (total, item) => total + item.quantity,
+                            0
+                          )}`}
+                        </p>
+                        <p>
+                          {`Total  Price: ${productList?.reduce(
+                            (total, item) =>
+                              total + item.productId.price * item.quantity,
+                            0
+                          )} TK`}
+                        </p>
+                      </TableCell>
                     </TableBody>
                   </Table>
                 </TableContainer>

@@ -18,13 +18,9 @@ export const setCheckoutItems = (data) => ({
 });
 
 export const setCartQuantity = (data) => ({
-  type: ActionTypes.SET_CHECKOUT_ITEMS,
+  type: ActionTypes.SET_CART_QUANTITY,
   payload: data,
 });
-
-// fetch("{BASE_URL}/cart")
-//   .then((res) => res.json())
-//   .then((json) => console.log(json));
 
 export const requestAddToCart = (item) => {
   const id = item.product._id;

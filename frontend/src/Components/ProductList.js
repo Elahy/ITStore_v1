@@ -33,7 +33,9 @@ const useStyles = makeStyles({
   },
   selectButton: {
     display: "inline-flex",
-    margin: "20px",
+    margin: "15px",
+    color: "#04b4c4",
+    border: "1px solid #04b4c4",
   },
   options: {
     marginLeft: "190px",
@@ -74,8 +76,9 @@ function ProductList() {
           <div className={classes.options}>
             {categoryList.map((category) => (
               <Button
+                key={category._id}
                 className={classes.selectButton}
-                variant="contained"
+                variant="outlined"
                 color="secondary"
                 onClick={() => handleSelect(category._id)}
               >
