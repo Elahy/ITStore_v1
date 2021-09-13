@@ -15,12 +15,6 @@ const Header = () => {
 
   return (
     <header>
-      {/* <img
-        className="logo"
-        src="../images/logo.png"
-        onClick={logoClickHandler}
-        alt="logo"
-      /> */}
       <h1 onClick={logoClickHandler} className="logo">
         ITStore
       </h1>
@@ -50,16 +44,18 @@ const Header = () => {
           )}
         </ul>
       </nav>
-      <CartLogo />
-      {role ? (
-        <button className="homebtn" onClick={profileHandler}>
-          Profile
-        </button>
-      ) : (
-        <Link to="/signin" className="homebtn">
-          Sign In
-        </Link>
-      )}
+      <div className="cartLogo">
+        <CartLogo />
+        {role ? (
+          <button className="homebtn" onClick={profileHandler}>
+            Profile
+          </button>
+        ) : (
+          <Link to="/signin" className="homebtn">
+            Sign In
+          </Link>
+        )}
+      </div>
     </header>
   );
 };

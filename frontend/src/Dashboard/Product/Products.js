@@ -34,8 +34,11 @@ const useStyles = makeStyles({
   },
   button: {
     maxHeight: "35px",
-    padding: "8px 20px ",
-    margin: "0 1%",
+    padding: "6px 20px ",
+    margin: "8% 2%",
+  },
+  buttons: {
+    display: "flex",
   },
 });
 
@@ -103,14 +106,14 @@ function Products() {
                         )}
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell className={classes.buttons}>
                         <button
                           className={classes.button}
                           onClick={() => updateHandler(product)}
                         >
                           Edit
                         </button>
-                        {/* <DeleteIcon className={classes.deleteButton} /> */}
+
                         <button
                           className={classes.button}
                           onClick={() => deleteHandler(product)}

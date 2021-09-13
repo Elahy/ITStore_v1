@@ -17,19 +17,6 @@ code {
   position: relative;
   display: inline-block;
 }
-.input {
-  /* align-content: center; */
-  margin-left: 45px;
-  /* position: relative; */
-  /* display: inline-block; */
-}
-/* .product img {
-  max-height: 350px;
-  max-width: 350px;
-}
-.proList {
-  background-color: floralwhite;
-} */
 
 /* Nav Bar Design */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
@@ -52,6 +39,9 @@ header {
   color: #edf0f1;
   text-decoration: none;
   margin: 0;
+}
+.cartLogo {
+  display: flex;
 }
 
 .logo {
@@ -102,7 +92,7 @@ header {
   font-weight: 450;
   transition: all 0.3s ease 0s;
   text-decoration: none;
-  margin: 0;
+  margin: 0 0 0 20px;
 }
 .homebtn:hover {
   color: #24252a;

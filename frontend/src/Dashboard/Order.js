@@ -30,8 +30,11 @@ const useStyles = makeStyles({
   },
   button: {
     maxHeight: "35px",
-    padding: "8px 20px ",
-    margin: "0 1%",
+    padding: "6px 20px ",
+    margin: "0 2%",
+  },
+  buttons: {
+    display: "flex",
   },
 });
 
@@ -118,7 +121,7 @@ function Order() {
                         )}
                       </p>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={classes.buttons}>
                       {product.status === 0 ? (
                         <>
                           <button

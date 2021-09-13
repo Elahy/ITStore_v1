@@ -12,6 +12,14 @@ import {
   setCurrentCategoryId,
 } from "../../store/action/categoryAction";
 import { setView } from "../../store/action/userAction";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -58,31 +66,41 @@ function Category() {
         <Loader />
       ) : (
         <div>
-          {productList.map((product) => (
-            <div key={product._id} className={classes.root}>
-              {/* <img
-                src={`http://localhost:8080${product.image}`}
-                alt={product.title}
-                className={classes.image}
-              /> */}
-              {console.log(product.image, "===image")}
-              <p className={classes.button}>{product._id}</p>
-              <p className={classes.button}>{product.name}</p>
-              <p className={classes.button}>{product.description}</p>
-              <button
-                className={classes.button}
-                onClick={() => updateHandler(product)}
-              >
-                Edit
-              </button>
-              <button
-                className={classes.button}
-                onClick={() => deleteHandler(product)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Categogy ID</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {productList?.map((product) => (
+                  <TableRow hover tabIndex={-1} key={product._id}>
+                    <TableCell key={product?.title}>{product._id}</TableCell>
+
+                    <TableCell key={product.quantity}>{product.name}</TableCell>
+
+                    <TableCell className={classes.buttons}>
+                      <button
+                        className={classes.button}
+                        onClick={() => updateHandler(product)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className={classes.button}
+                        onClick={() => deleteHandler(product)}
+                      >
+                        Delete
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       )}
     </>

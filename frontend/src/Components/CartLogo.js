@@ -23,9 +23,24 @@ const useStyles = makeStyles({
   },
   image: {
     width: "50px",
+    margin: "0 10px",
   },
   cartitem: {
     display: "flex",
+  },
+  cartItemDetail: {
+    margin: "12px 5px",
+  },
+  button: {
+    border: "1px solid #04b4c4",
+    borderRadius: "10px",
+    backgroundColor: "#04b4c4",
+    color: "white",
+    padding: "4px 0",
+    "&:hover": {
+      backgroundColor: "white",
+      color: "#04b4c4",
+    },
   },
 });
 
@@ -54,24 +69,18 @@ function CartLogo() {
                   className={classes.image}
                   alt={prod.name}
                 />
-                <div className="cartItemDetail">
-                  <span>{prod.productId?.title}</span>
-                  <span> {prod.productId?.price} tk</span>
+                <div className={classes.cartItemDetail}>
+                  <span>{prod.productId?.title} </span>
+                  <span> ( {prod.productId?.price} tk) </span>
+                  <span> x {prod?.quantity}</span>
                 </div>
-                {/* <AiFillDelete
-                        fontSize="20px"
-                        style={{ cursor: "pointer" }}
-                        onClick={() =>
-                          dispatch({
-                            type: "REMOVE_FROM_CART",
-                            payload: prod,
-                          })
-                        }
-                      /> */}
               </span>
             ))}
             <Link to="/cart">
-              <Button style={{ width: "95%", margin: "0 10px" }}>
+              <Button
+                style={{ width: "40%", margin: "0 100px" }}
+                className={classes.button}
+              >
                 Go To Cart
               </Button>
             </Link>

@@ -68,7 +68,9 @@ function AddUser() {
       [event.target.name]: value,
     });
   };
-
+  const handleCancel = () => {
+    history.push("/");
+  };
   const handleSubmit = (e) => {
     dispatch(requestAddUser(user));
     history.push("/success");
@@ -197,7 +199,7 @@ function AddUser() {
               Submit
             </Button>
             <Button
-              onClick={handleSubmit}
+              onClick={handleCancel}
               className={classes.input2}
               variant="contained"
               color="secondary"

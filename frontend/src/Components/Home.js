@@ -14,19 +14,14 @@ function Home() {
           <img src="../images/Boat.jpg" alt="Background" />
         </div>
         <div className={styles.headercontent}>
-          <p className={styles.heading1}>Style Collection 2021</p>
-          <h1>
-            wellcome to brand<span className={styles.logostyle}>y</span> unique
-            store
-          </h1>
-          <p className="description">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry.
-          </p>
+          <p className={styles.heading1}>Latest Technology at Best Price!</p>
+          <h1>welcome to ITstore!</h1>
           <div className={styles.button}>
             <p onClick={handleBrowse}>shop now</p>
           </div>
+          <p className={styles.heading2}>
+            Fastest Delivery all over the country!
+          </p>
         </div>
       </div>
 

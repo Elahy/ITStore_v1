@@ -12,6 +12,14 @@ import {
   setCurrentUserId,
   setView,
 } from "../../store/action/userAction";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -57,28 +65,54 @@ function Users() {
         <Loader />
       ) : (
         <div>
-          {userList.map((user) => (
-            <div key={user._id} className={classes.root}>
-              {console.log(user.email, "===email")}
-              <p className={classes.button}>{user.username}</p>
-              <p className={classes.button}>{user.email}</p>
-              <p className={classes.button}>{user.phone}</p>
-              <p className={classes.button}>{user.address?.city}</p>
+          <div>
+            <div>
+              <TableContainer className={classes.container}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>User</TableCell>
+                      <TableCell>Email</TableCell>
+                      <TableCell>phone</TableCell>
+                      <TableCell>Address</TableCell>
+                      <TableCell>Action</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {userList.map((user) => (
+                      <TableRow hover tabIndex={-1} key={user._id}>
+                        <TableCell key={user?.username}>
+                          {user.username}
+                        </TableCell>
 
-              <button
-                className={classes.button}
-                onClick={() => updateHandler(user)}
-              >
-                Edit
-              </button>
-              <button
-                className={classes.button}
-                onClick={() => deleteHandler(user)}
-              >
-                Delete
-              </button>
+                        <TableCell key={user.email}>{user.email}</TableCell>
+                        <TableCell key={user.email}>{user.phone}</TableCell>
+                        <TableCell key={user.email}>
+                          {user.address?.city}
+                        </TableCell>
+
+                        <TableCell className={classes.buttons}>
+                          <button
+                            className={classes.button}
+                            onClick={() => updateHandler(user)}
+                          >
+                            Edit
+                          </button>
+
+                          <button
+                            className={classes.button}
+                            onClick={() => deleteHandler(user)}
+                          >
+                            Delete
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </div>
-          ))}
+          </div>
         </div>
       )}
     </>
