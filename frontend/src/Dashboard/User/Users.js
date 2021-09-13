@@ -36,6 +36,18 @@ const useStyles = makeStyles({
     padding: "8px 20px ",
     margin: "0 1%",
   },
+  EditIcon: {
+    width: "25px",
+    cursor: "pointer",
+    padding: "0 ",
+    margin: "0 10px",
+  },
+  DeleteIcon: {
+    width: "25px",
+    cursor: "pointer",
+    padding: "0 ",
+    margin: "0 10px",
+  },
 });
 
 function Users() {
@@ -92,19 +104,19 @@ function Users() {
                         </TableCell>
 
                         <TableCell className={classes.buttons}>
-                          <button
-                            className={classes.button}
+                          <img
                             onClick={() => updateHandler(user)}
-                          >
-                            Edit
-                          </button>
+                            src="../images/EditIcon.svg"
+                            alt="Edit icon"
+                            className={classes.EditIcon}
+                          />
 
-                          <button
-                            className={classes.button}
+                          <img
                             onClick={() => deleteHandler(user)}
-                          >
-                            Delete
-                          </button>
+                            src="../images/CrossDelete.svg"
+                            alt="Delete icon"
+                            className={classes.DeleteIcon}
+                          />
                         </TableCell>
                       </TableRow>
                     ))}

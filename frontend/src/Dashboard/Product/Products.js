@@ -40,6 +40,18 @@ const useStyles = makeStyles({
   buttons: {
     display: "flex",
   },
+  EditIcon: {
+    width: "25px",
+    cursor: "pointer",
+    padding: "0 ",
+    margin: "0 10px",
+  },
+  DeleteIcon: {
+    width: "25px",
+    cursor: "pointer",
+    padding: "0 ",
+    margin: "0 10px",
+  },
 });
 
 function Products() {
@@ -107,19 +119,19 @@ function Products() {
                       </TableCell>
 
                       <TableCell className={classes.buttons}>
-                        <button
-                          className={classes.button}
+                        <img
                           onClick={() => updateHandler(product)}
-                        >
-                          Edit
-                        </button>
+                          src="../images/EditIcon.svg"
+                          alt="Edit icon"
+                          className={classes.EditIcon}
+                        />
 
-                        <button
-                          className={classes.button}
+                        <img
                           onClick={() => deleteHandler(product)}
-                        >
-                          Delete
-                        </button>
+                          src="../images/CrossDelete.svg"
+                          alt="Delete icon"
+                          className={classes.DeleteIcon}
+                        />
                       </TableCell>
                     </TableRow>
                   ))}
