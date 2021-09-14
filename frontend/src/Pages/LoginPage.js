@@ -7,13 +7,20 @@ import { requestSignIn } from "../store/action/signInAction";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Components/Loader";
 import { setLoaderValue } from "../store/action/loaderAction";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const useStyles = makeStyles({
   container: {
     padding: "0",
     margin: "60px 0",
     borderRadius: "20px",
+  },
+  icon: {
+    width: "35px",
+    margin: "0 5px",
+  },
+  iconf: {
+    width: "45px",
+    margin: "0 5px",
   },
 });
 
@@ -52,21 +59,29 @@ function LoginPage() {
               <form className={styles.formContainer}>
                 <h1 className={styles.header}>Sign in</h1>
                 <div className={styles.socialContainer}>
-                  <Link to="www.facebook.com" className={styles.social}>
-                    <FontAwesomeIcon icon={["fab", "facebook-f"]} />
-                    <FontAwesomeIcon icon={["far", "coffee"]} />
+                  <Link to="/facebook" className={styles.social}>
+                    <img
+                      className={classes.iconf}
+                      src="./images/facebook.svg"
+                      alt="userIcon"
+                    />
+                  </Link>
+                  <Link to="www.google.com" className={styles.social}>
+                    <img
+                      className={classes.icon}
+                      src="./images/google-plus.svg"
+                      alt="userIcon"
+                    />
                   </Link>
                   <Link to="www.facebook.com" className={styles.social}>
-                    <FontAwesomeIcon icon={["fab", "facebook-f"]} />
-                  </Link>
-                  <Link to="www.facebook.com" className={styles.social}>
-                    <FontAwesomeIcon icon={["fab", "facebook-f"]} />
+                    <img
+                      className={classes.icon}
+                      src="./images/twittericon.svg"
+                      alt="userIcon"
+                    />
                   </Link>
                 </div>
-                <span>
-                  or use your account{" "}
-                  <FontAwesomeIcon icon={["far", "coffee"]} />
-                </span>
+                <span>or use your account </span>
                 <input
                   className={styles.input}
                   type="email"

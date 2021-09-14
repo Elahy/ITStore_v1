@@ -6,6 +6,7 @@ import Info from "./Info";
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Orders from "./Orders";
+import { addToCart } from "../../store/action/cartAction";
 
 const useStyles = makeStyles({
   root: {
@@ -64,6 +65,7 @@ function UserProfile() {
   const logOutHandler = () => {
     history.push("/");
     dispatch(signIn(""));
+    dispatch(addToCart(""));
   };
   const [show, setShow] = useState(null);
 

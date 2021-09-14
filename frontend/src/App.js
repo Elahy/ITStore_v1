@@ -75,6 +75,13 @@ function App() {
                   <CheckOutPage />
                 </Route>
               )}
+              <Route
+                path="/facebook"
+                component={() => {
+                  window.location.href = "https://www.facebook.com/";
+                  return null;
+                }}
+              />
               <Route path="/*">
                 <NotFound />
               </Route>
@@ -82,9 +89,7 @@ function App() {
           </main>
           <footer>
             <div className="bottom-details">
-              <span className="copyright_text">
-                Copyright © 2021 E-commerce.
-              </span>
+              <span className="copyright_text">Copyright © 2021 ITStore.</span>
               <span className="policy_terms">
                 <Link to="/PrivacyPolicy" className="privacy">
                   Privacy policy

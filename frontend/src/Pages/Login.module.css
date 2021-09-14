@@ -4,26 +4,6 @@
   background-color: #d3d3d3;
 }
 
-/* .body {
-  margin: 60px 0;
-  font: 1.2em sans-serif;
-  width: 500px;
-  height: 750px;
-  border-radius: 0 20px 20px 0;
-  background-color: #cfa988f5;
-  background-image: linear-gradient(
-    to bottom right,
-    #d5a67d,
-    #e2c1a4,
-    #cfa988f5,
-    #d9af8a,
-    #e2c1a4,
-    #cfa988f5,
-    gray
-  );
-  text-align: center;
-} */
-
 .log {
   padding: 40% 0;
 }
@@ -135,15 +115,16 @@ Link {
 
 .socialContainer {
   margin: 20px 0;
+  display: inline;
 }
 
-.socialContainer Link {
-  border: 1px solid #dddddd;
-  border-radius: 50%;
-  display: inline-flex;
+.social {
+  /* border: 1px solid #dddddd; */
+  /* border-radius: 50%; */
+  display: inline-block;
   justify-content: center;
   align-items: center;
-  margin: 0 5px;
-  height: 40px;
-  width: 40px;
+  margin: 5px;
+  /* height: 40px; */
+  /* width: 40px; */
 }

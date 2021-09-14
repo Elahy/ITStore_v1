@@ -95,16 +95,6 @@ function Cart() {
     setProductList(cart);
   }, [cart]);
 
-  // useEffect(() => {
-  //   // const calculateTotalPrice = () => {
-  //   //   console.log("calculateTotalPrice called");
-  // //   productList?.map((product) =>
-  // //     setTotalPrice(
-  // //       totalPrice + product.productId?.price * parseInt(product?.quantity, 10)
-  // //     )
-  // //   );
-  // // }, [productList]);
-
   const handleCheckout = () => {
     history.push("/checkout");
   };

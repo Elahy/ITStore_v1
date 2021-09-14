@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     maxWidth: "100%",
     border: "1px solid black",
     borderRadius: "5px",
-    background: "#cdcdcd",
+    background: "#ADD8E6",
     "&:hover": {
       cursor: "pointer",
       padding: "7px 5px",
@@ -48,6 +48,10 @@ const useStyles = makeStyles({
   },
   logoutButton: {
     margin: "30px",
+  },
+  icon: {
+    maxWidth: "30px",
+    margin: "0 5px",
   },
 });
 function Dashboard() {
@@ -63,18 +67,38 @@ function Dashboard() {
           <p className={classes.menu}>Menu</p>
           <ul>
             <li onClick={() => setShow("user")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/user_icon.svg"
+                alt="userIcon"
+              />
               User
             </li>
             <li onClick={() => setShow("product")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/product.svg"
+                alt="userIcon"
+              />
               Product
             </li>
             <li onClick={() => setShow("order")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/orderlist.svg"
+                alt="userIcon"
+              />
               Orders
             </li>
             <li
               onClick={() => setShow("category")}
               className={classes.menuItem}
             >
+              <img
+                className={classes.icon}
+                src="./images/category_icon.svg"
+                alt="userIcon"
+              />
               Category
             </li>
           </ul>

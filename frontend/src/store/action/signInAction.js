@@ -1,6 +1,7 @@
 import { ActionTypes } from "../ActionTypes";
 import axios from "axios";
 import { setLoaderValue } from "./loaderAction";
+import { requestCart } from "./cartAction";
 
 export const signIn = (response) => ({
   type: ActionTypes.SIGN_IN,
@@ -25,6 +26,7 @@ export const requestSignIn = (credential) => {
         },
       });
       dispatch(signIn(response.data.userInfo));
+      dispatch(requestCart());
       dispatch(setLoaderValue(false));
 
       console.log("Signin Successfull");
