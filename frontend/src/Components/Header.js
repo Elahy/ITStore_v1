@@ -1,6 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import CartLogo from "./CartLogo";
 import { useSelector } from "react-redux";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const { role } = useSelector((store) => store.userInfoStore);
@@ -18,6 +19,7 @@ const Header = () => {
       <h1 onClick={logoClickHandler} className="logo">
         ITStore
       </h1>
+      <SearchBar />
       <nav>
         <ul className="nav_links">
           <li>
@@ -25,11 +27,11 @@ const Header = () => {
               Sale!
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/products" className="navbtn">
               New Collection
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/contact" className="navbtn">
               Contact

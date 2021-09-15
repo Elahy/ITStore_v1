@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     maxWidth: "100%",
     border: "1px solid black",
     borderRadius: "5px",
-    background: "#cdcdcd",
+    background: "#ADD8E6",
     "&:hover": {
       cursor: "pointer",
       padding: "7px 5px",

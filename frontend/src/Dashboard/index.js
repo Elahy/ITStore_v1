@@ -122,7 +122,7 @@ function Dashboard() {
             <Order />
           ) : show === "category" ? (
             <CategoryBoard />
-          ) : show === "category" ? (
+          ) : show === "carts" ? (
             <PendingCarts />
           ) : (
             <p>Welcome!</p>

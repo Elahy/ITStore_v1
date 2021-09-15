@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,6 +19,7 @@ import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Loader";
 import { useHistory } from "react-router";
 import { setView } from "../../store/action/userAction";
+import Pagination from "../../Components/Pagination";
 
 // import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -58,13 +59,27 @@ function Products() {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productPerPage /*setPostPerPage */] = useState(5);
+
   const { productStore, loaderStore } = useSelector((store) => store);
-  const productList = productStore.productList;
+  // const productList = productStore.productList;
 
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestProductList());
   }, [dispatch]);
+
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentProductList = productStore.productList.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const updateHandler = (e) => {
     console.log(e, "==update Event");
@@ -103,7 +118,7 @@ function Products() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {productList?.map((product) => (
+                  {currentProductList?.map((product) => (
                     <TableRow hover tabIndex={-1} key={product._id}>
                       <TableCell key={product?.image}>
                         <img
@@ -147,6 +162,11 @@ function Products() {
                 </TableBody>
               </Table>
             </TableContainer>
+            <Pagination
+              productPerPage={productPerPage}
+              totalProducts={productStore.productList.length}
+              paginate={paginate}
+            />
           </div>
         </div>
       )}

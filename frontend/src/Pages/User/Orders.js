@@ -29,8 +29,41 @@ const useStyles = makeStyles({
   },
   button: {
     maxHeight: "35px",
-    padding: "8px 20px ",
-    margin: "0 1%",
+    maxWidth: "100px",
+    padding: "7px 20px ",
+    margin: "2px 10px",
+    border: "1px solid black",
+    borderRadius: "10px",
+  },
+  confirmButton: {
+    maxHeight: "35px",
+    maxWidth: "100px",
+    padding: "7px 20px ",
+    margin: "2px 10px",
+    border: "1px solid black",
+    borderRadius: "10px",
+    backgroundColor: "#98FB98",
+  },
+  cancelButton: {
+    maxHeight: "35px",
+    maxWidth: "100px",
+    padding: "7px 20px ",
+    margin: "2px 10px",
+    border: "1px solid black",
+    borderRadius: "10px",
+    background: "#FFB6C1",
+  },
+  pendingButton: {
+    maxHeight: "35px",
+    maxWidth: "100px",
+    padding: "7px 20px ",
+    margin: "2px 10px",
+    border: "1px solid black",
+    borderRadius: "10px",
+    backgroundColor: "#FFFACD",
+  },
+  buttons: {
+    display: "flex",
   },
 });
 
@@ -82,21 +115,31 @@ function Orders() {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Order ID</TableCell>
-                  <TableCell>Order Date</TableCell>
-                  <TableCell>Item</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Action</TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Order ID
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Order Date
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Item
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Status
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Action
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {productList?.map((product) => (
                   <TableRow hover tabIndex={-1} key={product._id}>
                     <TableCell key={product.productId?.image}>
-                      {product._id}
+                      {product._id.slice(12, 24)}
                     </TableCell>
                     <TableCell key={product.productId?.title}>
-                      {product.date}
+                      {product.date.slice(0, 10)}
                     </TableCell>
                     <TableCell key={product.productId?.price}>
                       {product.products.length}
@@ -112,17 +155,17 @@ function Orders() {
                         )}
                       </p>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={classes.buttons}>
                       {product.status === 0 ? (
                         <>
                           <button
-                            className={classes.button}
+                            className={classes.confirmButton}
                             onClick={() => confirmHandler(product)}
                           >
                             Confirm
                           </button>
                           <button
-                            className={classes.button}
+                            className={classes.cancelButton}
                             onClick={() => cancelHandler(product)}
                           >
                             Cancel
@@ -131,13 +174,13 @@ function Orders() {
                       ) : product.status === 1 ? (
                         <>
                           <button
-                            className={classes.button}
+                            className={classes.pendingButton}
                             onClick={() => pendingHandler(product)}
                           >
                             Pending
                           </button>
                           <button
-                            className={classes.button}
+                            className={classes.cancelButton}
                             onClick={() => cancelHandler(product)}
                           >
                             Cancel
@@ -146,13 +189,13 @@ function Orders() {
                       ) : (
                         <>
                           <button
-                            className={classes.button}
+                            className={classes.pendingButton}
                             onClick={() => pendingHandler(product)}
                           >
                             Pending
                           </button>
                           <button
-                            className={classes.button}
+                            className={classes.confirmButton}
                             onClick={() => cancelHandler(product)}
                           >
                             Confirm

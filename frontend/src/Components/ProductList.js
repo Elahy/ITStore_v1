@@ -53,8 +53,6 @@ function ProductList() {
   const { productStore, loaderStore, categoryStore } = useSelector(
     (store) => store
   );
-
-  // const productList = productStore.productList;
   const categoryList = categoryStore.categoryList;
 
   const indexOfLastProduct = currentPage * productPerPage;
@@ -78,6 +76,11 @@ function ProductList() {
     dispatch(requestProductByCategory(categoryId));
   };
 
+  const handleSelectAll = () => {
+    dispatch(setLoaderValue(true));
+    dispatch(requestProductList());
+  };
+
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -93,6 +96,14 @@ function ProductList() {
       ) : (
         <div>
           <div className={classes.options}>
+            <Button
+              className={classes.selectButton}
+              variant="outlined"
+              color="secondary"
+              onClick={handleSelectAll}
+            >
+              All Products
+            </Button>
             {categoryList.map((category) => (
               <Button
                 key={category._id}
