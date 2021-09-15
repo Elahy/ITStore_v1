@@ -13,18 +13,15 @@ import {
 const useStyles = makeStyles({
   root: {
     textAlign: "left",
-    padding: "10%",
-    // border: "1px solid #ADD8E6",
-    // borderRadius: " 0 20px 20px 0",
+    margin: "5%",
   },
   header: {
     display: "flex",
   },
   userImage: {
-    width: "50px",
-    border: "2px solid black",
-    borderRadius: "50%",
-    margin: "0 5%",
+    width: "70px",
+
+    margin: "0 5% 2% 5%",
   },
 });
 

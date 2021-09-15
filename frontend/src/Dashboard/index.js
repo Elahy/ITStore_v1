@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import UserBoard from "./User/UserBoard";
 import CategoryBoard from "./Category/CategoryBoard";
 import Order from "./Order";
+import PendingCarts from "./PendingCarts";
 
 const useStyles = makeStyles({
   root: {
@@ -101,6 +102,14 @@ function Dashboard() {
               />
               Category
             </li>
+            <li onClick={() => setShow("carts")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/blackCart.svg"
+                alt="userIcon"
+              />
+              Pending Carts
+            </li>
           </ul>
         </Grid>
 
@@ -113,6 +122,8 @@ function Dashboard() {
             <Order />
           ) : show === "category" ? (
             <CategoryBoard />
+          ) : show === "category" ? (
+            <PendingCarts />
           ) : (
             <p>Welcome!</p>
           )}

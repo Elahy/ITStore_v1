@@ -8,6 +8,11 @@ export const signIn = (response) => ({
   payload: response,
 });
 
+export const signInError = (response) => ({
+  type: ActionTypes.SIGN_IN_ERROR,
+  payload: response,
+});
+
 // export const myInfo = (response) => ({
 //   type: ActionTypes.GET_MY_INFO,
 //   payload: response,
@@ -25,14 +30,15 @@ export const requestSignIn = (credential) => {
           password: credential.password,
         },
       });
+      console.log("Signin Successfull before");
       dispatch(signIn(response.data.userInfo));
       dispatch(requestCart());
       dispatch(setLoaderValue(false));
-
-      console.log("Signin Successfull");
+      console.log("Signin Successfull after");
     } catch (err) {
+      dispatch(signInError(err.message));
       dispatch(setLoaderValue(false));
-      console.error(err, "===Error");
+      console.error(err, " Signin ===Error");
     }
   };
 };

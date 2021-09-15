@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styles from "./Login.module.css";
 import Grid from "@material-ui/core/Grid";
@@ -29,7 +29,7 @@ function LoginPage() {
   const classes = useStyles();
   const history = useHistory();
   const { loader } = useSelector((store) => store.loaderStore);
-  // const { token } = useSelector((store) => store.userInfoStore);
+  const { errorMessage, token } = useSelector((store) => store.userInfoStore);
   console.log(loader, "===loader");
   const [cred, setCred] = useState([]);
   const handleLogin = (e) => {
@@ -37,8 +37,14 @@ function LoginPage() {
     dispatch(setLoaderValue(true));
     dispatch(requestSignIn(cred));
     console.log(cred, "===credential");
-    history.push("/");
   };
+  useEffect(() => {
+    history.push("/");
+  }, [history, token]);
+
+  useEffect(() => {
+    history.push("/signin");
+  }, [history, errorMessage]);
 
   return (
     <>
@@ -100,6 +106,7 @@ function LoginPage() {
                   }
                   autoComplete="on"
                 />
+                {errorMessage ? <p>{errorMessage}</p> : null}
                 <Link href="#">Forgot your password?</Link>
                 <p className={styles.para}>
                   Don't have a account? <Link to="/signup">Sign Up!</Link>

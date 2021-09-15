@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -19,6 +19,7 @@ import { requestCategoryList } from "../store/action/categoryAction";
 import { setLoaderValue } from "../store/action/loaderAction";
 import Loader from "./Loader";
 import AddToCart from "../ReComponent/AddToCart";
+import Pagination from "./Pagination";
 
 const useStyles = makeStyles({
   root: {
@@ -46,11 +47,25 @@ function ProductList() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productPerPage /*setPostPerPage */] = useState(8);
+
   const { productStore, loaderStore, categoryStore } = useSelector(
     (store) => store
   );
-  const productList = productStore.productList;
+
+  // const productList = productStore.productList;
   const categoryList = categoryStore.categoryList;
+
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentProductList = productStore.productList.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+  console.log(currentProductList, "===currentProductList");
+  console.log(indexOfFirstProduct, "===indexOfFirstProduct");
+  console.log(indexOfLastProduct, "===currentProductList");
 
   useEffect(() => {
     dispatch(setLoaderValue(true));
@@ -58,14 +73,18 @@ function ProductList() {
     dispatch(requestProductList());
   }, [dispatch]);
 
-  const handleSelect = (e) => {
+  const handleSelect = (categoryId) => {
     dispatch(setLoaderValue(true));
-    dispatch(requestProductByCategory(e));
+    dispatch(requestProductByCategory(categoryId));
   };
 
-  console.log(productList);
-  const buttonHanlder = (e) => {
-    history.push(`/products/${e}`);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  console.log(productStore.productList);
+  const buttonHanlder = (productId) => {
+    history.push(`/products/${productId}`);
   };
   return (
     <>
@@ -89,7 +108,7 @@ function ProductList() {
           <Grid container spacing={3}>
             <Grid item xs={false} lg={1}></Grid>
             <Grid item xs={12} lg={10}>
-              {productList.map((product) => (
+              {currentProductList.map((product) => (
                 <div key={product._id} className="productList">
                   <Card className={classes.root}>
                     <CardActionArea>
@@ -130,6 +149,11 @@ function ProductList() {
                   </Card>
                 </div>
               ))}
+              <Pagination
+                productPerPage={productPerPage}
+                totalProducts={productStore.productList.length}
+                paginate={paginate}
+              />
             </Grid>
           </Grid>
         </div>

@@ -91,11 +91,22 @@ function Order() {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Order ID</TableCell>
-                  <TableCell>Order Date</TableCell>
-                  <TableCell>Item</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Action</TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Order ID
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Order Date
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    {" "}
+                    Item
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Status
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Action
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

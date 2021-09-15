@@ -83,11 +83,21 @@ function Users() {
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
-                      <TableCell>User</TableCell>
-                      <TableCell>Email</TableCell>
-                      <TableCell>phone</TableCell>
-                      <TableCell>Address</TableCell>
-                      <TableCell>Action</TableCell>
+                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                        User
+                      </TableCell>
+                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                        Email
+                      </TableCell>
+                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                        phone
+                      </TableCell>
+                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                        Address
+                      </TableCell>
+                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                        Action
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

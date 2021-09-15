@@ -44,7 +44,7 @@ const useStyles = makeStyles({
     width: "25px",
     cursor: "pointer",
     padding: "0 ",
-    margin: "0 10px",
+    margin: "17px 10px",
   },
   DeleteIcon: {
     width: "25px",
@@ -88,10 +88,18 @@ function Products() {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>{""}</TableCell>
-                    <TableCell>Product</TableCell>
-                    <TableCell>Stock</TableCell>
-                    <TableCell>Action</TableCell>
+                    <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                      {""}
+                    </TableCell>
+                    <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                      Product
+                    </TableCell>
+                    <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                      Stock
+                    </TableCell>
+                    <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                      Action
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -104,15 +112,16 @@ function Products() {
                           className={classes.image}
                         />
                       </TableCell>
-                      <TableCell key={product?.title}>
+                      <TableCell
+                        key={product?.title}
+                        style={{ maxWidth: "200px" }}
+                      >
                         {product?.title}
                       </TableCell>
 
                       <TableCell key={product.quantity}>
                         {product.stock ? (
-                          <p className={classes.button}>
-                            {product.stock} pieces available
-                          </p>
+                          <p className={classes.button}>{product.stock}</p>
                         ) : (
                           <p className={classes.button}>Out of Stock</p>
                         )}

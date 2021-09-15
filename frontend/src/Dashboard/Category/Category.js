@@ -82,9 +82,15 @@ function Category() {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Categogy ID</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Action</TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Categogy ID
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Name
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Action
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
