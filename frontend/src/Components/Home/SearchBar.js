@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { requestProductList } from "../store/action/productAction";
+import { requestProductList } from "../../store/action/productAction";
 import { Link } from "react-router-dom";
 import styles from "./SearchBar.module.css";
 

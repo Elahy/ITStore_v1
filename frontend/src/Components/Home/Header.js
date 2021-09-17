@@ -1,7 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
-import CartLogo from "./CartLogo";
+import CartLogo from "../Cart/CartLogo";
 import { useSelector } from "react-redux";
-import SearchBar from "./SearchBar";
+import SearchBar from "../Home/SearchBar";
 
 const Header = () => {
   const { role } = useSelector((store) => store.userInfoStore);

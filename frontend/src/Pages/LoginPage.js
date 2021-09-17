@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core";
 import { requestSignIn } from "../store/action/signInAction";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../Components/Loader";
+import Loader from "../Components/Miscellaneous/Loader";
 import { setLoaderValue } from "../store/action/loaderAction";
 
 const useStyles = makeStyles({

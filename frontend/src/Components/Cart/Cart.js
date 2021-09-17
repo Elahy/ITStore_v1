@@ -13,8 +13,8 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import Loader from "../Components/Loader";
-import { requestAddToCart, requestCart } from "../store/action/cartAction";
+import Loader from "../Miscellaneous/Loader";
+import { requestAddToCart, requestCart } from "../../store/action/cartAction";
 
 const useStyles = makeStyles({
   root: {

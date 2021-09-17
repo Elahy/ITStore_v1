@@ -1,7 +1,7 @@
 // import { Button } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router";
-import ContactUs from "../ReComponent/ContactUs";
+import ContactUs from "../../Components/Miscellaneous/ContactUs";
 import styles from "./Home.module.css";
 
 function Home() {
@@ -16,9 +16,11 @@ function Home() {
         <div className={styles.headercontent}>
           <p className={styles.heading1}>Latest Technology at Best Price!</p>
           <h1>welcome to ITstore!</h1>
-          <div className={styles.button}>
-            <p onClick={handleBrowse}>shop now</p>
-          </div>
+
+          <button onClick={handleBrowse} className={styles.button}>
+            shop now
+          </button>
+
           <p className={styles.heading2}>
             Fastest Delivery all over the country!
           </p>

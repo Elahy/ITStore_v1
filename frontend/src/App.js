@@ -1,22 +1,22 @@
 import "./App.css";
 import { Switch, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Loader from "./Components/Loader";
+import Loader from "./Components/Miscellaneous/Loader";
 import ProductList from "./Components/ProductList";
-import Policy from "./Components/Policy";
-import NotFound from "./Components/NotFound";
+import Policy from "./Components/Miscellaneous/Policy";
+import NotFound from "./Components/Miscellaneous/NotFound";
 import ProductDetails from "./Components/ProductDetails";
-import Success from "./Components/Success";
-import Home from "./Components/Home";
+import Success from "./Components/Miscellaneous/Success";
+import Home from "./Components/Home/index";
 import LoginPage from "./Pages/LoginPage";
 import { useSelector } from "react-redux";
 import Dashboard from "./Dashboard";
-import Cart from "./Pages/Cart";
-import ContactUs from "./ReComponent/ContactUs";
+import Cart from "./Components/Cart/Cart";
+import ContactUs from "./Components/Miscellaneous/ContactUs";
 import SignupPage from "./Pages/SignupPage";
 import UserProfile from "./Pages/User/UserProfile";
 import CheckOutPage from "./Pages/CheckOutPage";
-import Header from "./Components/Header";
+import Header from "./Components/Home/Header";
 
 function App() {
   const { role } = useSelector((store) => store.userInfoStore);

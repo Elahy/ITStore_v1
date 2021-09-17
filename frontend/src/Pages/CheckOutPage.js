@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 // import DeleteIcon from "@material-ui/icons/Delete";
-import Loader from "../Components/Loader";
+import Loader from "../Components/Miscellaneous/Loader";
 import { setLoaderValue } from "../store/action/loaderAction";
 import { addToCart, requestCheckout } from "../store/action/cartAction";
 import { requestMyInfo } from "../store/action/userAction";

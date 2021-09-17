@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 import { setLoaderValue } from "../../store/action/loaderAction";
-import Loader from "../../Components/Loader";
+import Loader from "../../Components/Miscellaneous/Loader";
 import { useHistory } from "react-router";
 import { setView } from "../../store/action/userAction";
 import Pagination from "../../Components/Pagination";

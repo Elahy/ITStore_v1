@@ -1,7 +1,7 @@
 import { Button, makeStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../Components/Loader";
+import Loader from "../../Components/Miscellaneous/Loader";
 import UpdateUser from "../../Dashboard/User/UpdateUser";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import { requestMyInfo } from "../../store/action/userAction";

@@ -17,8 +17,8 @@ import {
 } from "../store/action/productAction";
 import { requestCategoryList } from "../store/action/categoryAction";
 import { setLoaderValue } from "../store/action/loaderAction";
-import Loader from "./Loader";
-import AddToCart from "../ReComponent/AddToCart";
+import Loader from "./Miscellaneous/Loader";
+import AddToCart from "../Components/Cart/AddToCart";
 import Pagination from "./Pagination";
 
 const useStyles = makeStyles({

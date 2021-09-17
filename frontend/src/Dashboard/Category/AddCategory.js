@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Loader from "../../Components/Loader";
+import Loader from "../../Components/Miscellaneous/Loader";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 // import FileBase64 from "react-file-base64";

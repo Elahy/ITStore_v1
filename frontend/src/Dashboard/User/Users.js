@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { setLoaderValue } from "../../store/action/loaderAction";
-import Loader from "../../Components/Loader";
+import Loader from "../../Components/Miscellaneous/Loader";
 import { useHistory } from "react-router";
 import {
   requestDeleteUser,

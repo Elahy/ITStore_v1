@@ -2,7 +2,10 @@ import { Button, makeStyles } from "@material-ui/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { requestAddToCart, setCartQuantity } from "../store/action/cartAction";
+import {
+  requestAddToCart,
+  setCartQuantity,
+} from "../../store/action/cartAction";
 
 const useStyles = makeStyles({
   button: {

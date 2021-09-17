@@ -84,10 +84,11 @@
   cursor: pointer;
 }
 .headerhero .headercontent .button:hover {
-  padding: 1rem;
+  background-color: #db6a9f;
+  color: #161616;
 }
 
-.headerhero .headercontent .button p {
+.headerhero .headercontent .button {
   font-family: Cambria;
   font-size: 1rem;
   font-weight: 400;
@@ -95,6 +96,8 @@
   margin: 0 auto;
   text-align: center;
   text-transform: uppercase;
+  border: none;
+  color: #ffffff;
 }
 
 @media only screen and (max-width: 1440px) {

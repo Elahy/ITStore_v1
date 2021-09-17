@@ -5,13 +5,13 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Loader from "./Loader";
+import Loader from "./Miscellaneous/Loader";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { requestProductDetails } from "../store/action/productAction";
 import { setLoaderValue } from "../store/action/loaderAction";
-import AddToCart from "../ReComponent/AddToCart";
+import AddToCart from "../Components/Cart/AddToCart";
 
 const useStyles = makeStyles({
   root: {
