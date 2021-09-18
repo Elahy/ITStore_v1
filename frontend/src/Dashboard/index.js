@@ -35,15 +35,15 @@ const useStyles = makeStyles({
   menuItem: {
     display: "flex",
     textDecoration: "none",
-    margin: "5px 50px",
+    margin: "8px 50px",
     padding: "5px",
     maxWidth: "100%",
-    border: "1px solid black",
+    border: "1px solid #ADD8E6",
     borderRadius: "5px",
     background: "#ADD8E6",
     "&:hover": {
       cursor: "pointer",
-      padding: "7px 5px",
+      // padding: "7px 5px",
       background: "#d1bcbc",
     },
   },

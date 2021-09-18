@@ -36,10 +36,10 @@ const useStyles = makeStyles({
   menuItem: {
     display: "flex",
     textDecoration: "none",
-    margin: "5px 50px",
+    margin: "10px 50px",
     padding: "5px",
     maxWidth: "100%",
-    border: "1px solid black",
+    border: "1px solid #ADD8E6",
     borderRadius: "5px",
     background: "#ADD8E6",
     "&:hover": {
@@ -47,6 +47,13 @@ const useStyles = makeStyles({
       padding: "7px 5px",
       background: "#d1bcbc",
     },
+  },
+  logout: {
+    display: "flex",
+    margin: "5px 130px",
+    padding: "5px",
+    maxWidth: "100%",
+    background: "#ADD8E6",
   },
   logoutButton: {
     margin: "30px",
@@ -95,7 +102,7 @@ function UserProfile() {
             <li onClick={() => setShow("order")} className={classes.menuItem}>
               Customer Service
             </li>
-            <li onClick={() => setShow("order")} className={classes.menuItem}>
+            <li className={classes.logout}>
               <Button
                 onClick={logOutHandler}
                 className={classes.logoutButton}

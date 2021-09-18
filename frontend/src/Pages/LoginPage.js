@@ -31,6 +31,7 @@ function LoginPage() {
   const { loader } = useSelector((store) => store.loaderStore);
   const { errorMessage, token } = useSelector((store) => store.userInfoStore);
   console.log(loader, "===loader");
+  console.log(errorMessage, "===errorMessage");
   const [cred, setCred] = useState([]);
   const handleLogin = (e) => {
     e.preventDefault();
@@ -72,14 +73,14 @@ function LoginPage() {
                       alt="userIcon"
                     />
                   </Link>
-                  <Link to="www.google.com" className={styles.social}>
+                  <Link to="/facebook" className={styles.social}>
                     <img
                       className={classes.icon}
                       src="./images/google-plus.svg"
                       alt="userIcon"
                     />
                   </Link>
-                  <Link to="www.facebook.com" className={styles.social}>
+                  <Link to="/facebook" className={styles.social}>
                     <img
                       className={classes.icon}
                       src="./images/twittericon.svg"
@@ -107,7 +108,7 @@ function LoginPage() {
                   autoComplete="on"
                 />
                 {errorMessage ? <p>{errorMessage}</p> : null}
-                <Link href="#">Forgot your password?</Link>
+                <Link to="/signup">Forgot your password?</Link>
                 <p className={styles.para}>
                   Don't have a account? <Link to="/signup">Sign Up!</Link>
                 </p>

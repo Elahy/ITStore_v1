@@ -61,7 +61,7 @@ function CartLogo() {
         {cart?.length > 0 ? (
           <>
             {cart.map((prod) => (
-              <span className={classes.cartitem} key={prod.id}>
+              <span className={classes.cartitem} key={prod._id}>
                 {console.log(prod, "===prod")}
                 <img
                   src={`http://localhost:8080${prod.productId?.image}`}
@@ -69,8 +69,8 @@ function CartLogo() {
                   alt={prod.name}
                 />
                 <div className={classes.cartItemDetail}>
-                  <span>{prod.productId?.title} </span>
-                  <span> ( {prod.productId?.price} tk) </span>
+                  <span>{prod.productId?.title}</span>
+                  <span>( {prod.productId?.price} tk)</span>
                   <span> x {prod?.quantity}</span>
                 </div>
               </span>
@@ -85,7 +85,7 @@ function CartLogo() {
             </Link>
           </>
         ) : (
-          <span style={{ padding: 10 }}>Cart is Empty!</span>
+          <p style={{ padding: 10 }}>Cart is Empty!</p>
         )}
       </Dropdown.Menu>
     </Dropdown>

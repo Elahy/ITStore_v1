@@ -38,7 +38,7 @@ export const requestSignIn = (credential) => {
     } catch (err) {
       dispatch(signInError(err.message));
       dispatch(setLoaderValue(false));
-      console.error(err, " Signin ===Error");
+      console.log(err, " Signin ===Error");
     }
   };
 };
