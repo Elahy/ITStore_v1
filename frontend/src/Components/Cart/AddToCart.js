@@ -19,7 +19,7 @@ function AddToCart(product) {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
-  const { role } = useSelector((store) => store.userInfoStore);
+  const { role } = useSelector((store) => store.signInStore);
   const { itemNumber } = useSelector((store) => store.cartStore);
 
   const handleCartAdd = () => {

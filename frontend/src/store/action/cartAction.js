@@ -27,8 +27,8 @@ export const requestAddToCart = (item) => {
   console.log(item, "===item from Cart");
   return async (dispatch, getState) => {
     try {
-      const { userInfoStore } = getState();
-      const token = userInfoStore.token;
+      const { signInStore } = getState();
+      const token = signInStore.token;
       const response = await axios.post(
         "http://localhost:8080/cart",
         {
@@ -52,8 +52,8 @@ export const requestAddToCart = (item) => {
 export const requestCheckout = () => {
   return async (dispatch, getState) => {
     try {
-      const { userInfoStore } = getState();
-      const token = userInfoStore.token;
+      const { signInStore } = getState();
+      const token = signInStore.token;
       const response = await axios.get("http://localhost:8080/order/checkout", {
         headers: { authorization: `bearer ${token}` },
       });
@@ -69,8 +69,8 @@ export const requestCheckout = () => {
 export const requestCart = () => {
   return async (dispatch, getState) => {
     try {
-      const { userInfoStore } = getState();
-      const token = userInfoStore.token;
+      const { signInStore } = getState();
+      const token = signInStore.token;
       const response = await axios.get("http://localhost:8080/cart", {
         headers: { authorization: `bearer ${token}` },
       });

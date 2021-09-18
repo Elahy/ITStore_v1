@@ -7,7 +7,6 @@ const initialState = {
   userEdited: null,
   userDeleted: null,
   view: "",
-  errorMessage: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -24,11 +23,6 @@ const userReducer = (state = initialState, action) => {
       return { ...state, currentUserId: action.payload };
     case ActionTypes.DELETE_A_USER:
       return { ...state, userDeleted: action.payload };
-    case ActionTypes.SIGN_IN_ERROR:
-      return {
-        ...state,
-        errorMessage: action.payload,
-      };
 
     default:
       return state;

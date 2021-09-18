@@ -44,8 +44,8 @@ export const setMyInfo = (response) => ({
 
 export const requestUserList = () => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
-    const token = userInfoStore.token;
+    const { signInStore } = getState();
+    const token = signInStore.token;
     const response = await axios({
       method: "GET",
       url: "http://localhost:8080/user",
@@ -58,8 +58,8 @@ export const requestUserList = () => {
 
 export const requestUserDetails = (userId) => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
-    const token = userInfoStore.token;
+    const { signInStore } = getState();
+    const token = signInStore.token;
     const response = await axios({
       method: "GET",
       url: `http://localhost:8080/user/${userId}`,
@@ -72,8 +72,8 @@ export const requestUserDetails = (userId) => {
 
 export const requestDeleteUser = (userId) => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
-    const token = userInfoStore.token;
+    const { signInStore } = getState();
+    const token = signInStore.token;
     const response = await axios({
       method: "DELETE",
       url: `http://localhost:8080/user/${userId}`,
@@ -86,8 +86,8 @@ export const requestDeleteUser = (userId) => {
 
 export const requestEditUser = (user) => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
-    const token = userInfoStore.token;
+    const { signInStore } = getState();
+    const token = signInStore.token;
     const response = await axios.patch(
       `http://localhost:8080/user/${user._id}`,
       {
@@ -120,8 +120,8 @@ export const requestEditUser = (user) => {
 export const requestAddUser = (user) => {
   return async (dispatch, getState) => {
     try {
-      const { userInfoStore } = getState();
-      const token = userInfoStore.token;
+      const { signInStore } = getState();
+      const token = signInStore.token;
       const response = await axios.post(
         "http://localhost:8080/user",
         {
@@ -156,8 +156,8 @@ export const requestAddUser = (user) => {
 
 export const requestMyInfo = () => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
-    const token = userInfoStore.token;
+    const { signInStore } = getState();
+    const token = signInStore.token;
     const response = await axios({
       method: "GET",
       url: `http://localhost:8080/my-detail`,

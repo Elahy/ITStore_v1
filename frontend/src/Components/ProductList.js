@@ -61,9 +61,6 @@ function ProductList() {
     indexOfFirstProduct,
     indexOfLastProduct
   );
-  console.log(currentProductList, "===currentProductList");
-  console.log(indexOfFirstProduct, "===indexOfFirstProduct");
-  console.log(indexOfLastProduct, "===currentProductList");
 
   useEffect(() => {
     dispatch(setLoaderValue(true));

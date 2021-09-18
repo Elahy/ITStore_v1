@@ -15,14 +15,14 @@ const persistConfig = {
   storage: storage,
 };
 
-const persistedUserInfo = persistReducer(persistConfig, signInReducer);
+const persistedSignInInfo = persistReducer(persistConfig, signInReducer);
 const persistedCart = persistReducer(persistConfig, cartReducer);
 
 const mainReducer = combineReducers({
   productStore: productReducer,
   cartStore: persistedCart,
   loaderStore: loaderReducer,
-  userInfoStore: persistedUserInfo,
+  signInStore: persistedSignInInfo,
   allUserStore: userReducer,
   myInfoStore: myInfoReducer,
   categoryStore: categoryReducer,

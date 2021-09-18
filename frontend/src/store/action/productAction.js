@@ -62,9 +62,9 @@ export const requestProductDetails = (productId) => {
 
 export const requestDeleteProduct = (productId) => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
+    const { signInStore } = getState();
     console.log("requestDeleteProduct Call");
-    const token = userInfoStore.token;
+    const token = signInStore.token;
     const response = await axios.delete(
       `http://localhost:8080/products/${productId}`,
       {
@@ -79,9 +79,9 @@ export const requestDeleteProduct = (productId) => {
 export const requestEditProduct = (product) => {
   return async (dispatch, getState) => {
     try {
-      const { userInfoStore } = getState();
+      const { signInStore } = getState();
       console.log(product, "requestEditProduct Call");
-      const token = userInfoStore.token;
+      const token = signInStore.token;
       const response = await axios.patch(
         `http://localhost:8080/products/${product._id}`,
         {
@@ -106,8 +106,8 @@ export const requestEditProduct = (product) => {
 export const requestAddProduct = (product) => {
   return async (dispatch, getState) => {
     try {
-      const { userInfoStore } = getState();
-      const token = userInfoStore.token;
+      const { signInStore } = getState();
+      const token = signInStore.token;
       const response = await axios.post(
         "http://localhost:8080/products",
         {

@@ -70,9 +70,9 @@ function UserProfile() {
   }, []);
 
   const logOutHandler = () => {
-    history.push("/");
     dispatch(signIn(""));
-    dispatch(addToCart(""));
+    dispatch(addToCart([null]));
+    history.push("/");
   };
   const [show, setShow] = useState(null);
 

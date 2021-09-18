@@ -19,7 +19,7 @@ import CheckOutPage from "./Pages/CheckOutPage";
 import Header from "./Components/Home/Header";
 
 function App() {
-  const { role } = useSelector((store) => store.userInfoStore);
+  const { role } = useSelector((store) => store.signInStore);
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {

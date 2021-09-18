@@ -19,9 +19,9 @@ export const myOrder = (response) => ({
 
 export const requestOrderList = () => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
+    const { signInStore } = getState();
     console.log("requestEditProduct Call");
-    const token = userInfoStore.token;
+    const token = signInStore.token;
     const response = await axios({
       method: "GET",
       url: "http://localhost:8080/order",
@@ -34,8 +34,8 @@ export const requestOrderList = () => {
 
 export const requestUpdateOrder = (order) => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
-    const token = userInfoStore.token;
+    const { signInStore } = getState();
+    const token = signInStore.token;
     console.log(order.status, "order Status");
     const response = await axios({
       method: "PATCH",
@@ -53,9 +53,9 @@ export const requestUpdateOrder = (order) => {
 
 export const requestMyOrder = () => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
+    const { signInStore } = getState();
     console.log("requestMyOrder Successfull");
-    const token = userInfoStore.token;
+    const token = signInStore.token;
     try {
       const response = await axios({
         method: "GET",

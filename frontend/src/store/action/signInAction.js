@@ -1,7 +1,7 @@
 import { ActionTypes } from "../ActionTypes";
 import axios from "axios";
 import { setLoaderValue } from "./loaderAction";
-import { requestCart } from "./cartAction";
+// import { requestCart } from "./cartAction";
 
 export const signIn = (response) => ({
   type: ActionTypes.SIGN_IN,
@@ -12,11 +12,6 @@ export const signInError = (response) => ({
   type: ActionTypes.SIGN_IN_ERROR,
   payload: response,
 });
-
-// export const myInfo = (response) => ({
-//   type: ActionTypes.GET_MY_INFO,
-//   payload: response,
-// });
 
 export const requestSignIn = (credential) => {
   console.log(JSON.stringify(credential), "Signin");
@@ -32,7 +27,8 @@ export const requestSignIn = (credential) => {
       });
       console.log("Signin Successfull before");
       dispatch(signIn(response.data.userInfo));
-      dispatch(requestCart());
+      console.log(response.data.userInfo, "===response.data.userInfo");
+      // dispatch(requestCart());
       dispatch(setLoaderValue(false));
       console.log("Signin Successfull after");
     } catch (err) {
@@ -42,23 +38,3 @@ export const requestSignIn = (credential) => {
     }
   };
 };
-
-// export const requestMyInfo = () => {
-//   return async (dispatch, getState) => {
-//     const { userInfoStore } = getState();
-//     console.log("requestMyInfo Successfull");
-//     const token = userInfoStore.token;
-//     try {
-//       const response = await axios({
-//         method: "GET",
-//         url: "http://localhost:8080/my-detail",
-//         headers: { authorization: `bearer ${token}` },
-//       });
-//       dispatch(myInfo(response.data));
-//       dispatch(setLoaderValue(false));
-//     } catch (err) {
-//       dispatch(setLoaderValue(false));
-//       console.error(err, "===Error");
-//     }
-//   };
-// };

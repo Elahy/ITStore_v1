@@ -7,8 +7,8 @@ function NotFound() {
     <>
       <div
         style={{
-          backgroundColor: "#2f3242",
-          height: "100%",
+          backgroundColor: "#fffff5",
+          minHeight: "90vh",
           width: "100%",
         }}
       >
@@ -24,7 +24,7 @@ function NotFound() {
           <g
             id="Page-1"
             stroke="none"
-            stroke-width="1"
+            strokeWidth="1"
             fill="none"
             fillRule="evenodd"
             sketchtype="MSPage"

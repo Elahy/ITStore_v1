@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import SearchBar from "../Home/SearchBar";
 
 const Header = () => {
-  const { role } = useSelector((store) => store.userInfoStore);
+  const { role } = useSelector((store) => store.signInStore);
   const history = useHistory();
 
   const profileHandler = () => {

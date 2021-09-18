@@ -29,9 +29,10 @@ function LoginPage() {
   const classes = useStyles();
   const history = useHistory();
   const { loader } = useSelector((store) => store.loaderStore);
-  const { errorMessage, token } = useSelector((store) => store.userInfoStore);
+  const { errorMessage, token } = useSelector((store) => store.signInStore);
   console.log(loader, "===loader");
   console.log(errorMessage, "===errorMessage");
+
   const [cred, setCred] = useState([]);
   const handleLogin = (e) => {
     e.preventDefault();

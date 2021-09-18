@@ -58,8 +58,8 @@ export const requestCategoryDetails = (categoryId) => {
 
 export const requestDeleteCategory = (categoryId) => {
   return async (dispatch, getState) => {
-    const { userInfoStore } = getState();
-    const token = userInfoStore.token;
+    const { signInStore } = getState();
+    const token = signInStore.token;
     const response = await axios({
       method: "DELETE",
       url: `http://localhost:8080/category/${categoryId}`,
@@ -74,9 +74,9 @@ export const requestEditCategory = (category) => {
   return async (dispatch, getState) => {
     console.log(category, "===requestEditCategory");
     try {
-      const { userInfoStore } = getState();
+      const { signInStore } = getState();
       console.log("requestEditProduct Call");
-      const token = userInfoStore.token;
+      const token = signInStore.token;
       const response = await axios.patch(
         `http://localhost:8080/category/${category._id}`,
         {
@@ -99,8 +99,8 @@ export const requestEditCategory = (category) => {
 export const requestAddCategory = (category) => {
   return async (dispatch, getState) => {
     try {
-      const { userInfoStore } = getState();
-      const token = userInfoStore.token;
+      const { signInStore } = getState();
+      const token = signInStore.token;
       const response = await axios.post(
         "http://localhost:8080/category",
         {
