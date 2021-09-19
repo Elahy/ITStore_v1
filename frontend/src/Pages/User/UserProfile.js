@@ -58,6 +58,10 @@ const useStyles = makeStyles({
   logoutButton: {
     margin: "30px",
   },
+  icon: {
+    maxWidth: "30px",
+    margin: "0 5px",
+  },
 });
 
 function UserProfile() {
@@ -85,21 +89,51 @@ function UserProfile() {
           <p className={classes.menu}>Menu</p>
           <ul>
             <li onClick={() => setShow("info")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/user_icon.svg"
+                alt="userIcon"
+              />
               Profile
             </li>
             <li onClick={() => setShow("order")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/orderlist.svg"
+                alt="userIcon"
+              />
               Active Orders
             </li>
             <li onClick={() => setShow("order")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/done.svg"
+                alt="userIcon"
+              />
               Past Orders
             </li>
             <li onClick={() => setShow("order")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/reviews.svg"
+                alt="userIcon"
+              />
               Reviews
             </li>
             <li onClick={() => setShow("order")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/trackOder.png"
+                alt="userIcon"
+              />
               Track Orders
             </li>
             <li onClick={() => setShow("order")} className={classes.menuItem}>
+              <img
+                className={classes.icon}
+                src="./images/customerService.svg"
+                alt="userIcon"
+              />
               Customer Service
             </li>
             <li className={classes.logout}>
