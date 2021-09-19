@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,6 +16,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import Pagination from "../../Components/Pagination";
 
 const useStyles = makeStyles({
   root: {
@@ -71,12 +72,28 @@ function Orders() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { myInfoStore, loaderStore } = useSelector((store) => store);
-  const productList = myInfoStore.myOrder;
-  console.log(productList, "===orderlist");
+  // const productList = myInfoStore.myOrder;
+  // console.log(productList, "===orderlist");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [orderPerPage /*setOrderPerPage */] = useState(5);
+
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestMyOrder());
   }, [dispatch]);
+
+  const indexOfLastProduct = currentPage * orderPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - orderPerPage;
+  const currentProductList = myInfoStore.myOrder.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   const confirmHandler = (e) => {
     console.log(e, "==update Event");
     const order = {
@@ -133,7 +150,7 @@ function Orders() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {productList?.map((product) => (
+                {currentProductList?.map((product) => (
                   <TableRow hover tabIndex={-1} key={product._id}>
                     <TableCell key={product.productId?.image}>
                       {product._id.slice(12, 24)}
@@ -208,6 +225,11 @@ function Orders() {
               </TableBody>
             </Table>
           </TableContainer>
+          <Pagination
+            productPerPage={orderPerPage}
+            totalProducts={myInfoStore.myOrder.length}
+            paginate={paginate}
+          />
         </div>
       )}
     </>

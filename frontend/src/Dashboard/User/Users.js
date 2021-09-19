@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,6 +20,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import Pagination from "../../Components/Pagination";
 
 const useStyles = makeStyles({
   root: {
@@ -55,7 +56,21 @@ function Users() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { allUserStore, loaderStore } = useSelector((store) => store);
-  const userList = allUserStore.userList;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productPerPage /*setPostPerPage */] = useState(5);
+
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentUserList = allUserStore.userList.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestUserList());
@@ -77,64 +92,62 @@ function Users() {
         <Loader />
       ) : (
         <div>
-          <div>
-            <div>
-              <TableContainer className={classes.container}>
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
-                        User
-                      </TableCell>
-                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
-                        Email
-                      </TableCell>
-                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
-                        phone
-                      </TableCell>
-                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
-                        Address
-                      </TableCell>
-                      <TableCell style={{ backgroundColor: "#ADD8E6" }}>
-                        Action
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {userList.map((user) => (
-                      <TableRow hover tabIndex={-1} key={user._id}>
-                        <TableCell key={user?.username}>
-                          {user.username}
-                        </TableCell>
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    User
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Email
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    phone
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Address
+                  </TableCell>
+                  <TableCell style={{ backgroundColor: "#ADD8E6" }}>
+                    Action
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {currentUserList.map((user) => (
+                  <TableRow hover tabIndex={-1} key={user._id}>
+                    <TableCell key={user?.username}>{user.username}</TableCell>
 
-                        <TableCell key={user.email}>{user.email}</TableCell>
-                        <TableCell key={user.email}>{user.phone}</TableCell>
-                        <TableCell key={user.email}>
-                          {user.address?.city}
-                        </TableCell>
+                    <TableCell key={user.email}>{user.email}</TableCell>
+                    <TableCell key={user.phone}>{user.phone}</TableCell>
+                    <TableCell key={user.address?.city}>
+                      {user.address?.city}
+                    </TableCell>
+                    <TableCell className={classes.buttons}>
+                      <img
+                        onClick={() => updateHandler(user)}
+                        src="../images/EditIcon.svg"
+                        alt="Edit icon"
+                        className={classes.EditIcon}
+                      />
 
-                        <TableCell className={classes.buttons}>
-                          <img
-                            onClick={() => updateHandler(user)}
-                            src="../images/EditIcon.svg"
-                            alt="Edit icon"
-                            className={classes.EditIcon}
-                          />
-
-                          <img
-                            onClick={() => deleteHandler(user)}
-                            src="../images/CrossDelete.svg"
-                            alt="Delete icon"
-                            className={classes.DeleteIcon}
-                          />
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div>
-          </div>
+                      <img
+                        onClick={() => deleteHandler(user)}
+                        src="../images/CrossDelete.svg"
+                        alt="Delete icon"
+                        className={classes.DeleteIcon}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Pagination
+            productPerPage={productPerPage}
+            totalProducts={allUserStore.userList.length}
+            paginate={paginate}
+          />
         </div>
       )}
     </>

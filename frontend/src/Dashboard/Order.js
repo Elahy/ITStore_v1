@@ -17,6 +17,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import Pagination from "../Components/Pagination";
 
 const useStyles = makeStyles({
   root: {
@@ -43,15 +44,25 @@ function Order() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { orderStore, loaderStore } = useSelector((store) => store);
-  const [orderList, setOrderList] = useState();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [orderPerPage /*setOrderPerPage */] = useState(5);
+
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestOrderList());
   }, [dispatch]);
 
-  useEffect(() => {
-    setOrderList(orderStore.orderList);
-  }, [orderStore]);
+  const indexOfLastProduct = currentPage * orderPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - orderPerPage;
+  const currentProductList = orderStore.orderList.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const confirmHandler = (e) => {
     console.log(e, "==update Event");
@@ -110,13 +121,13 @@ function Order() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orderList?.map((product) => (
+                {currentProductList?.map((product) => (
                   <TableRow hover tabIndex={-1} key={product._id}>
                     <TableCell key={product.productId?.image}>
-                      {product._id}
+                      {product._id.slice(12, 24)}
                     </TableCell>
                     <TableCell key={product.productId?.title}>
-                      {product.date}
+                      {product.date.slice(0, 10)}
                     </TableCell>
                     <TableCell key={product.productId?.price}>
                       {product.products.length}
@@ -185,6 +196,11 @@ function Order() {
               </TableBody>
             </Table>
           </TableContainer>
+          <Pagination
+            productPerPage={orderPerPage}
+            totalProducts={orderStore.orderList.length}
+            paginate={paginate}
+          />
         </div>
       )}
     </>

@@ -27,11 +27,6 @@ const Header = () => {
               Sale!
             </Link>
           </li>
-          {/* <li>
-            <Link to="/products" className="navbtn">
-              New Collection
-            </Link>
-          </li> */}
           <li>
             <Link to="/contact" className="navbtn">
               Contact

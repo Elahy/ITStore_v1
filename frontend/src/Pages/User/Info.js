@@ -23,6 +23,9 @@ const useStyles = makeStyles({
 
     margin: "0 5% 2% 5%",
   },
+  info: {
+    margin: "5%",
+  },
 });
 
 function Info() {
@@ -56,19 +59,28 @@ function Info() {
               alt="user"
               className={classes.userImage}
             />
-            <h1>
-              {myInfoStore.userInfo.firstname} {myInfoStore.userInfo.lastname}
-            </h1>
+            <div>
+              <h1>
+                {myInfoStore.userInfo.firstname} {myInfoStore.userInfo.lastname}
+              </h1>
+              <p>@{myInfoStore.userInfo.username}</p>
+            </div>
           </div>
           <h3> Personal Info </h3>
-          <p>First Name: {myInfoStore.userInfo.firstname}</p>
-          <p>Last Name: {myInfoStore.userInfo.lastname}</p>
-          <p>Email: {myInfoStore.userInfo.email}</p>
-          <p>Phone: {myInfoStore.userInfo.phone}</p>
-          <p>Address</p>
-          <p>City: {myInfoStore.userInfo.address?.city}</p>
-          <p>Road Number: {myInfoStore.userInfo.address?.number}</p>
-          <p>Zipcode: {myInfoStore.userInfo.address?.zipcode}</p>
+          <div className={classes.header}>
+            <div className={classes.info}>
+              <p>First Name: {myInfoStore.userInfo.firstname}</p>
+              <p>Last Name: {myInfoStore.userInfo.lastname}</p>
+              <p>Email: {myInfoStore.userInfo.email}</p>
+              <p>Phone: {myInfoStore.userInfo.phone}</p>
+            </div>
+            <div className={classes.info}>
+              <p>Address</p>
+              <p>City: {myInfoStore.userInfo.address?.city}</p>
+              <p>Road Number: {myInfoStore.userInfo.address?.number}</p>
+              <p>Zipcode: {myInfoStore.userInfo.address?.zipcode}</p>
+            </div>
+          </div>
           <Button
             onClick={() => handleEditUserInfo(myInfoStore?.userInfo)}
             variant="contained"

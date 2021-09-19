@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
 import {
   Button,
-  Checkbox,
   Grid,
   Table,
   TableBody,
@@ -18,7 +17,7 @@ import { requestAddToCart, requestCart } from "../../store/action/cartAction";
 
 const useStyles = makeStyles({
   root: {
-    margin: "5%",
+    margin: "1% 5%",
     minHeight: "90vh",
   },
   main: {
@@ -33,15 +32,19 @@ const useStyles = makeStyles({
     maxHeight: "35px",
     padding: "8px 20px ",
     margin: "10px",
+    border: "1px solid black",
   },
   cartButton: {
-    padding: "5px 7px",
+    padding: "0px 8px",
     margin: "5px",
+    border: "1px solid black",
+    fontSize: "25px",
   },
   deleteButton: {
     padding: "2px",
     margin: "2px",
     display: "block",
+    border: "1px solid white",
   },
   heading: {
     textAlign: "start",
@@ -58,15 +61,6 @@ function Cart() {
   const { loader } = useSelector((store) => store.loaderStore);
   console.log(cart, "===cart");
   const [productList, setProductList] = useState();
-  // const [totalPrice, setTotalPrice] = useState(0);
-
-  // console.log(totalPrice, "===totalPrice");
-
-  const [checked, setChecked] = React.useState(true);
-
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
 
   const deleteHandler = (productId) => {
     console.log("delete handler called");
@@ -116,9 +110,6 @@ function Cart() {
                   <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                       <TableRow>
-                        <TableCell>
-                          <Checkbox />
-                        </TableCell>
                         <TableCell>{""}</TableCell>
                         <TableCell>Product</TableCell>
                         <TableCell>Unit Price</TableCell>
@@ -129,14 +120,7 @@ function Cart() {
                     </TableHead>
                     <TableBody>
                       {productList?.map((product) => (
-                        <TableRow hover tabIndex={-1} key={product._id}>
-                          <TableCell key={product._id}>
-                            <Checkbox
-                              checked={checked}
-                              onChange={handleChange}
-                              inputProps={{ "aria-label": "primary checkbox" }}
-                            />
-                          </TableCell>
+                        <TableRow hover key={product._id}>
                           <TableCell key={product.productId?.image}>
                             <img
                               src={`http://localhost:8080${product.productId?.image}`}
@@ -175,6 +159,7 @@ function Cart() {
                               onClick={() =>
                                 deleteHandler(product.productId._id)
                               }
+                              className={classes.deleteButton}
                             >
                               <img
                                 src="../images/CrossDelete.svg"

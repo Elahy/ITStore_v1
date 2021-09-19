@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,6 +20,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import Pagination from "../../Components/Pagination";
 
 const useStyles = makeStyles({
   root: {
@@ -56,7 +57,21 @@ function Category() {
   const dispatch = useDispatch();
   const { categoryStore, loaderStore } = useSelector((store) => store);
   console.log(categoryStore, "===Category Store");
-  const productList = categoryStore.categoryList;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productPerPage /*setPostPerPage */] = useState(5);
+
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentCategoryList = categoryStore.categoryList.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestCategoryList());
@@ -94,7 +109,7 @@ function Category() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {productList?.map((product) => (
+                {currentCategoryList?.map((product) => (
                   <TableRow hover tabIndex={-1} key={product._id}>
                     <TableCell key={product?.title}>{product._id}</TableCell>
 
@@ -120,6 +135,11 @@ function Category() {
               </TableBody>
             </Table>
           </TableContainer>
+          <Pagination
+            productPerPage={productPerPage}
+            totalProducts={categoryStore.categoryList.length}
+            paginate={paginate}
+          />
         </div>
       )}
     </>

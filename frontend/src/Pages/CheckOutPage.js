@@ -94,11 +94,11 @@ function CheckOutPage() {
               </div>
               <div>
                 <h4>Select Payment Method</h4>
-                <p1>Bkash</p1>
+                <p>Bkash</p>
                 <br />
-                <p1>Card</p1>
+                <p>Card</p>
                 <br />
-                <p1>Cash On Deliery</p1>
+                <p>Cash On Deliery</p>
               </div>
               {/* <h5>{totalPrice} Tk</h5> */}
               {/* {console.log(totalPrice, "totalPrice")} */}

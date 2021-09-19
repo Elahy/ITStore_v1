@@ -47,12 +47,12 @@ const useStyles = makeStyles({
 function SearchBar() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
   const handleFliter = (e) => {
     const searchWord = e.target.value;
-    setSearchTerm(searchTerm);
+    // setSearchTerm(searchTerm);
     const newFiter = productList.filter((product) => {
       return product.title.toLowerCase().includes(searchWord.toLowerCase());
     });
@@ -60,7 +60,6 @@ function SearchBar() {
   };
   const closeHandler = () => {
     setFilteredData([]);
-    setSearchTerm("");
   };
 
   useEffect(() => {
