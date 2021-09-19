@@ -108,7 +108,9 @@ function LoginPage() {
                   }
                   autoComplete="on"
                 />
-                {errorMessage ? <p>{errorMessage}</p> : null}
+                {errorMessage ? (
+                  <p className={styles.error}>{errorMessage}! Try Again.</p>
+                ) : null}
                 <Link to="/signup">Forgot your password?</Link>
                 <p className={styles.para}>
                   Don't have a account? <Link to="/signup">Sign Up!</Link>

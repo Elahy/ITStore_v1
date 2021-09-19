@@ -1,7 +1,7 @@
 import { ActionTypes } from "../ActionTypes";
 import axios from "axios";
 import { setLoaderValue } from "./loaderAction";
-// import { requestCart } from "./cartAction";
+import { requestCart } from "./cartAction";
 
 export const signIn = (response) => ({
   type: ActionTypes.SIGN_IN,
@@ -16,25 +16,23 @@ export const signInError = (response) => ({
 export const requestSignIn = (credential) => {
   console.log(JSON.stringify(credential), "Signin");
   return async (dispatch) => {
-    try {
-      const response = await axios({
-        method: "POST",
-        url: "http://localhost:8080/signin",
-        data: {
-          email: credential.email,
-          password: credential.password,
-        },
-      });
-      console.log("Signin Successfull before");
+    const response = await axios({
+      method: "POST",
+      url: "http://localhost:8080/signin",
+      data: {
+        email: credential.email,
+        password: credential.password,
+      },
+    });
+
+    if (response.data.message === "Logged in Successfully") {
       dispatch(signIn(response.data.userInfo));
-      console.log(response.data.userInfo, "===response.data.userInfo");
-      // dispatch(requestCart());
+      dispatch(signInError(null));
       dispatch(setLoaderValue(false));
-      console.log("Signin Successfull after");
-    } catch (err) {
-      dispatch(signInError(err.message));
+      dispatch(requestCart());
+    } else {
+      dispatch(signInError(response.data.message));
       dispatch(setLoaderValue(false));
-      console.log(err, " Signin ===Error");
     }
   };
 };

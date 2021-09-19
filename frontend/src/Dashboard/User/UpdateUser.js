@@ -105,6 +105,7 @@ function UpdateUser(userId) {
                 label="Username"
                 multiline
                 maxRows={4}
+                required
                 // placeholder={currentUser?.username}
                 variant="outlined"
                 type="text"

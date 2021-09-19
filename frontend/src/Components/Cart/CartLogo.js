@@ -46,6 +46,7 @@ const useStyles = makeStyles({
 
 function CartLogo() {
   const classes = useStyles();
+
   const { cart } = useSelector((store) => store.cartStore);
   return (
     <Dropdown>
