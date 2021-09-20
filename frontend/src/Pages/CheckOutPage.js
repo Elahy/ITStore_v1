@@ -10,7 +10,6 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
-// import DeleteIcon from "@material-ui/icons/Delete";
 import Loader from "../Components/Miscellaneous/Loader";
 import { setLoaderValue } from "../store/action/loaderAction";
 import { addToCart, requestCheckout } from "../store/action/cartAction";
@@ -18,35 +17,28 @@ import { requestMyInfo } from "../store/action/userAction";
 
 const useStyles = makeStyles({
   main: {
-    margin: "5%",
     minHeight: "90vh",
+    backgroundImage:
+      "linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%)",
   },
   address: {
-    border: "1px solid black",
     padding: "25px",
-    borderRadius: "20px",
-    maxWidth: "400px",
-    margin: "25px",
-  },
-  media: {
-    maxWidth: "150px",
+    maxWidth: "500px",
+    margin: "10px 10px",
   },
   root: {
     display: "flex",
+    maxWidth: "500px",
+    margin: "10px 20px 10px 100px",
   },
-  details: {
+  productIcon: {
+    width: "151px",
+    margin: "20px 20px",
+  },
+  header: {
     display: "flex",
-    flexDirection: "column",
-  },
-  content: {
-    flex: "1 0 auto",
-  },
-  cover: {
-    width: 151,
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
+    justifyContent: "center",
+    padding: "20px",
   },
 });
 
@@ -54,12 +46,9 @@ function CheckOutPage() {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
-
   const { cart } = useSelector((store) => store.cartStore);
   const { userInfo } = useSelector((store) => store.myInfoStore);
-
   const { loader } = useSelector((store) => store.loaderStore);
-  console.log(cart, "===checkoutItems");
   const [productList, setProductList] = useState();
 
   useEffect(() => {
@@ -80,42 +69,17 @@ function CheckOutPage() {
         <Loader />
       ) : (
         <div className={classes.main}>
-          <h1>Review Address and Payment Method</h1>
-          <Grid xs={false} lg={1} item={true}></Grid>
+          <h1 className={classes.header}>Review Address and Payment Method</h1>
+
           <Grid container>
-            <Grid xs={12} lg={5} item={true}>
-              <div className={classes.address}>
-                <p>First Name: {userInfo.firstname}</p>
-                <p>Last Name: {userInfo.lastname}</p>
-                <p>Email: {userInfo.email}</p>
-                <p>Shipping Address</p>
-                <p>City: {userInfo.address?.city}</p>
-                <p>Phone: {userInfo.phone}</p>
-              </div>
-              <div>
-                <h4>Select Payment Method</h4>
-                <p>Bkash</p>
-                <br />
-                <p>Card</p>
-                <br />
-                <p>Cash On Deliery</p>
-              </div>
-              {/* <h5>{totalPrice} Tk</h5> */}
-              {/* {console.log(totalPrice, "totalPrice")} */}
-              <Button
-                onClick={handleCheckout}
-                variant="contained"
-                color="primary"
-              >
-                Place Order
-              </Button>
-            </Grid>
-            <Grid xs={12} lg={5} item={true}>
+            <Grid xs={false} lg={2} item={true}></Grid>
+
+            <Grid xs={12} lg={4} item={true}>
               {productList?.map((product) => (
-                <>
+                <div key={product.productId?._id}>
                   <Card className={classes.root}>
                     <CardMedia
-                      className={classes.cover}
+                      className={classes.productIcon}
                       image={`http://localhost:8080${product.productId?.image}`}
                       title="Live from space album cover"
                     />
@@ -136,10 +100,52 @@ function CheckOutPage() {
                       </CardContent>
                     </div>
                   </Card>
-                </>
+                </div>
               ))}
             </Grid>
-            <Grid xs={false} lg={1} item={true}></Grid>
+            <Grid xs={12} lg={4} item={true}>
+              <Card className={classes.address}>
+                <CardContent>
+                  <p>First Name: {userInfo.firstname}</p>
+                  <p>Last Name: {userInfo.lastname}</p>
+                  <p>Email: {userInfo.email}</p>
+                  <p>Shipping Address</p>
+                  <p>City: {userInfo.address?.city}</p>
+                  <p>Phone: {userInfo.phone}</p>
+                </CardContent>
+              </Card>
+              <Card className={classes.address}>
+                <CardContent>
+                  <h5>{`Total  Price: ${productList?.reduce(
+                    (total, item) =>
+                      total + item.productId.price * item.quantity,
+                    0
+                  )} TK`}</h5>
+                  <h5>
+                    {`Total Products: ${productList?.reduce(
+                      (total, item) => total + item.quantity,
+                      0
+                    )}`}
+                  </h5>
+                  <div>
+                    <h4>Select Payment Method</h4>
+                    <select name="cars" id="cars">
+                      <option value="bkash">Bkash</option>
+                      <option value="card">Credit Card</option>
+                      <option value="COD">Cash On Deliery</option>
+                    </select>
+                  </div>
+                </CardContent>
+              </Card>
+              <Button
+                onClick={handleCheckout}
+                variant="contained"
+                color="primary"
+              >
+                Place Order
+              </Button>
+            </Grid>
+            <Grid xs={false} lg={4} item={true}></Grid>
           </Grid>
         </div>
       )}

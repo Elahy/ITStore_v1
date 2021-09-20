@@ -99,6 +99,7 @@ function AddCategory() {
                 id="outlined-multiline-flexible"
                 label="Name"
                 multiline
+                placeholder="Placeholder"
                 variant="outlined"
                 type="text"
                 name="name"

@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import Loader from "../Components/Miscellaneous/Loader";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,38 +7,57 @@ import { requestSignUp } from "../store/action/signUpAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    minHeight: "90vh",
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "80%",
-      textAlign: "center",
-      marginLeft: "10%",
     },
   },
+  partition: {
+    display: "flex",
+    margin: "2% 25%",
+    align: "center",
+  },
   input1: {
-    margin: theme.spacing(1),
-    marginLeft: "30%",
+    marginLeft: "800px",
+    border: "1px solid #04b4c4",
+    borderRadius: "5px",
+    padding: "5px 20px",
     backgroundColor: "#04b4c4",
+    color: "white",
   },
   input2: {
-    margin: theme.spacing(1),
-    marginLeft: 15,
+    marginLeft: "100px",
+    border: "1px solid #FF5349",
+    borderRadius: "5px",
+    padding: "5px 20px",
+    backgroundColor: "#FF5349",
+    color: "white",
   },
   head: {
     margin: theme.spacing(1),
+    display: "flex",
+    justifyContent: "center",
   },
   upload: {
     textAlign: "center",
-    border: "2px solid black",
+    border: "1px solid black",
     padding: "8px 15px",
-    maxWidth: "50px",
+    width: "400px",
     borderRadius: "5px",
     cursor: "pointer",
-  },
-  imageWrap: {
+    margin: "20px 35px 20px 35px",
     display: "flex",
+    // marginLeft: "10px",
+    // alignSelf: "flex-end",
   },
-  image: {
-    marginLeft: "10%",
+  label: {
+    // marginLeft: "55px",
+    display: "flex",
+    justifyContent: "center",
+    // alignSelf: "center",
+  },
+  item: {
+    alignItems: "justified",
   },
 }));
 
@@ -81,143 +97,132 @@ function SignupPage() {
       {loader ? (
         <Loader />
       ) : (
-        <div>
-          <Typography
-            variant="h3"
-            align="center"
-            className={classes.head}
-            gutterBottom
-          >
-            Enter Details to Sign Up:
-          </Typography>
-          <form className={classes.root} noValidate autoComplete="off">
-            <div>
-              <TextField
-                id="outlined-multiline-flexible"
-                label="Username"
-                placeholder="Username"
-                multiline
-                maxRows={4}
-                variant="outlined"
-                type="text"
-                name="username"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <TextField
-                id="outlined-textarea"
-                label="Email"
-                placeholder="Email"
-                multiline
-                variant="outlined"
-                type="email"
-                name="email"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <TextField
-                id="outlined-textarea"
-                label="Phone"
-                placeholder="Phone"
-                multiline
-                variant="outlined"
-                type="text"
-                name="phone"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <TextField
-                id="outlined-textarea"
-                label="Password"
-                placeholder="Password"
-                multiline
-                variant="outlined"
-                type="password"
-                name="password"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <TextField
-                id="outlined-textarea"
-                label="Fist Name"
-                placeholder="Fist Name"
-                multiline
-                variant="outlined"
-                type="text"
-                name="fistName"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <TextField
-                id="outlined-textarea"
-                label="Last Name"
-                placeholder="Last Name"
-                multiline
-                variant="outlined"
-                type="text"
-                name="lastName"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <TextField
-                id="outlined-textarea"
-                label="City"
-                placeholder="City"
-                multiline
-                variant="outlined"
-                type="text"
-                name="city"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <TextField
-                id="outlined-textarea"
-                label="Street Number"
-                placeholder="Street Number"
-                multiline
-                variant="outlined"
-                type="text"
-                name="streetNumber"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <TextField
-                id="outlined-textarea"
-                label="Zipcode"
-                placeholder="Zipcode"
-                multiline
-                variant="outlined"
-                type="text"
-                name="zipcode"
-                onChange={handleChange}
-              />
+        <div className={classes.root}>
+          <h1 className={classes.head}>Enter Details to Sign Up:</h1>
+          <form autoComplete="off">
+            <div className={classes.partition}>
+              <div>
+                <div className={classes.item}>
+                  <label className={classes.label}>Username: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Enter Username"
+                    type="text"
+                    name="username"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className={classes.item}>
+                  <label className={classes.label}>Email: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Enter Email"
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className={classes.item}>
+                  <label className={classes.label}>Phone Number: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Enter Phone Number"
+                    type="text"
+                    name="phone"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className={classes.item}>
+                  <label className={classes.label}>Password: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Enter Password"
+                    type="password"
+                    name="password"
+                    autoComplete="off"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div>
+                  <label className={classes.label}>Confirm Password: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Enter Password Again"
+                    type="password"
+                    autoComplete="off"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div>
+                  <label className={classes.label}>Fist Name: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Enter Fist Name"
+                    type="text"
+                    name="fistName"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div>
+                  <label className={classes.label}>Enter Name: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Last Name"
+                    type="text"
+                    name="lastName"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div>
+                  <label className={classes.label}>City: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Name of City"
+                    type="text"
+                    name="city"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div>
+                  <label className={classes.label}>Street Number: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Enter Street Number"
+                    type="text"
+                    name="streetNumber"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div>
+                  <label className={classes.label}>Zipcode: </label>
+                  <input
+                    className={classes.upload}
+                    placeholder="Enter Zipcode"
+                    type="text"
+                    name="zipcode"
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
             </div>
           </form>
           <div>
-            <Button
-              onClick={handleSubmit}
-              className={classes.input1}
-              variant="contained"
-              color="primary"
-            >
+            <button onClick={handleSubmit} className={classes.input1}>
               Submit
-            </Button>
-            <Button
-              onClick={handleSubmit}
-              className={classes.input2}
-              variant="contained"
-              color="secondary"
-            >
+            </button>
+            <button onClick={handleSubmit} className={classes.input2}>
               Cancel
-            </Button>
+            </button>
           </div>
         </div>
       )}

@@ -6,7 +6,6 @@ import UserBoard from "./User/UserBoard";
 import CategoryBoard from "./Category/CategoryBoard";
 import Order from "./Order";
 import PendingCarts from "./PendingCarts";
-import DashNav from "./DashNav";
 
 const useStyles = makeStyles({
   root: {
@@ -115,7 +114,6 @@ function Dashboard() {
         </Grid>
 
         <Grid item lg={5} className={classes.itemGrid}>
-          <DashNav />
           {show === "product" ? (
             <ProductBoard />
           ) : show === "user" ? (
