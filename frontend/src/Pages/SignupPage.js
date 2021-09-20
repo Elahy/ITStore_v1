@@ -220,7 +220,10 @@ function SignupPage() {
             <button onClick={handleSubmit} className={classes.input1}>
               Submit
             </button>
-            <button onClick={handleSubmit} className={classes.input2}>
+            <button
+              onClick={() => history.push("/")}
+              className={classes.input2}
+            >
               Cancel
             </button>
           </div>

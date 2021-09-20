@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { setLoaderValue } from "../store/action/loaderAction";
 import Loader from "../Components/Miscellaneous/Loader";
-// import { useHistory } from "react-router";
 import {
   requestOrderList,
   requestUpdateOrder,
@@ -21,18 +20,15 @@ import Pagination from "../Components/Pagination";
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    // minHeight: "70vh",
-  },
-  image: {
-    maxWidth: "60px",
-    maxHeight: "60px",
-    padding: "0 1% ",
+    marginTop: "25px",
   },
   button: {
     maxHeight: "35px",
-    padding: "6px 20px ",
+    padding: "6px 20px",
     margin: "0 2%",
+    border: "1px solid black",
+    borderRadius: "5px",
+    backgroundColor: "inherit",
   },
   buttons: {
     display: "flex",
@@ -40,13 +36,12 @@ const useStyles = makeStyles({
 });
 
 function Order() {
-  // const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { orderStore, loaderStore } = useSelector((store) => store);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [orderPerPage /*setOrderPerPage */] = useState(5);
+  const [orderPerPage /*setOrderPerPage */] = useState(7);
 
   useEffect(() => {
     dispatch(setLoaderValue(true));
@@ -97,8 +92,8 @@ function Order() {
       {loaderStore.loader ? (
         <Loader />
       ) : (
-        <div>
-          <TableContainer className={classes.container}>
+        <div className={classes.root}>
+          <TableContainer>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
@@ -109,7 +104,6 @@ function Order() {
                     Order Date
                   </TableCell>
                   <TableCell style={{ backgroundColor: "#ADD8E6" }}>
-                    {" "}
                     Item
                   </TableCell>
                   <TableCell style={{ backgroundColor: "#ADD8E6" }}>

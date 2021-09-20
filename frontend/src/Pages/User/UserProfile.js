@@ -28,10 +28,13 @@ const useStyles = makeStyles({
     textAlign: "center",
     margin: "0",
     padding: "20px",
+    fontFamily: "Helvetica Neue",
   },
   menu: {
     textAlign: "center",
     fontSize: "25px",
+    fontFamily: "Helvetica Neue",
+    marginTop: "40px",
   },
   menuItem: {
     display: "flex",
@@ -56,7 +59,7 @@ const useStyles = makeStyles({
     background: "#ADD8E6",
   },
   logoutButton: {
-    margin: "30px",
+    margin: "30px 0",
   },
   icon: {
     maxWidth: "30px",

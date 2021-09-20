@@ -8,6 +8,7 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 // import FileBase64 from "react-file-base64";
 import { requestAddCategory } from "../../store/action/categoryAction";
+import { setView } from "../../store/action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   head: {
     margin: theme.spacing(1),
+    fontSize: "25px",
   },
   upload: {
     textAlign: "center",
@@ -51,12 +53,10 @@ function AddCategory() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { loader } = useSelector((store) => store.loaderStore);
-  // const [image, setImage] = useState(null);
 
   const [category, setCategory] = useState({
     name: "",
     description: "",
-    // image: "",
   });
 
   const handleChange = (event) => {
@@ -67,18 +67,12 @@ function AddCategory() {
     });
   };
 
-  // const handleImage = (e) => {
-  //   setImage({ files: e });
-  //   setProduct({ ...product, image: e.base64 });
-  //   // console.log(e.base64, "Image Event");
-  // };
-
   const handleSubmit = (e) => {
-    console.log(category, "Image Submitted");
     dispatch(requestAddCategory(category));
     history.push("/success");
     e.preventDefault();
   };
+
   return (
     <>
       {loader ? (
@@ -118,13 +112,6 @@ function AddCategory() {
                 onChange={handleChange}
               />
               <div />
-
-              {/* <div className={classes.imageWrap}>
-                <FileBase64 onDone={handleImage} multiple={false} />
-                {image ? (
-                  <pre>{JSON.stringify(image.files, null, 2)}</pre>
-                ) : null}
-              </div> */}
             </div>
           </form>
           <div>
@@ -137,7 +124,7 @@ function AddCategory() {
               Submit
             </Button>
             <Button
-              onClick={handleSubmit}
+              onClick={() => dispatch(setView("all"))}
               className={classes.input2}
               variant="contained"
               color="secondary"

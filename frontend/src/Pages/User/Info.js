@@ -13,7 +13,7 @@ import {
 const useStyles = makeStyles({
   root: {
     textAlign: "left",
-    margin: "5%",
+    margin: "10% 5%",
   },
   header: {
     display: "flex",
@@ -25,6 +25,14 @@ const useStyles = makeStyles({
   },
   info: {
     margin: "5%",
+  },
+  fName: {
+    margin: "0",
+    padding: "0",
+  },
+  personalInfo: {
+    marginLeft: "150px",
+    fontSize: "23px",
   },
 });
 
@@ -60,15 +68,16 @@ function Info() {
               className={classes.userImage}
             />
             <div>
-              <h1>
+              <h1 className={classes.fName}>
                 {myInfoStore.userInfo.firstname} {myInfoStore.userInfo.lastname}
               </h1>
               <p>@{myInfoStore.userInfo.username}</p>
             </div>
           </div>
-          <h3> Personal Info </h3>
+          <h3 className={classes.personalInfo}> Personal Info </h3>
           <div className={classes.header}>
             <div className={classes.info}>
+              <p>User Name: @{myInfoStore.userInfo.username}</p>
               <p>First Name: {myInfoStore.userInfo.firstname}</p>
               <p>Last Name: {myInfoStore.userInfo.lastname}</p>
               <p>Email: {myInfoStore.userInfo.email}</p>

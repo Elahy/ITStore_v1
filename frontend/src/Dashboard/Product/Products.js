@@ -29,9 +29,11 @@ const useStyles = makeStyles({
     // minHeight: "70vh",
   },
   image: {
-    maxWidth: "60px",
     maxHeight: "60px",
-    padding: "0 1% ",
+    padding: "0",
+  },
+  imageWrap: {
+    padding: "5px",
   },
   button: {
     maxHeight: "35px",
@@ -120,7 +122,10 @@ function Products() {
                 <TableBody>
                   {currentProductList?.map((product) => (
                     <TableRow hover tabIndex={-1} key={product._id}>
-                      <TableCell key={product?.image}>
+                      <TableCell
+                        key={product?.image}
+                        className={classes.imageWrap}
+                      >
                         <img
                           src={`http://localhost:8080${product?.image}`}
                           alt={product?.title}

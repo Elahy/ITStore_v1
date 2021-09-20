@@ -11,6 +11,7 @@ import FileBase64 from "react-file-base64";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import { requestCategoryList } from "../../store/action/categoryAction";
 import { MenuItem } from "@material-ui/core";
+import { setView } from "../../store/action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   head: {
     margin: theme.spacing(1),
+    fontSize: "25px",
   },
   upload: {
     textAlign: "center",
@@ -43,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   imageWrap: {
     display: "flex",
+    marginLeft: "80px",
   },
   image: {
     marginLeft: "10%",
@@ -55,10 +58,7 @@ function AddProduct() {
   const dispatch = useDispatch();
   const { loader } = useSelector((store) => store.loaderStore);
   const { categoryList } = useSelector((store) => store.categoryStore);
-  console.log(categoryList, "categoryList after Store Call");
   const [image, setImage] = useState(null);
-  // const [categories, setCategories] = useState(null);
-  // const [category, setCategory] = useState("SSD");
   const [product, setProduct] = useState({
     title: "",
     price: null,
@@ -73,10 +73,6 @@ function AddProduct() {
     dispatch(requestCategoryList());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   setCategories(categoryList.map((category) => category.name));
-  // }, [categoryList]);
-
   const handleChange = (event) => {
     const value = event.target.value;
     setProduct({
@@ -88,15 +84,14 @@ function AddProduct() {
   const handleImage = (e) => {
     setImage({ files: e });
     setProduct({ ...product, image: e.base64 });
-    // console.log(e.base64, "Image Event");
   };
 
   const handleSubmit = (e) => {
-    console.log(product, "Image Submitted");
     dispatch(requestAddProduct(product));
     history.push("/success");
     e.preventDefault();
   };
+
   return (
     <>
       {loader ? (
@@ -141,17 +136,14 @@ function AddProduct() {
                   id="outlined-multiline-static"
                   label="Description"
                   multiline
-                  rows={8}
+                  rows={5}
                   variant="outlined"
                   type="text"
                   name="description"
                   onChange={handleChange}
                 />
               </div>
-              <div className={classes.imageWrap}>
-                <FileBase64 onDone={handleImage} multiple={false} />
-                {image ? <pre>Image Uploaded</pre> : null}
-              </div>
+
               <div>
                 <TextField
                   id="filled-select-categoty"
@@ -180,6 +172,10 @@ function AddProduct() {
                   onChange={handleChange}
                 />
               </div>
+              <div className={classes.imageWrap}>
+                <FileBase64 onDone={handleImage} multiple={false} />
+                {image ? <pre>Image Uploaded</pre> : null}
+              </div>
             </div>
           </form>
           <div>
@@ -192,7 +188,7 @@ function AddProduct() {
               Submit
             </Button>
             <Button
-              onClick={handleSubmit}
+              onClick={() => dispatch(setView("all"))}
               className={classes.input2}
               variant="contained"
               color="secondary"

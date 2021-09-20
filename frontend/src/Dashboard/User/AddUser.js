@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Loader from "../../Components/Miscellaneous/Loader";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { requestAddUser } from "../../store/action/userAction";
+import { requestAddUser, setView } from "../../store/action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,9 +68,7 @@ function AddUser() {
       [event.target.name]: value,
     });
   };
-  const handleCancel = () => {
-    history.push("/");
-  };
+
   const handleSubmit = (e) => {
     dispatch(requestAddUser(user));
     history.push("/success");
@@ -199,7 +197,7 @@ function AddUser() {
               Submit
             </Button>
             <Button
-              onClick={handleCancel}
+              onClick={() => dispatch(setView("all"))}
               className={classes.input2}
               variant="contained"
               color="secondary"

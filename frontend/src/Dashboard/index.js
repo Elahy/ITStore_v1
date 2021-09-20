@@ -27,10 +27,13 @@ const useStyles = makeStyles({
     textAlign: "center",
     margin: "0",
     padding: "20px",
+    fontFamily: "Helvetica Neue",
   },
   menu: {
     textAlign: "center",
     fontSize: "25px",
+    margin: "25px 0",
+    fontFamily: "Helvetica Neue",
   },
   menuItem: {
     display: "flex",
@@ -61,7 +64,7 @@ function Dashboard() {
 
   return (
     <div className={classes.root}>
-      <h1 className={classes.header}>Dashboard</h1>
+      <h1 className={classes.header}>DashBoard</h1>
       <Grid container>
         <Grid item lg={2}></Grid>
         <Grid item lg={3} className={classes.menuGrid}>

@@ -5,25 +5,37 @@ import { setView } from "../store/action/userAction";
 
 const useStyles = makeStyles({
   list: {
+    // padding: "5px 10px",
     display: "flex",
-    marginTop: "30px",
+    marginTop: "25px",
+    fontSize: "17px",
+    fontFamily: "sans-serif",
+  },
+  link: {
+    padding: "7px 10px 7px 0",
+    marginBottom: "0",
+    "&:hover": {
+      cursor: "pointer",
+      background: "#91B2C7",
+      borderRadius: "5px",
+    },
   },
   select: {
     display: "flex",
     textDecoration: "none",
-    padding: "8px",
+    padding: "5px 8px",
     margin: "0 10px 0 300px",
     border: "1px solid black",
     borderRadius: "5px",
-    // background: "#cdcdcd",
     "&:hover": {
       cursor: "pointer",
-      padding: "12px 10px",
-      background: "#d1bcbc",
+      padding: "5px 10px",
+      margin: "0 10px 0 298px",
+      background: "#91B2C7",
     },
   },
   addIcon: {
-    width: "25px",
+    height: "25px",
     cursor: "pointer",
     padding: "0 ",
     marginRight: "5px",
@@ -37,17 +49,27 @@ function DashNav({ keyword }) {
 
   return (
     <div className={classes.list}>
-      <p onClick={() => dispatch(setView("all"))}> DashBoard </p> {" > "}
-      <p onClick={() => dispatch(setView("all"))}>{`${keyword} List`}</p>
+      <p onClick={() => dispatch(setView("all"))} className={classes.link}>
+        DashBoard
+      </p>
+
+      <p onClick={() => dispatch(setView("all"))} className={classes.link}>
+        {" > "}
+        {`${keyword} List`}
+      </p>
       {view === "add" ? (
         <>
-          {" > "}
-          <p> {`Add ${keyword}`}</p>
+          <p className={classes.link}>
+            {" > "}
+            {`Add ${keyword}`}
+          </p>
         </>
       ) : view === "edit" ? (
         <>
-          {" > "}
-          <p>{`Edit ${keyword} Info`}</p>
+          <p className={classes.link}>
+            {" > "}
+            {`Edit ${keyword} Info`}
+          </p>
         </>
       ) : null}
       {view !== "add" ? (
