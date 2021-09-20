@@ -80,13 +80,13 @@ function SearchBar() {
         <div className={styles.Icon}>
           {filteredData.length === 0 ? (
             <img
-              src="./images/search.svg"
+              src="../images/search.svg"
               alt="search"
               className={styles.searchIcon}
             />
           ) : (
             <img
-              src="./images/close.svg"
+              src="../images/close.svg"
               alt="search"
               className={styles.searchIcon}
               onClick={closeHandler}
@@ -97,7 +97,11 @@ function SearchBar() {
       {filteredData.length === 0 ? null : (
         <div className={classes.dataResult}>
           {filteredData.map((product, key) => (
-            <Link to={`/products/${product._id}`} className={classes.dataItem}>
+            <Link
+              key={product._id}
+              to={`/products/${product._id}`}
+              className={classes.dataItem}
+            >
               <p className={classes.item}> {product.title} </p>
             </Link>
           ))}

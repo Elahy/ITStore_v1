@@ -51,7 +51,7 @@ function CartLogo() {
   return (
     <Dropdown>
       <Dropdown.Toggle variant="success" className={classes.menu}>
-        <img className={classes.cart} src="./images/cart.svg" alt="cart" />
+        <img className={classes.cart} src="../images/cart.svg" alt="cart" />
 
         <Badge className={classes.badge}>
           {cart?.reduce((total, item) => total + item.quantity, 0)}

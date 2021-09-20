@@ -22,10 +22,11 @@ const useStyles = makeStyles({
     minHeight: "80vh",
   },
   buttton: {
-    color: "#04b4c4",
-    borderColor: "#04b4c4",
-    // margin: "2% 4%",
+    color: "#e00067",
+    borderColor: "#e00067",
+    margin: "2% 4%",
     display: "block",
+    padding: "8px 15px",
   },
   image: {
     maxWidth: "500px",
@@ -34,6 +35,9 @@ const useStyles = makeStyles({
   },
   cardBody: {
     margin: "5%",
+  },
+  butttons: {
+    display: "flex",
   },
 });
 
@@ -90,16 +94,18 @@ function ProductList() {
             <Typography variant="h5" color="textPrimary" component="p">
               Price: ${currentProduct && currentProduct.price}
             </Typography>
-            <AddToCart product={currentProduct} />
-            <Button
-              onClick={buttonHandler}
-              className={classes.buttton}
-              size="medium"
-              variant="outlined"
-              color="primary"
-            >
-              Go Back
-            </Button>
+            <div className={classes.butttons}>
+              <AddToCart product={currentProduct} />
+              <Button
+                onClick={buttonHandler}
+                className={classes.buttton}
+                size="medium"
+                variant="outlined"
+                color="primary"
+              >
+                Go Back
+              </Button>
+            </div>
           </CardContent>
         </Card>
       )}
