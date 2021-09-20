@@ -59,7 +59,8 @@ const useStyles = makeStyles({
     background: "#ADD8E6",
   },
   logoutButton: {
-    margin: "30px 0",
+    margin: "64px 0",
+    backgroundColor: "gray",
   },
   icon: {
     maxWidth: "30px",

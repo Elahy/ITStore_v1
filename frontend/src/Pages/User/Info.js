@@ -34,6 +34,10 @@ const useStyles = makeStyles({
     marginLeft: "150px",
     fontSize: "23px",
   },
+  button: {
+    backgroundColor: "gray",
+    marginLeft: "200px",
+  },
 });
 
 function Info() {
@@ -94,6 +98,7 @@ function Info() {
             onClick={() => handleEditUserInfo(myInfoStore?.userInfo)}
             variant="contained"
             color="primary"
+            className={classes.button}
           >
             Edit Info
           </Button>
