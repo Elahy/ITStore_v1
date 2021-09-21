@@ -4,9 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Loader from "../../Components/Miscellaneous/Loader";
-import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-// import FileBase64 from "react-file-base64";
 import { requestAddCategory } from "../../store/action/categoryAction";
 import { setView } from "../../store/action/userAction";
 
@@ -49,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AddCategory() {
-  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { loader } = useSelector((store) => store.loaderStore);
@@ -69,7 +66,7 @@ function AddCategory() {
 
   const handleSubmit = (e) => {
     dispatch(requestAddCategory(category));
-    history.push("/success");
+    dispatch(setView("all"));
     e.preventDefault();
   };
 

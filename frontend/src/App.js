@@ -70,11 +70,11 @@ function App() {
                   <Dashboard />
                 </Route>
               )}
-              {role === "admin" && (
+              {role ? (
                 <Route path="/checkout">
                   <CheckOutPage />
                 </Route>
-              )}
+              ) : null}
               <Route
                 path="/facebook"
                 component={() => {

@@ -47,6 +47,7 @@ export const requestUpdateOrder = (order) => {
     });
     dispatch(updateOrder(response));
     dispatch(requestOrderList());
+    dispatch(requestMyOrder());
     dispatch(setLoaderValue(false));
   };
 };

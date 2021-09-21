@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import Loader from "../../Components/Miscellaneous/Loader";
-import { useHistory } from "react-router";
 import {
   requestCategoryDetails,
   requestCategoryList,
@@ -52,7 +51,6 @@ const useStyles = makeStyles({
 });
 
 function Category() {
-  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { categoryStore, loaderStore } = useSelector((store) => store);
@@ -75,7 +73,7 @@ function Category() {
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestCategoryList());
-  }, [dispatch]);
+  }, [dispatch, categoryStore.categoryDeleted]);
   const updateHandler = (e) => {
     console.log(e, "===event update");
     dispatch(requestCategoryDetails(e._id));
@@ -84,7 +82,7 @@ function Category() {
   };
   const deleteHandler = (e) => {
     dispatch(requestDeleteCategory(e._id));
-    history.push("/success");
+    dispatch(setView("all"));
   };
 
   return (

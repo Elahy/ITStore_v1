@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -7,7 +7,11 @@ import Loader from "../../Components/Miscellaneous/Loader";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoaderValue } from "../../store/action/loaderAction";
-import { requestEditUser } from "../../store/action/userAction";
+import {
+  editUser,
+  requestEditUser,
+  setView,
+} from "../../store/action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +50,7 @@ function UpdateUser(userId) {
   const { currentUser, currentUserId } = useSelector(
     (store) => store.allUserStore
   );
-  console.log(currentUser, "===currentUser");
+  const { userEdited } = useSelector((store) => store.allUserStore);
   const { loaderStore } = useSelector((store) => store);
   // console.log(loaderStore.loader, "===loaderStore.loader");
 
@@ -83,7 +87,16 @@ function UpdateUser(userId) {
   const handleSubmit = (e) => {
     dispatch(setLoaderValue(true));
     dispatch(requestEditUser(user));
+    dispatch(setView("all"));
   };
+
+  useEffect(() => {
+    if (userEdited !== null) {
+      dispatch(setView("all"));
+      dispatch(editUser(null));
+    }
+  }, [dispatch, userEdited]);
+
   return (
     <>
       {loaderStore.loader ? (

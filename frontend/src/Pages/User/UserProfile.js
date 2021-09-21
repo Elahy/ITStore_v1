@@ -1,12 +1,13 @@
 import { Button, makeStyles } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { signIn } from "../../store/action/signInAction";
 import Info from "./Info";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Orders from "./Orders";
 import { addToCart } from "../../store/action/cartAction";
+import { setView } from "../../store/action/userAction";
 
 const useStyles = makeStyles({
   root: {
@@ -72,17 +73,17 @@ function UserProfile() {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
+  const { view } = useSelector((store) => store.allUserStore);
 
   useEffect(() => {
-    setShow("info");
-  }, []);
+    dispatch(setView("info"));
+  }, [dispatch]);
 
   const logOutHandler = () => {
     dispatch(signIn(""));
     dispatch(addToCart([null]));
     history.push("/");
   };
-  const [show, setShow] = useState(null);
 
   return (
     <div className={classes.root}>
@@ -92,7 +93,10 @@ function UserProfile() {
         <Grid item lg={3} className={classes.menuGrid}>
           <p className={classes.menu}>Menu</p>
           <ul>
-            <li onClick={() => setShow("info")} className={classes.menuItem}>
+            <li
+              onClick={() => dispatch(setView("info"))}
+              className={classes.menuItem}
+            >
               <img
                 className={classes.icon}
                 src="./images/user_icon.svg"
@@ -100,7 +104,10 @@ function UserProfile() {
               />
               Profile
             </li>
-            <li onClick={() => setShow("order")} className={classes.menuItem}>
+            <li
+              onClick={() => dispatch(setView("order"))}
+              className={classes.menuItem}
+            >
               <img
                 className={classes.icon}
                 src="./images/orderlist.svg"
@@ -108,7 +115,10 @@ function UserProfile() {
               />
               Active Orders
             </li>
-            <li onClick={() => setShow("order")} className={classes.menuItem}>
+            <li
+              onClick={() => dispatch(setView("info"))}
+              className={classes.menuItem}
+            >
               <img
                 className={classes.icon}
                 src="./images/done.svg"
@@ -116,7 +126,10 @@ function UserProfile() {
               />
               Past Orders
             </li>
-            <li onClick={() => setShow("order")} className={classes.menuItem}>
+            <li
+              onClick={() => dispatch(setView("order"))}
+              className={classes.menuItem}
+            >
               <img
                 className={classes.icon}
                 src="./images/reviews.svg"
@@ -124,7 +137,10 @@ function UserProfile() {
               />
               Reviews
             </li>
-            <li onClick={() => setShow("order")} className={classes.menuItem}>
+            <li
+              onClick={() => dispatch(setView("info"))}
+              className={classes.menuItem}
+            >
               <img
                 className={classes.icon}
                 src="./images/trackOder.png"
@@ -132,7 +148,10 @@ function UserProfile() {
               />
               Track Orders
             </li>
-            <li onClick={() => setShow("order")} className={classes.menuItem}>
+            <li
+              onClick={() => dispatch(setView("order"))}
+              className={classes.menuItem}
+            >
               <img
                 className={classes.icon}
                 src="./images/customerService.svg"
@@ -154,9 +173,9 @@ function UserProfile() {
         </Grid>
         {/* <Grid item lg={1} className={classes.menuGrid}></Grid> */}
         <Grid item lg={5} className={classes.itemGrid}>
-          {show === "info" ? (
+          {view === "info" ? (
             <Info />
-          ) : show === "order" ? (
+          ) : view === "order" ? (
             <Orders />
           ) : (
             <p>Welcome!</p>

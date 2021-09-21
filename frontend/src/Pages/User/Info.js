@@ -1,10 +1,10 @@
 import { Button, makeStyles } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/Miscellaneous/Loader";
 import UpdateUser from "../../Dashboard/User/UpdateUser";
 import { setLoaderValue } from "../../store/action/loaderAction";
-import { requestMyInfo } from "../../store/action/userAction";
+import { requestMyInfo, setView } from "../../store/action/userAction";
 import {
   requestUserDetails,
   setCurrentUserId,
@@ -44,17 +44,17 @@ function Info() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { myInfoStore, loaderStore } = useSelector((store) => store);
+  const { view, userEdited } = useSelector((store) => store.allUserStore);
+
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestMyInfo());
-  }, [dispatch]);
-
-  const [view, setView] = useState("");
+  }, [dispatch, userEdited]);
 
   const handleEditUserInfo = (e) => {
     dispatch(requestUserDetails(e._id));
     dispatch(setCurrentUserId(e._id));
-    setView("edit");
+    dispatch(setView("edit"));
   };
 
   return (
