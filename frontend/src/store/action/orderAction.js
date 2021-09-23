@@ -24,7 +24,7 @@ export const requestOrderList = () => {
     const token = signInStore.token;
     const response = await axios({
       method: "GET",
-      url: "http://localhost:8080/order",
+      url: "http://fake-comb.herokuapp.com/order",
       headers: { authorization: `bearer ${token}` },
     });
     dispatch(setListofOrder(response.data));
@@ -39,7 +39,7 @@ export const requestUpdateOrder = (order) => {
     console.log(order.status, "order Status");
     const response = await axios({
       method: "PATCH",
-      url: `http://localhost:8080/order/${order._id}`,
+      url: `http://fake-comb.herokuapp.com/order/${order._id}`,
       headers: { authorization: `bearer ${token}` },
       data: {
         status: parseInt(order.status, 10),
@@ -60,7 +60,7 @@ export const requestMyOrder = () => {
     try {
       const response = await axios({
         method: "GET",
-        url: "http://localhost:8080/order/my-order",
+        url: "http://fake-comb.herokuapp.com/order/my-order",
         headers: { authorization: `bearer ${token}` },
       });
       dispatch(myOrder(response.data));

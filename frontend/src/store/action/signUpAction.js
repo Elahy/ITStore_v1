@@ -10,24 +10,27 @@ export const signUp = (response) => ({
 export const requestSignUp = (user) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:8080/signup", {
-        address: {
-          geolocation: {
-            lat: "0",
-            long: "0",
+      const response = await axios.post(
+        "http://fake-comb.herokuapp.com/signup",
+        {
+          address: {
+            geolocation: {
+              lat: "0",
+              long: "0",
+            },
+            city: user.city,
+            street: "0",
+            number: user.streetNumber,
+            zipcode: user.zipcode,
           },
-          city: user.city,
-          street: "0",
-          number: user.streetNumber,
-          zipcode: user.zipcode,
-        },
-        firstname: user.fistName,
-        lastname: user.lastName,
-        email: user.email,
-        username: user.username,
-        phone: user.phone,
-        password: user.password,
-      });
+          firstname: user.fistName,
+          lastname: user.lastName,
+          email: user.email,
+          username: user.username,
+          phone: user.phone,
+          password: user.password,
+        }
+      );
       dispatch(signUp(response.data));
       dispatch(setLoaderValue(false));
       console.log(response, "===response from request");

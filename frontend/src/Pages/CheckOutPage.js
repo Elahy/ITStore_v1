@@ -80,7 +80,7 @@ function CheckOutPage() {
                   <Card className={classes.root}>
                     <CardMedia
                       className={classes.productIcon}
-                      image={`http://localhost:8080${product.productId?.image}`}
+                      image={`http://fake-comb.herokuapp.com${product.productId?.image}`}
                       title="Live from space album cover"
                     />
                     <div className={classes.details}>

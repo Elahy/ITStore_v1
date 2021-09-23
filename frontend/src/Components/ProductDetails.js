@@ -73,7 +73,7 @@ function ProductList() {
             className={classes.image}
             component="img"
             alt={currentProduct?.title}
-            image={`http://localhost:8080${currentProduct?.image}`}
+            image={`http://fake-comb.herokuapp.com${currentProduct?.image}`}
             title={currentProduct?.title}
           />
           <CardContent className={classes.cardBody}>

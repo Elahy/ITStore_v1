@@ -123,7 +123,7 @@ function Cart() {
                         <TableRow hover key={product._id}>
                           <TableCell key={product.productId?.image}>
                             <img
-                              src={`http://localhost:8080${product.productId?.image}`}
+                              src={`http://fake-comb.herokuapp.com${product.productId?.image}`}
                               alt={product.productId?.title}
                               className={classes.image}
                             />

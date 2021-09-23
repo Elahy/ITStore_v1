@@ -18,7 +18,7 @@ export const requestSignIn = (credential) => {
   return async (dispatch) => {
     const response = await axios({
       method: "POST",
-      url: "http://localhost:8080/signin",
+      url: "http://fake-comb.herokuapp.com/signin",
       data: {
         email: credential.email,
         password: credential.password,

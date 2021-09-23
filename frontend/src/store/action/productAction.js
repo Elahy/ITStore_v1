@@ -30,7 +30,7 @@ export const requestProductList = () => {
   return async (dispatch) => {
     const response = await axios({
       method: "GET",
-      url: "http://localhost:8080/products",
+      url: "https://fake-comb.herokuapp.com/products",
     });
     dispatch(setListofProduct(response.data));
     dispatch(setLoaderValue(false));
@@ -41,7 +41,7 @@ export const requestProductByCategory = (categoryId) => {
   return async (dispatch) => {
     const response = await axios({
       method: "GET",
-      url: `http://localhost:8080/products/category/${categoryId}`,
+      url: `http://fake-comb.herokuapp.com/products/category/${categoryId}`,
     });
     dispatch(setListofProduct(response.data));
     dispatch(setLoaderValue(false));
@@ -52,7 +52,7 @@ export const requestProductDetails = (productId) => {
   return async (dispatch) => {
     const response = await axios({
       method: "GET",
-      url: `http://localhost:8080/products/${productId}`,
+      url: `http://fake-comb.herokuapp.com/products/${productId}`,
     });
 
     dispatch(setCurrentProduct(response.data));
@@ -66,7 +66,7 @@ export const requestDeleteProduct = (productId) => {
     console.log("requestDeleteProduct Call");
     const token = signInStore.token;
     const response = await axios.delete(
-      `http://localhost:8080/products/${productId}`,
+      `http://fake-comb.herokuapp.com/products/${productId}`,
       {
         headers: { authorization: `bearer ${token}` },
       }
@@ -83,7 +83,7 @@ export const requestEditProduct = (product) => {
       console.log(product, "requestEditProduct Call");
       const token = signInStore.token;
       const response = await axios.patch(
-        `http://localhost:8080/products/${product._id}`,
+        `http://fake-comb.herokuapp.com/products/${product._id}`,
         {
           title: product.title,
           price: parseInt(product.price, 10),
@@ -110,7 +110,7 @@ export const requestAddProduct = (product) => {
       const { signInStore } = getState();
       const token = signInStore.token;
       const response = await axios.post(
-        "http://localhost:8080/products",
+        "http://fake-comb.herokuapp.com/products",
         {
           title: product.title,
           price: parseInt(product.price, 10),
