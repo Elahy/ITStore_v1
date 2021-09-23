@@ -92,7 +92,7 @@ function ProductList() {
               Type: {currentProduct && currentProduct.category.name}
             </Typography>
             <Typography variant="h5" color="textPrimary" component="p">
-              Price: ${currentProduct && currentProduct.price}
+              Price: {currentProduct && currentProduct.price}Tk
             </Typography>
             <div className={classes.butttons}>
               <AddToCart product={currentProduct} />

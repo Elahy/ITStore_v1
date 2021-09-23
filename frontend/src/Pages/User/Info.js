@@ -2,9 +2,12 @@ import { Button, makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/Miscellaneous/Loader";
-import UpdateUser from "../../Dashboard/User/UpdateUser";
 import { setLoaderValue } from "../../store/action/loaderAction";
-import { requestMyInfo, setView } from "../../store/action/userAction";
+import {
+  // editUser,
+  requestMyInfo,
+  setView,
+} from "../../store/action/userAction";
 import {
   requestUserDetails,
   setCurrentUserId,
@@ -44,16 +47,17 @@ function Info() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { myInfoStore, loaderStore } = useSelector((store) => store);
-  const { view, userEdited } = useSelector((store) => store.allUserStore);
+  // const { userEdited } = useSelector((store) => store.allUserStore);
 
   useEffect(() => {
     dispatch(setLoaderValue(true));
     dispatch(requestMyInfo());
-  }, [dispatch, userEdited]);
+    // dispatch(editUser(null));
+  }, [dispatch]);
 
-  const handleEditUserInfo = (e) => {
-    dispatch(requestUserDetails(e._id));
-    dispatch(setCurrentUserId(e._id));
+  const handleEditUserInfo = (userInfo) => {
+    dispatch(requestUserDetails(userInfo._id));
+    dispatch(setCurrentUserId(userInfo._id));
     dispatch(setView("edit"));
   };
 
@@ -61,8 +65,6 @@ function Info() {
     <>
       {loaderStore.loader ? (
         <Loader />
-      ) : view === "edit" ? (
-        <UpdateUser />
       ) : (
         <div className={classes.root}>
           <div className={classes.header}>

@@ -89,7 +89,8 @@ export const requestEditProduct = (product) => {
           price: parseInt(product.price, 10),
           description: product.description,
           stock: product.stock,
-          category: { _id: product.category },
+          // category: { _id: product.category },
+          category_id: product.category,
         },
         {
           headers: { authorization: `bearer ${token}` },

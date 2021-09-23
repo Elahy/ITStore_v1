@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Orders from "./Orders";
 import { addToCart } from "../../store/action/cartAction";
 import { setView } from "../../store/action/userAction";
+import UpdateUser from "../../Dashboard/User/UpdateUser";
 
 const useStyles = makeStyles({
   root: {
@@ -76,7 +77,7 @@ function UserProfile() {
   const { view } = useSelector((store) => store.allUserStore);
 
   useEffect(() => {
-    dispatch(setView("info"));
+    dispatch(setView("all"));
   }, [dispatch]);
 
   const logOutHandler = () => {
@@ -173,10 +174,12 @@ function UserProfile() {
         </Grid>
         {/* <Grid item lg={1} className={classes.menuGrid}></Grid> */}
         <Grid item lg={5} className={classes.itemGrid}>
-          {view === "info" ? (
+          {view === "all" ? (
             <Info />
           ) : view === "order" ? (
             <Orders />
+          ) : view === "edit" ? (
+            <UpdateUser />
           ) : (
             <p>Welcome!</p>
           )}

@@ -4,10 +4,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Loader from "../../Components/Miscellaneous/Loader";
-import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import { requestEditCategory } from "../../store/action/categoryAction";
+import { setView } from "../../store/action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 function UpdateCategory(userId) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const { currentCategory } = useSelector((store) => store.categoryStore);
   console.log(currentCategory, "===currentUser");
@@ -63,9 +62,6 @@ function UpdateCategory(userId) {
       ...category,
       [event.target.name]: value,
     });
-  };
-  const handleCancel = () => {
-    history.push("/");
   };
 
   const handleSubmit = (e) => {
@@ -125,7 +121,7 @@ function UpdateCategory(userId) {
             Update
           </Button>
           <Button
-            onClick={handleCancel}
+            onClick={() => dispatch(setView("all"))}
             className={classes.input2}
             variant="contained"
             color="secondary"

@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Loader from "../../Components/Miscellaneous/Loader";
-import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoaderValue } from "../../store/action/loaderAction";
 import {
-  editUser,
+  // editUser,
   requestEditUser,
   setView,
 } from "../../store/action/userAction";
@@ -42,15 +41,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function UpdateUser(userId) {
+function UpdateUser() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   const { currentUser, currentUserId } = useSelector(
     (store) => store.allUserStore
   );
-  const { userEdited } = useSelector((store) => store.allUserStore);
+  // const { userEdited } = useSelector((store) => store.allUserStore);
   const { loaderStore } = useSelector((store) => store);
   // console.log(loaderStore.loader, "===loaderStore.loader");
 
@@ -80,9 +79,6 @@ function UpdateUser(userId) {
       [event.target.name]: value,
     });
   };
-  const handleCancel = () => {
-    history.push("/");
-  };
 
   const handleSubmit = (e) => {
     dispatch(setLoaderValue(true));
@@ -90,12 +86,12 @@ function UpdateUser(userId) {
     dispatch(setView("all"));
   };
 
-  useEffect(() => {
-    if (userEdited !== null) {
-      dispatch(setView("all"));
-      dispatch(editUser(null));
-    }
-  }, [dispatch, userEdited]);
+  // useEffect(() => {
+  //   if (userEdited !== null) {
+  //     dispatch(setView("all"));
+  //     dispatch(editUser(null));
+  //   }
+  // }, [dispatch, userEdited]);
 
   return (
     <>
@@ -191,7 +187,7 @@ function UpdateUser(userId) {
             Update
           </Button>
           <Button
-            onClick={handleCancel}
+            onClick={() => dispatch(setView("all"))}
             className={classes.input2}
             variant="contained"
             color="secondary"

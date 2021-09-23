@@ -10,7 +10,7 @@ function CategoryBoard() {
 
   return (
     <div>
-      <DashNav keyword={"Category"} />
+      <DashNav keyword={"Ctg."} />
       {view === "all" ? (
         <Category />
       ) : view === "add" ? (

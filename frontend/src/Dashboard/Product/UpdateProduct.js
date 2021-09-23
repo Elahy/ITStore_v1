@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Loader from "../../Components/Miscellaneous/Loader";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
   requestEditProduct,
@@ -13,6 +13,7 @@ import {
 import { setLoaderValue } from "../../store/action/loaderAction";
 import { MenuItem } from "@material-ui/core";
 import { requestCategoryList } from "../../store/action/categoryAction";
+import { setView } from "../../store/action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 function UpdateProduct() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   const { currentProduct } = useSelector((store) => store.productStore);
   console.log(currentProduct, "====currentProduct");
@@ -85,7 +86,7 @@ function UpdateProduct() {
   const handleSubmit = (e) => {
     dispatch(setLoaderValue(true));
     dispatch(requestEditProduct(product));
-    history.push("/");
+    dispatch(setView("all"));
   };
 
   return (
@@ -174,7 +175,7 @@ function UpdateProduct() {
                 {categoryList.map((category) => (
                   <MenuItem
                     key={category._id}
-                    value={category.name}
+                    value={category._id}
                     // defaultValue={currentProduct?.category.name}
                   >
                     {category.name}
@@ -192,7 +193,7 @@ function UpdateProduct() {
             Update
           </Button>
           <Button
-            onClick={handleSubmit}
+            onClick={() => dispatch(setView("all"))}
             className={classes.input2}
             variant="contained"
             color="secondary"

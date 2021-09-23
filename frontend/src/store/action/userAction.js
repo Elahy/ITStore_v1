@@ -112,6 +112,10 @@ export const requestEditUser = (user) => {
       }
     );
     dispatch(editUser(response));
+    signInStore.role === "admin"
+      ? dispatch(requestUserList()) && dispatch(requestMyInfo())
+      : dispatch(requestMyInfo());
+
     dispatch(setLoaderValue(false));
     // console.log(response, "===response from update");
   };
